@@ -1,3 +1,26 @@
 theme: jekyll-theme-minimal
 title: Welcome to the kaestro's homepage!
 description: Gatherings of computational knowledges that aren't in coded format, or that isn't enough to be in repository's format
+
+# kakao's solution to use tags with github blog
+# https://kakao.github.io/2016/07/07/tech-blog-story/
+# https://github.com/kakao/kakao.github.io
+collections:
+  authors:
+    output: true
+    permalink: /authors/:path/
+  tags:
+    output: true
+    permalink: /tags/:path/
+
+defaults:
+  - scope:
+      path: ''
+      type: tags
+    values:
+      layout: tag
+  - scope:
+      path: ''
+      type: authors
+    values:
+      layout: authos
