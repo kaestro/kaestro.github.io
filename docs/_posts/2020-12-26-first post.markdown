@@ -1,8 +1,8 @@
 ---
 layout: post
 title:  "First Post!"
+categories: Legacy
 date:   2020-12-26 20:20:23 +0900
-categories: None
 ---
 
 Though I know this would seem a bit dirty, because the blog has "TESTPAGE" on the right upper corner, and this is written in English, why do you still have welcome-to-jekyll page, and so on.
