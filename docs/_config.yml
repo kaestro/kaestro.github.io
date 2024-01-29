@@ -30,7 +30,7 @@ url: kaestro.github.io # the base hostname & protocol for your site, e.g. http:/
 github_username:  kaestro
 
 # Build settings
-theme: minima
+theme: minimal-mistakes-jekyll
 plugins:
   - jekyll-feed
 
