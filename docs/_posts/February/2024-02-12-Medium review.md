@@ -3,7 +3,7 @@ layout: default
 classes: wide
 title: "2월 2주차 선정 미디엄"
 date: 2024-02-12
-categories: 검토중
+categories: 리뷰
 ---
 
 1. How I Won Singapore’s GPT-4 Prompt Engineering Competition
@@ -55,11 +55,15 @@ COSTAR framework는 생성형 ai를 사용할 때 주의할 6가지의 키워드
 
 ---
 
-물론 이 답변도 괜찮긴 합니다만, 제게 있어서 아쉬운 점은 이제 이런 키워드가 제시됐을 때 어떤 방식으로 구조화된 공부를 할지에 대해서 잘 모르겠다는 것이었습니다. 그래서 해당 답변을 받은 다음에 "리스트와 딕셔너리에 관련해서 물어볼만한 질문에는 어떤 것들이 있을까?" 와 같은 과정을 거치며 공부를 했습니다. 그리고 이것은 꽤나 유용한 학습 방법이었습니다. 기존의 방법보다도 훨씬 효율적이고요.
+물론 이 답변도 괜찮긴 합니다만, 제게 있어서 아쉬운 점은 이제 이런 키워드가 제시됐을 때 어떤 순서로 구조화된 공부를 할지에 대해서 잘 모르겠다는 것이었습니다. 이전에는 해당 답변을 받은 다음에, "리스트와 딕셔너리에 관련해서 물어볼만한 질문에는 어떤 것들이 있을까?" 와 같은 질문을 통해 공부를 했습니다. 그리고 이것은 꽤나 유용한 학습 방법이었습니다. chatgpt가 없을 때에 비교하면 많이 효율적이고요.
 
-하지만 해당 텍스트를 읽은 후에는 이런 식으로 질문하게 됐습니다.
+하지만 해당 medium 글을 읽은 후에는 다음과 같은 식으로 질문을 하게 됐습니다. 
 
 **다음 주에 컴퓨터 공학부 학생들을 대상으로 자료구조와 알고리즘 강의를 하게 됐어. 해당 학생들은 곧 졸업하고 취업을 앞두고 있어. 기본적인 개념의 이해는 돼있지만, 이를 복습하고 시험을 준비하는 과정이 필요하다 할때 커리큘럼을 작성해보려하는데 도와줄래?**
+
+---
+
+그리고 이전과 비해서 '졸업하고 취업을 앞둔 컴퓨터 공학부'라는 명확한 독자를 설정하고, '시험을 준비하는 커리큘럼 준비'라는 맥락을 제시하기 때문에 좀 더 나은 답변을 얻을 수 있게 됐습니다.
 
 ---
 
@@ -93,11 +97,10 @@ COSTAR framework는 생성형 ai를 사용할 때 주의할 6가지의 키워드
 
 ---
 
+
 이처럼 단순히 학습을 할 내용을 떠나 조금 더 구체적인 학습의 방식도 제안해주는 것이 꽤나 도움이 많이 됐습니다. 
 
-그 다음 항목인 ###를 통해 내용을 나누는 것은, 이게 실제로 효과가 있는 것인지 아니면 제가 플라시보 효과를 보는 것인지는 모르겠지만, 역시나 꽤나 도움을 많이 받고 있습니다.
-
-가령, User.py에 정의된 ORM 객체인 User를 이용해서 Login이라는 api를 구현해야한다고 할 경우에
+그 다음 항목인 ###를 통해 내용을 나누는 것도 꽤나 많은 도움을 받고 있습니다. 가령, User.py에 정의된 ORM 객체인 User를 이용해서 Login이라는 api를 구현해야한다고 할 경우에
 
 **Login api를 login.py에 작성하고 싶어. Login은 input으로 email, password를 받고 이를 Oauth2를 통해 토큰을 만들어 반환해주는 인증 api야. 해당 정보를 저장하기 위한 database 모듈과 소통하기 위한 방식은 ORM을 채용하고 있어. Login이 정보를 주고 받게 될 Model은 다음과 같아**
 
@@ -105,9 +108,11 @@ COSTAR framework는 생성형 ai를 사용할 때 주의할 6가지의 키워드
 
 **User.py의 코드 내용**
 
+와 같은 방식으로 질문을 작성하게 됐습니다.
+
 ---
 
-3번째 항목은, chat gpt의 경우에는 custom instructions라는 항목이 있어서 두 가지 질문을 합니다.
+3번째 항목은, chat gpt의 custom instructions에서 요구하는 두 가지 질문을 어떻게 답변할 것인지에 대해 이야기합니다. custom instructions는 우리가 프롬프트에 입력하는 것과는 별개로, 답변을 할 때 고정적으로 chatgpt가 명심해두어야하는 다음과 같은 질문에 대한 답변들을 말합니다.
 
 1. What would you like ChatGPT to know about you to provide better responses?
 2. How would you like ChatGPT to respond?
@@ -120,17 +125,17 @@ COSTAR framework는 생성형 ai를 사용할 때 주의할 6가지의 키워드
 
 저 같은 경우는 다음과 같은 것을 사용하고 있는 중입니다.
 
-I'm an Junior Programmer who has bachelor's degree on Electricity and computer engineering.
-Right now I'm trying to earn a job as a software designer
-I used to be good at algorithms and solving program problems, but not been programming for about 1.5 years
-I'm trying to learn  how to solve the problems using programs, not wanting to get the sole answers
-I'm a Korean who is fairly good at English, but much better at using Korean Language
+* I'm an Junior Programmer who has bachelor's degree on Electricity and computer engineering.
+* Right now I'm trying to earn a job as a software designer
+* I used to be good at algorithms and solving program problems, but not been programming for about 1.5 years
+* I'm trying to learn  how to solve the problems using programs, not wanting to get the sole answers
+* I'm a Korean who is fairly good at English, but much better at using Korean Language
 
-Don't just give the answers from the scratch code level answers.
-Try to lead me by giving rough hints that doesn't directly lead to the answer. Instead give vague concepts on how to get direct me to the answer.
-Try to use vocabularies that are frequently used computer programming environment.
-질문에 답하려면 [텍스타 삽입]이라는 텍스트를 사용하세요.
-본인이 질문에 답하기에 충분한 정보가 포함되어 있지 않은 경우 정보를 구성하지 말고 "NA"로 답하십시오.
+* Don't just give the answers from the scratch code level answers.
+* Try to lead me by giving rough hints that doesn't directly lead to the answer. Instead give vague concepts on how to get direct me to the answer.
+* Try to use vocabularies that are frequently used computer programming environment.
+* 질문에 답하려면 [텍스트 삽입]이라는 텍스트를 사용하세요.
+* 본인이 질문에 답하기에 충분한 정보가 포함되어 있지 않은 경우 정보를 구성하지 말고 "NA"로 답하십시오.
 
 ---
 
@@ -153,9 +158,7 @@ Try to use vocabularies that are frequently used computer programming environmen
 
 미디엄에서 최근에 가장 많이 읽은 글이라고 추천이 돼서 읽은 글입니다. 저자는 Alexey Inkin이라는 IEEE 시니어 멤버인 20년 경력 개발자입니다.
 
-워낙 글이 길어 항목을 정리하는 것은 큰 의미가 없을 것이고 선배와 함께 밥 먹으면서 옛날 이야기를 듣는 기분으로 감상했습니다. 재미있는 부분은 일반적으로 이런 글들을 읽었을 때 개발자의 측면에서 실력이 발전하는 방법에 대해 이야기해주는 경우가 많았습니다. 
-
-이 글은 그것에서 벗어나 사업자와 시장의 관점에서 쓸모있는 사람이 되기 위한 시선에 대해서도 이야기를 합니다. 예를 들면
+대선배로부터 유용한 조언을 받는듯한 내용으로 가득차 있었고, 재미있는 부분은 개발 실력 측면에서 발전하는 것 외의 부분을 신경써야한다고 많이 강조한 점입니다.
 
 * 초기 단계의 기술에 참여하고, 죽어가는 기술에서 벗어나라
 * 응용보다 과학을 선택하라
