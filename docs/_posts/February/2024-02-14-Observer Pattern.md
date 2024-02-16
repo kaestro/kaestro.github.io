@@ -1,7 +1,7 @@
 ---
 layout: default
 classes: wide
-title: "옵저버 패턴 - 신문이 구독자에게 새로운 뉴스를 통보하는 것처럼"
+title: "옵저버 패턴 - 어느새 빗물이 내 발목에 고이기 전에 알려줬어야지!"
 date: 2024-02-14
 categories: 개발이야기
 ---

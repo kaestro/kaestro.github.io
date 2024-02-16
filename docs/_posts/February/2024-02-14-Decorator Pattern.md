@@ -1,7 +1,7 @@
 ---
 layout: default
 classes: wide
-title: "데코레이터 패턴 - 커피의 맛을 풍성하게 만들어주는 우유와 같이"
+title: "데코레이터 패턴 - 싸구려 커피를 마시기 전에 우유를 넣으세요"
 date: 2024-02-14
 categories: 개발이야기
 ---
