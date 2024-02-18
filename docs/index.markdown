@@ -5,6 +5,10 @@
 layout: default
 ---
 
+<head>
+    <meta name="google-site-verification" content="swFW3uc8I4itY8f-nuRC4KyC8OevDsMkTn_SnB_sOGE" />
+</head>
+
 {% for category in site.categories %}
 {% if category[0] != 'ProtoType' and category[0] != 'Pre-Renewal' and category[0] != 'Legacy' %}
 <h2>{{ category[0] }}</h2>
