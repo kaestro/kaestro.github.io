@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title:  "First Post!"
 categories: Legacy
 date:   2020-12-26 20:20:23 +0900

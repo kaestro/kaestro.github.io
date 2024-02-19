@@ -1,5 +1,5 @@
 ---
-layout: single
+layout: default
 title:  "Welcome to Jekyll!"
 categories: Legacy
 date:   2020-10-19 19:57:23 +0900

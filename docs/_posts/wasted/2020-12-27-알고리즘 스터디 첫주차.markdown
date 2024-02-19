@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title:  "알고리즘 스터디 2주차!"
 categories: Legacy
 date:   2020-12-28 20:20:23 +0900
