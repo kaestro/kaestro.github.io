@@ -3,6 +3,7 @@ layout: default
 title:  "Why JPA?"
 categories: Legacy
 date:   2020-12-30 06:06:23 +0900
+comments: true
 ---
 
  아래 내용은 주로 김영한님의 자바 ORM 표준 JPA 프로그래밍 -기본편-의 내용을 정리한 것입니다.
