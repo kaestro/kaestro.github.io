@@ -1,7 +1,7 @@
 ---
 layout: default
 classes: wide
-title: "반복자 패턴"
+title: "반복자 패턴 - 저녁밥도 디저트도 다 단비꺼야"
 date: 2024-02-23
 categories: 개발이야기
 ---
