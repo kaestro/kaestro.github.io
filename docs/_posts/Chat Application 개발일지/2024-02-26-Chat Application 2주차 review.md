@@ -1,12 +1,12 @@
 ---
 layout: default
 classes: wide
-title: "1주차 Review"
-date: 2024-02-26
+title: "2주차 Review"
+date: 2024-02-27
 categories: "개발일지"
 ---
 
-# ChatApplication 1주차
+# ChatApplication 2주차
 
 ---
 
