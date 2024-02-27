@@ -13,9 +13,19 @@ categories: "개발일지"
 
 ## 목차
 
-1. 진행 내용
-2. 문제 및 해결 방법
-3. 느낀 점
+1. 느낀 점
+2. 진행 내용
+3. 문제 및 해결 방법
+
+
+---
+
+
+## 느낀 점
+
+개발할 때 최초에 생각한 것과 별개로 기능 추가 및 변경이 빈번하게 발생하게 된다. 이 때마다 기존의 코드를 변경하기 용이하게 하기 위한 추상화, business logic 분리, unit test 등의 작업이 필요하다.
+
+원래는 login api를 다루는 서버에서 채팅 역시도 다루게 될 것이라고 생각했다. 그런데 현재 서버 구조는 api를 다루는 형태로 되어 있으니 이를 api 전용 서버로 두고, 채팅을 다루는 서버는 따로 두는 것이 낫지 않을까? 라는 생각이 들었다.
 
 
 ---
@@ -88,14 +98,14 @@ myapp
   * 로그인 세션을 통해 회원탈퇴.
   * 회원탈퇴 실패 시 에러 메시지를 응답.
 
-**구현 상세**
+[**구현 상세**](https://github.com/kaestro/ChatApplication/tree/main/myapp/api)
 
 DBManager와 SessionManager를 통해 유저의 정보를 조회하고, 관리를 위한 로직을 수행.
 PasswordManager를 통해 비밀번호를 암호화하여 저장하고, 비밀번호 검증을 수행.
 
-orm 패키지를 사용하여 데이터베이스와 연동하고, 이를 위한 models를 구현.
+user data model을 구현, 이를 orm 패키지를 사용하여 데이터베이스와 연동한다.
 
-handler에 응답을 처리하는 로직을 구현한 뒤 login 같은 경우는 비즈니스 로직이 변경될 수 있으므로 service 패키지를 통해 비즈니스 로직을 분리.
+handler에 응답을 처리하는 로직을 구현한 뒤 login 같은 경우는 비즈니스 로직이 변경될 수 있으므로 service 패키지를 통해 자주 변경되는 부분을 분리하였다.
 
 ---
 
@@ -117,13 +127,13 @@ handler에 응답을 처리하는 로직을 구현한 뒤 login 같은 경우는
   
 **구현 상세**
 
-**DBManager**는 DB 연결을 gorm을 통해 생성하고, create, read by single field, read all table, update row, delete row 기능을 제공.
+**DBManager**는 DB 연결을 gorm을 통해 생성하고, create, read by single field, read all table, update row, delete row 기능을 제공한다.
 
-**SessionManager**는 redis를 통해 세션 키 생성, 세션 생성, 조회, 삭제, 정합성 확인 기능을 제공. => *TODO* 현재 <u>LoginSessionGenerator.go를 LoginSessionKeyGenerator.go로 파일명 변경.</u>
+**SessionManager**는 redis를 통해 세션 키 생성, 세션 생성, 조회, 삭제, 정합성 확인 기능을 제공. => *TODO* 현재 <u>LoginSessionGenerator.go를 LoginSessionKeyGenerator.go로 파일명 변경한다</u>
 
-**Store**라는 추상적인 인터페이스를 통해 session을 관리하고, 현재 이를 RedisStore를 통해 구현한 상태이다. 이는 추후에 다른 저장소를 사용할 때 변경이 용이하도록 하기 위함.
+**Store**라는 추상적인 인터페이스를 통해 session을 관리하고, 현재 이를 RedisStore를 통해 구현한다. 이는 추후에 다른 저장소를 사용할 때 변경이 용이하도록 하기 위해서이다.
 
-**PasswordManager**는 bcrypt를 통해 비밀번호를 암호화하고, 비밀번호 검증하는 기능을 제공.
+**PasswordManager**는 bcrypt를 통해 비밀번호를 암호화하고, 비밀번호 검증하는 기능을 제공한다.
 
 ---
 
@@ -143,7 +153,7 @@ handler에 응답을 처리하는 로직을 구현한 뒤 login 같은 경우는
 
 **dbManager가 연결 객체 자체를 반환하고 있었음.**
 
-**문제점**: GetDB() 함수를 통해 db 객체를 반환하고 있었음. 이는 db 객체를 직접 사용하게 되어, dbManager의 로직이 변경될 때마다 모든 곳에서 변경이 필요하게 됨.
+**문제점**: GetDB() 함수를 통해 db 객체를 반환하고 있었다. 이는 db 객체를 직접 사용하게 되어, dbManager의 로직이 변경될 때마다 모든 곳에서 변경이 필요하게 된다.
 
 ```go
 var (
@@ -206,7 +216,7 @@ func (m *DBManager) Create(value interface{}) error {
 
 **암호화 로직이 api마다 중복되어 있었음.**
 
-**문제점**: 비밀번호 암호화, 비밀번호 검증 로직이 user api마다 중복되어 있었음.
+**문제점**: 비밀번호 암호화, 비밀번호 검증 로직이 user CRUD api마다 중복되어 있었음.
 
 ```go
 func Signup(c *gin.Context) {
@@ -286,7 +296,7 @@ func CheckPasswordHash(password, hash string) bool {
 }
 ```
 
-구현 과정에서 DBManager, SessionManager, Password 등의 패키지가 추가로 구현하게 됐다. 구현하는 과정에서 추상화, 접근 제어 등의 기능이 도입되었고 이 때마다 login api의 비즈니스 로직이 변경될 때마다 handler에서 변경이 필요하게 됨.
+구현 과정에서 DBManager, SessionManager, Password 등의 패키지를 추가하게 됐다. 이 과정에서 추상화, 접근 제어 등의 기능이 도입되었고 이 때마다 handler에서 변경이 필요하게 됨.
 
 이와 관련한 해결 방법으로 service 패키지를 통해 비즈니스 로직을 분리하고자 함.
 
@@ -353,7 +363,7 @@ func (s *LoginService) LogIn(userEmailAddress, userPassword, userSessionKey stri
 
 **문제점**: user CRUD api를 구현 때마다 postman을 통해 수동으로 테스트를 진행하고 있었음.
 
-**해결 방법**: user CRUD api를 매 빌드시마다 unit test를 작성.
+**해결 방법**: user CRUD api를 매 빌드시마다 검증할 unit test를 작성.
 
 ```go
 func TestUserHandler(t *testing.T) {
@@ -442,7 +452,3 @@ func TestUserHandler(t *testing.T) {
 ```
 
 ---
-
-## 느낀 점
-
-개발할 때 최초에 생각한 것과 별개로 기능 추가 및 변경이 빈번하게 발생하게 된다. 이 때마다 기존의 코드를 변경하기 용이하게 하기 위한 추상화, business logic 분리, unit test 등의 작업이 필요하다.
