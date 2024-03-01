@@ -43,4 +43,35 @@ categories: "개발일지"
   2. Failed to process session key 에러가 발생하고 있음.
 	 * 이는 로컬에서는 발생하지 않았던 에러로, 이를 해결하기 위해선 어떤 부분이 문제인지 파악해야함.
 	 * 이를 위해선 로컬에서와 동일한 환경을 만들어야함.
-   => 해결: postgresql에서 localhost로 돼있었던 것과 동일한 이유
+   
+* 해결 방법:
+  * ENV를 사용하여 환경변수를 설정하고, 없을 경우에는 default인 localhost를 사용하게 해서 local에서 동작하도록 변경함.
+  * 해당 ENV는 docker-compose.yml와 dockerfile에서 사용하도록 변경함.
+   * [https://github.com/kaestro/ChatApplication/commit/e6258879d661345d7aeeac0a05ed953e8bd05a0e](https://github.com/kaestro/ChatApplication/commit/e6258879d661345d7aeeac0a05ed953e8bd05a0e)
+  * ex)
+
+    * before)
+```go
+func GetDBManager() *DBManager {
+	once.Do(func() {
+		var err error
+		db, err := gorm.Open("postgres", "postgres://postgres:rootpassword@postgresql:5432/postgres?sslmode=disable")
+		if err != nil {
+			panic(err)
+		}
+```
+
+    * after)
+```go
+func GetDBManager() *DBManager {
+	once.Do(func() {
+		var err error
+		dbURL := os.Getenv("DB_URL")
+		if dbURL == "" {
+			dbURL = "postgres://postgres:rootpassword@localhost:5432/postgres?sslmode=disable" // default value
+		}
+		db, err := gorm.Open("postgres", dbURL)
+		if err != nil {
+			panic(err)
+		}
+```
