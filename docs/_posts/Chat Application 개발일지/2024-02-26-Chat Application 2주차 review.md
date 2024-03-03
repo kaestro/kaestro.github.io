@@ -69,7 +69,7 @@ func GetDBManager() *DBManager {
 		}
 ```
 
-   * after)
+	* after)
 ```go
 func GetDBManager() *DBManager {
 	once.Do(func() {
