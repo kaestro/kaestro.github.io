@@ -9,11 +9,13 @@ layout: default
     <meta name="google-site-verification" content="swFW3uc8I4itY8f-nuRC4KyC8OevDsMkTn_SnB_sOGE" />
 </head>
 
-{% for category in site.categories %}
-{% if category[0] != 'ProtoType' and category[0] != 'Pre-Renewal' and category[0] != 'Legacy' %}
-<h2>{{ category[0] }}</h2>
+{% assign ordered_categories = "신변잡기,개발일지,리뷰,개발이야기,WeeklyMedium" | split: "," %}
+
+{% for category_name in ordered_categories %}
+{% if site.categories[category_name] %}
+<h2>{{ category_name }}</h2>
 <ul>
-{% for post in category[1] %}
+{% for post in site.categories[category_name] %}
 <li>
     <a href="{{ post.url }}">{{ post.title }}</a>
 </li>

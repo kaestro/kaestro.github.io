@@ -3,7 +3,7 @@ layout: default
 classes: wide
 title: "2월 3주차 선정 미디엄"
 date: 2024-02-20
-categories: 리뷰
+categories: WeeklyMedium
 ---
 
 1. Embracing Chaos: The Unexpected STrength of the Chaos Monkey Principle
