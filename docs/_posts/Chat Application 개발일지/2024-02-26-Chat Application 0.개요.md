@@ -1,7 +1,7 @@
 ---
 layout: default
 classes: wide
-title: "ChatApplication 개요"
+title: "[ChatApplication] 개요"
 date: 2024-02-26
 categories: "개발일지"
 ---
