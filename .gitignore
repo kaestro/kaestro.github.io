@@ -1,2 +1,5 @@
 *.swp
 *.backup
+__pycache__
+_site
+docs/_site
