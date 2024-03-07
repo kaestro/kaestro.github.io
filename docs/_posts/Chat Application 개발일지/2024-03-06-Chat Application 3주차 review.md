@@ -85,7 +85,8 @@ func (factory *RedisStoreFactory) Create(sessionTypeNum SessionType) SessionStor
 
 * 커뮤니티에 모집글을 게시
 * 연락이 온 사람과 화상 미팅 진행
-
+  - 2명 모집.
+  - 일주일간 진행해보고 계속할 지 여부에 대해 결정하기로 함.
 
 
 ---
