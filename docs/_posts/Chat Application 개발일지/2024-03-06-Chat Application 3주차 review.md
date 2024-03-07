@@ -1,7 +1,7 @@
 ---
 layout: default
 classes: wide
-title: "[ChatApplication] 3주차 Review - 팀원 모집, 확장성 높은 세션 설계"
+title: "[ChatApplication] 3주차 Review - 팀원 모집, 확장성 높은 디자인, CI/CD"
 date: 2024-03-06
 categories: "개발일지"
 ---
@@ -32,6 +32,7 @@ categories: "개발일지"
 * 추가 진행에서 협업할 인원 모집
 * 채팅 기능을 위한 모듈들의 작성
 * 설계 조건 맞추기 위한 이론적인 구상
+* 협업을 위한 환경 설정
 
 
 ---
@@ -84,3 +85,65 @@ func (factory *RedisStoreFactory) Create(sessionTypeNum SessionType) SessionStor
 
 * 커뮤니티에 모집글을 게시
 * 연락이 온 사람과 화상 미팅 진행
+
+
+
+---
+
+### 문제: 협업을 위한 환경 설정
+
+1. 브랜치를 관리하기 위한 규칙이 필요
+2. ci를 위한 설정이 필요
+
+
+### 해결 방법
+
+1. 브랜치 관리 규칙을 정함
+	* main: 배포용 브랜치
+    	* push 불가능
+	* pull request 규칙 설정
+		* 승인을 받아야만 merge 가능
+		* 코드 소유자의 리뷰가 필요
+2. github action을 통해 ci를 설정함
+	* go 프로젝트 빌드/테스트가 성공해야만 merge 가능
+		* [TODO] 기존의 테스트 코드들이 mock을 사용하지 않아서 테스트가 불가능한 상황 해소 필요
+	* docker 빌드가 성공해야만 merge 가능
+
+```yaml
+name: CI
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v2
+      with:
+        go-version: 1.22
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Dockerfile main_server 빌드
+      run: docker build -t main_server:latest .
+      working-directory: myapp
+
+    - name: Build with docker-compose
+      run: docker-compose up -d
+      working-directory: myapp
+
+    - name: Test
+      run: go test ./...
+      working-directory: myapp
+
+    - name: Build
+      run: go build ./...
+      working-directory: myapp
+```
