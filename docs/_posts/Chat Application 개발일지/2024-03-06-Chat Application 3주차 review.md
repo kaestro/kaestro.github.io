@@ -148,3 +148,14 @@ jobs:
       run: go build ./...
       working-directory: myapp
 ```
+
+---
+
+### 문제: azure에 컨테이너를 통한 배포
+
+* 컨테이너에 앞서 이에 포함된 main_server를 acr(azure container registry)에 올리는 과정에서 문제가 발생함.
+  * [Docker를 통한 어플리케이션 생성 wiki](https://github.com/kaestro/ChatApplication/wiki/Docker%EB%A5%BC-%ED%86%B5%ED%95%9C-%EC%96%B4%ED%94%8C%EB%A6%AC%EC%BC%80%EC%9D%B4%EC%85%98-%EC%83%9D%EC%84%B1)
+  * [Azure Container Registry](https://github.com/kaestro/ChatApplication/wiki/Azure-Container-Registry)
+
+### 해결 방법
+: 진행중
