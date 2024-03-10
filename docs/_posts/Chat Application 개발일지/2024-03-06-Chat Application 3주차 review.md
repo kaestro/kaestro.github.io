@@ -158,4 +158,7 @@ jobs:
   * [Azure Container Registry](https://github.com/kaestro/ChatApplication/wiki/Azure-Container-Registry)
 
 ### 해결 방법
-: 진행중
+
+* 기존에 acr의 이름이 너무 길어서 camelCase를 사용했던 것이 문제였음. docker는 push할 때 대/소문자가 있을 경우 인증 오류를 발생시킬 수 있음.
+* [공식문서](https://learn.microsoft.com/ko-kr/azure/container-registry/container-registry-faq#az-acr-login-succeeds-but-docker-fails-with-error--unauthorized--authentication-required)
+* 기존의 purmirContainerRegistry를 purmir로 변경함.
