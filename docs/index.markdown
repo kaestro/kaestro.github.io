@@ -9,7 +9,7 @@ layout: default
     <meta name="google-site-verification" content="swFW3uc8I4itY8f-nuRC4KyC8OevDsMkTn_SnB_sOGE" />
 </head>
 
-{% assign ordered_categories = "신변잡기,개발일지,리뷰,개발이야기,WeeklyMedium,ETC, 작성중," | split: "," %}
+{% assign ordered_categories = "신변잡기,개발일지,리뷰,개발이야기,WeeklyMedium,ETC,작성중," | split: "," %}
 
 {% for category_name in ordered_categories %}
 {% if site.categories[category_name] %}
