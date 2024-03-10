@@ -162,3 +162,15 @@ jobs:
 * 기존에 acr의 이름이 너무 길어서 camelCase를 사용했던 것이 문제였음. docker는 push할 때 대/소문자가 있을 경우 인증 오류를 발생시킬 수 있음.
 * [공식문서](https://learn.microsoft.com/ko-kr/azure/container-registry/container-registry-faq#az-acr-login-succeeds-but-docker-fails-with-error--unauthorized--authentication-required)
 * 기존의 purmirContainerRegistry를 purmir로 변경함.
+
+---
+
+### Kubernetes를 통한 배포
+
+### 문제: kubernetes로 로컬에 클러스터를 생성한 상태에서 요청이 이루어지지 않고 있음.
+
+### 해결 방법
+
+* log를 일단 읽어야 문제 해결이 가능할 것 같음.
+* kubernetes에 대한 이해 필요
+* 혹은 kubernetes 이외의 방법을 통한 배포를 고려해야할 수도 있음.
