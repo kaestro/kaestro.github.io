@@ -1,7 +1,4 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: default
 ---
 
@@ -15,12 +12,13 @@ layout: default
 {% if site.categories[category_name] %}
 <h2>{{ category_name }}</h2>
 <ul>
-{% for post in site.categories[category_name] %}
+{% for post in site.categories[category_name] | limit: 10 %}
 <li>
     <a href="{{ post.url }}">{{ post.title }}</a>
 </li>
 {% endfor %}
 </ul>
+<a href="/categories/{{ category_name }}">See all posts in {{ category_name }}</a>
 {% endif %}
 {% endfor %}
 
@@ -29,21 +27,23 @@ layout: default
 {% if site.categories['Pre-Renewal'] %}
 <h2 style="color: red;">Pre-Renewal</h2>
 <ul>
-{% for post in site.categories['Pre-Renewal'] %}
+{% for post in site.categories['Pre-Renewal'] | limit: 10 %}
 <li>
     <a style="color: gray;" href="{{ post.url }}">{{ post.title }}</a>
 </li>
 {% endfor %}
 </ul>
+<a style="color: gray;" href="/categories/Pre-Renewal">See all posts in Pre-Renewal</a>
 {% endif %}
 
 {% if site.categories['ProtoType'] %}
 <h2 style="color: red;">ProtoType</h2>
 <ul>
-{% for post in site.categories['ProtoType'] %}
+{% for post in site.categories['ProtoType'] | limit: 10 %}
 <li>
     <a style="color: gray;" href="{{ post.url }}">{{ post.title }}</a>
 </li>
 {% endfor %}
 </ul>
+<a style="color: gray;" href="/categories/ProtoType">See all posts in ProtoType</a>
 {% endif %}
