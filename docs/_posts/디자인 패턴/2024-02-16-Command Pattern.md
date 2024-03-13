@@ -3,7 +3,7 @@ layout: default
 classes: wide
 title: "커맨드 패턴 - 나는 IoT를 지배할 수 있다!"
 date: 2024-02-16
-categories: 개발이야기
+categories: 디자인패턴
 ---
 
 # 커맨드 패턴

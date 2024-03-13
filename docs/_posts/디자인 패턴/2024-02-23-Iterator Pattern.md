@@ -3,7 +3,7 @@ layout: default
 classes: wide
 title: "반복자 패턴 - 저녁밥도 팬케이크도 다 단비꺼야"
 date: 2024-02-23
-categories: 개발이야기
+categories: 디자인패턴
 ---
 
 # 반복자 패턴

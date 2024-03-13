@@ -3,7 +3,7 @@ layout: default
 classes: wide
 title: "파사드 패턴 - 이겨야 한다 '딸깍'"
 date: 2024-02-18
-categories: 개발이야기
+categories: 디자인패턴
 ---
 
 # 파사드 패턴

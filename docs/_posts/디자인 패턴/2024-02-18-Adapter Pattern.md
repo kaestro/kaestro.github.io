@@ -3,7 +3,7 @@ layout: default
 classes: wide
 title: "어댑터 패턴 - 오리가 되겠다던 칠면조"
 date: 2024-02-18
-categories: 개발이야기
+categories: 디자인패턴
 ---
 
 # 어댑터 패턴

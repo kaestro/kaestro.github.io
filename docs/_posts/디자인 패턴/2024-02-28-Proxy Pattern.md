@@ -3,7 +3,7 @@ layout: default
 classes: wide
 title: "프록시 패턴 - 당신이 나의 대리인인가"
 date: 2024-02-28
-categories: 개발이야기
+categories: 디자인패턴
 ---
 
 # 프록시 패턴

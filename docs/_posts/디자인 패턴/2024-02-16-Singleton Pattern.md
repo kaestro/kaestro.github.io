@@ -3,7 +3,7 @@ layout: default
 classes: wide
 title: "싱글톤 패턴 - 찰리네 초콜릿 보일러는 세계 유일!"
 date: 2024-02-16
-categories: 개발이야기
+categories: 디자인패턴
 ---
 
 # 싱글톤 패턴

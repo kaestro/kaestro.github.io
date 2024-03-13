@@ -3,7 +3,7 @@ layout: default
 classes: wide
 title: "팩토리 패턴 - 공장에서 만든 피자는 피자가 아니라고 생각한거야?"
 date: 2024-02-15
-categories: 개발이야기
+categories: 디자인패턴
 ---
 
 # 팩토리 패턴

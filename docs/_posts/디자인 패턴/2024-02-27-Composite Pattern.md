@@ -3,7 +3,7 @@ layout: default
 classes: wide
 title: "컴포지트 패턴 - 갈 때 가더라도 디저트 한 대 쯤은 괜찮잖아?"
 date: 2024-02-27
-categories: 개발이야기
+categories: 디자인패턴
 ---
 
 # 컴포지트 패턴
