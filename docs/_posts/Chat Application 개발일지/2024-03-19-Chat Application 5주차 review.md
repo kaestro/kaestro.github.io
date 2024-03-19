@@ -50,4 +50,7 @@ categories: "개발일지"
   * 기존 기술 선택 이유: golang이 가진 웹서버 성능 및 동시성 처리에 대한 장점.
   * 의문점
     * 다른 기술 스택에 비해 golang은 어떤 점에서 동시성 처리에 더 유리하다고 말할 수 있는가?
+      * **goroutine**은 **스레드**가 아니라, **runtime scheduler**를 통해 관리된다.
+      * 이 때문에 실행이 **커널**이 아닌 **유저 레벨**에서 이루어지기 때문에, **context switching**이 빠르다.
+        * [왜 golang은 동시성에 좋다고 할까?](https://velog.io/@hyeok3011/Goroutine)
 
