@@ -1,7 +1,7 @@
 ---
 layout: default
 classes: wide
-title: "[ChatApplication] 5주차 Review - 기술 스택에 대한 점검 필요"
+title: "[ChatApplication] 5주차 Review - 기술 스택에 대한 점검"
 date: 2024-03-19
 categories: "개발일지"
 ---
@@ -65,18 +65,47 @@ categories: "개발일지"
   * 대안: 유저 정보 저장에 사용하는 **SQL 데이터베이스**에서의 통합
   * 기존 기술 선택 이유: **문서형 데이터베이스**로서 가지는 장점이 있다는 점.
   * 문제점: 그 장점이 뭔지 모름
-  * mongoDB의 장점
+  * **mongoDB**의 장점
     * 데이터 형태에 구애를 덜 받으므로 **이모티콘**과 같은 **string 외 다양한 데이터**를 처리하는 데에 용이하다
-    * 채팅 방 단위로 데이터를 구현시에 기존 데이터를 신규 입장자에게 제공하기 유리하다
-  * RDBMS의 장점
-    * string만 사용할 경우 table과 로직을 통해서 기초적인 채팅을 빠르게 구현할 수 있다.
-  * 선택: RDBMS(mysql/postgresql) 중에 하나로 채팅의 interface를 구현하고, string에 한정한 뒤 방 입장시에 기본 데이터를 제공하지 않는 방향으로 mvp를 구성한 뒤에 기능을 확장하는 과정에서 mongoDB 도입을 고려한다.
+    * **채팅 방 단위**로 데이터를 구현시에 **기존 데이터**를 **신규 입장자**에게 제공하기 유리하다
+  * **RDBMS**의 장점
+    * string만 사용할 경우 table과 로직을 통해서 **기초적인 채팅**을 **빠르게 구현**할 수 있다.
+  * **선택**: **RDBMS**(mysql/postgresql) 중에 하나로 **채팅의 interface**를 구현하고, **string에 한정**한 뒤 방 입장시에 **접속 이전 데이터**를 제공하지 않는 방향으로 **mvp**를 구성한 뒤에 기능을 **확장**하는 과정에서 **mongoDB** 도입을 고려한다.
 * **세션**
   * 현재 사용중인 기술 스택: **redis**
   * 대안: **memcached**, 세션이 아닌 **토큰**(JWT 등)을 사용
   * 기존 기술 선택 이유
     * 사용해 본 적이 있는 기술 스택
     * 유명해서 자료를 구하는 것이 용이
+  * 참고 자료
+    * [Redis vs Memcached](https://velog.io/@sileeee/Redis-vs-Memcached)
+    * [Session storage로 적합한 데이터 베이스는 무엇일까? (Redis vs Memcached)](https://1-7171771.tistory.com/127)
+    * [Memcached vs Redis: Choose Your In-Memory Cache](https://kinsta.com/blog/memcached-vs-redis/)
+  * **Memcached**
+    * 장점
+      * 적은 **메모리 사용량** - 적은 메타 데이터
+      * 안정적인 **응답 시간**
+      * **데이터 변경이 적은 경우** 메모리 파편화가 적음
+      * **수평적 확장**이 쉬움 - multi-threading 지원
+    * 단점
+      * 적은 데이터 타입
+      * 적은 API
+      * 데이터 변경이 잦은 경우에 파편화가 많이 발생
+  * **Redis**
+    * 장점
+      * 다양한 **데이터 타입**
+      * 다양한 **기능**
+      * 많은 사용자
+      * **디스크**에 저장 가능
+      * **Key**에 저장할 수 있는 **데이터의 크기**가 큼
+      * **pub/sub**을 지원해서 **메시지 큐**로도 사용 가능
+    * 단점
+      * **메모리 사용량**이 많음
+      * 트래픽이 많은 경우 **응답 시간**이 불안정
+  * **선택**
+    * **MVP**의 관점에서 더 빠르게 시작할 수 있는 것은 Redis이다. 이는 **기능 및 데이터 타입**을 여럿 이미 구현돼 있기 때문이다.
+    * 트래픽이 많은 경우에 응답 시간이 얼마나 불안정해지는지 **측정**할 방법을 마련해두고, 그에 따라 **Memcached**로 전환할지 여부를 결정한다.
+    * Redis를 사용하면 다른 기술 스택 없이 **메시지 큐**를 처리할 수 있을 지도 모름
 * **메시지 큐**
   * 현재 사용 예정인 기술 스택: **kafka**
   * 대안: **RabbitMQ**, **ActiveMQ**
@@ -86,11 +115,10 @@ categories: "개발일지"
   * 참고 자료
     * <https://gwonbookcase.tistory.com/49>
     * <https://www.cloudamqp.com/blog/activemq-vs-rabbitmq-an-indepth-comparison.html>
-  * kafka의 장점
+  * **kafka**의 장점
     * 분산 처리 기능을 가장 잘 활용할 수 있음.
     * 메모리가 아니라 파일 시스템을 이용한다.
     * TPS가 높고 대용량 실시간 로그 처리에 유리하다
     * broker가 push하는 것이 아니라 pull하는 방식
-  * activeMQ vs rabbitMQ
-    * rabbitMQ가 더 다양한 프로토콜을 지원하고, activeMQ는 java에 더 특화된 모양이라 이 부분은 연구 필요
-    
+  * **activeMQ** vs **rabbitMQ**
+    * rabbitMQ가 **더 다양한 프로토콜**을 지원하고, activeMQ는 **java**에 더 특화된 모양이라 이 부분은 연구 필요
