@@ -57,10 +57,20 @@ categories: "개발일지"
   * 현재 사용중인 기술 스택: **postgresql**
   * 대안: **mysql**
   * 기존 기술 선택 이유: 기존에 사용한 적이 있었던 기술 스택.
+  * 조사 결과 PostgreSQL은 mySQL에 비해 복잡한 동작을 필요로 할 때 사용하는 기술 스택으로 알려져 있다.
+    * <https://www.integrate.io/ko/blog/postgresql-vs-mysql-which-one-is-better-for-your-use-case-ko/>
+  * 팀원들도 mysql에 경험이 더 많은 편이므로, mysql로 이전하도록 생각하고 있다.
 * **NoSQL**
   * 현재 사용중인 기술 스택: **mongodb**
   * 대안: 유저 정보 저장에 사용하는 **SQL 데이터베이스**에서의 통합
   * 기존 기술 선택 이유: **문서형 데이터베이스**로서 가지는 장점이 있다는 점.
+  * 문제점: 그 장점이 뭔지 모름
+  * mongoDB의 장점
+    * 데이터 형태에 구애를 덜 받으므로 **이모티콘**과 같은 **string 외 다양한 데이터**를 처리하는 데에 용이하다
+    * 채팅 방 단위로 데이터를 구현시에 기존 데이터를 신규 입장자에게 제공하기 유리하다
+  * RDBMS의 장점
+    * string만 사용할 경우 table과 로직을 통해서 기초적인 채팅을 빠르게 구현할 수 있다.
+  * 선택: RDBMS(mysql/postgresql) 중에 하나로 채팅의 interface를 구현하고, string에 한정한 뒤 방 입장시에 기본 데이터를 제공하지 않는 방향으로 mvp를 구성한 뒤에 기능을 확장하는 과정에서 mongoDB 도입을 고려한다.
 * **세션**
   * 현재 사용중인 기술 스택: **redis**
   * 대안: **memcached**, 세션이 아닌 **토큰**(JWT 등)을 사용
@@ -72,3 +82,15 @@ categories: "개발일지"
   * 대안: **RabbitMQ**, **ActiveMQ**
   * 기존 기술 선택 이유
     * 메시지 큐 기술들 중 가장 유명해서.
+  * 추가적으로 따로 글을 파서 고민해봐야 할 듯
+  * 참고 자료
+    * <https://gwonbookcase.tistory.com/49>
+    * <https://www.cloudamqp.com/blog/activemq-vs-rabbitmq-an-indepth-comparison.html>
+  * kafka의 장점
+    * 분산 처리 기능을 가장 잘 활용할 수 있음.
+    * 메모리가 아니라 파일 시스템을 이용한다.
+    * TPS가 높고 대용량 실시간 로그 처리에 유리하다
+    * broker가 push하는 것이 아니라 pull하는 방식
+  * activeMQ vs rabbitMQ
+    * rabbitMQ가 더 다양한 프로토콜을 지원하고, activeMQ는 java에 더 특화된 모양이라 이 부분은 연구 필요
+    
