@@ -71,8 +71,9 @@
       {% endif %}
     </header>
 
-    <aside style="position: fixed; left: 0; top: 400px; bottom: 0; width: 200px; overflow: auto; padding-left: 20px;">
-      <ul>
+    <aside id="category-list" style="position: fixed; left: 0; top: 400px; bottom: 0; width: 200px; overflow: auto; padding-left: 20px; transition: top 0.3s;">
+      <h2 style="color: #333;">Categories</h2>
+      <ul style="background-color: #FFE5B4; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; list-style-position: inside;">
         {% for category in site.categories %}
           {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' %}
             <li><a href="/categories/{{ category[0] }}">{{ category[0] }}</a></li>
@@ -80,6 +81,14 @@
         {% endfor %}
       </ul>
     </aside>
+
+    <script>
+    window.onscroll = function() {
+      var categoryList = document.getElementById('category-list');
+      var topValue = Math.max(0, 400 - window.pageYOffset);
+      categoryList.style.top = topValue + 'px';
+    };
+    </script>
 
     <main id="content" class="main-content" role="main">
         {{ content }}

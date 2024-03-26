@@ -71,26 +71,14 @@
       {% endif %}
     </header>
 
-    {% assign current_category = page.categories[0] | append: "" %}
-    {% assign current_index = site.posts | where: "categories", current_category | where: "url", page.url | map: "date" | index_of: page.date %}
-    {% assign category_posts = site.posts | where: "categories", current_category %}
-
-    <aside id="category-list" style="position: fixed; left: 0; top: 450px; bottom: 0; width: 300px; overflow: auto; padding-left: 20px; transition: top 0.3s;">
-      <h2 style="color: #333;">Categories</h2>
-      <ul style="background-color: #FFE5B4; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; list-style-position: inside;">
+    <aside id="category-list" style="position: fixed; left: 0; top: 400px; bottom: 0; width: 200px; overflow: auto; padding-left: 20px; transition: top 0.3s;">
+      <ul>
         {% for category in site.categories %}
           {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' %}
             <li><a href="/categories/{{ category[0] }}">{{ category[0] }}</a></li>
           {% endunless %}
         {% endfor %}
       </ul>
-
-      <h2 style="color: #333;">Posts</h2>
-      <ul style="background-color: #FFE5B4; border: 1px solid #ccc; padding: 10px; list-style-position: inside;">
-        {% for post in category_posts %}
-          <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-        {% endfor %}
-      </ul>      
     </aside>
 
     <script>
