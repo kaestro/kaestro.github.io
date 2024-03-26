@@ -48,6 +48,10 @@
         background-color: rgb(255, 100, 0); /* 마우스를 올렸을 때 배경색 변경 */
         color: #fff; /* 마우스를 올렸을 때 글자색 변경 */
       }
+
+      .right-align {
+        text-align: right;
+      }
     </style>
 
   </head>
@@ -94,11 +98,28 @@
         {{ content }}
 
         <div class="post-navigation" style="margin-top: 3em;">
-          {% if page.previous.url %}
-          <a href="{{ site.baseurl }}{{ page.previous.url }}">이전 글: {{ page.previous.title }} </a>
+          {% assign next = nil %}
+          {% for post in site.posts reversed limit:1000 %}
+            {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date > page.date %}
+              {% assign next = post %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+
+          {% assign prev = nil %}
+          {% for post in site.posts limit:1000 %}
+            {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date < page.date%}
+              {% assign prev = post %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+
+          {% if prev %}
+            <a href="{{ site.baseurl }}{{ prev.url }}" class="prev">이전 글: {{ prev.title }} </a>
           {% endif %}
-          {% if page.next.url %}
-          <a href="{{ site.baseurl }}{{ page.next.url }}" class="next">다음 글: {{ page.next.title }} </a>
+
+          {% if next %}
+            <a href="{{ site.baseurl }}{{ next.url }}" class="right-align">다음 글: {{ next.title }} </a>
           {% endif %}
         </div>
 
