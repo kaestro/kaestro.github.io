@@ -13,7 +13,6 @@ theme: jekyll-theme-cayman
 plugins:
   - jekyll-feed
 
-
 google_site_verification: "swFW3uc8I4itY8f-nuRC4KyC8OevDsMkTn_SnB_sOGE"
 
 disqus:
