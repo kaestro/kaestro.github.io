@@ -52,6 +52,7 @@
 
   </head>
   <body>
+
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
     <header class="page-header" role="banner">
@@ -70,7 +71,18 @@
       {% endif %}
     </header>
 
+    <aside style="position: fixed; left: 0; top: 400px; bottom: 0; width: 200px; overflow: auto; padding-left: 20px;">
+      <ul>
+        {% for category in site.categories %}
+          {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' %}
+            <li><a href="/categories/{{ category[0] }}">{{ category[0] }}</a></li>
+          {% endunless %}
+        {% endfor %}
+      </ul>
+    </aside>
+
     <main id="content" class="main-content" role="main">
+
         {{ content }}
 
         <div class="post-navigation" style="margin-top: 3em;">
