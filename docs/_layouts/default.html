@@ -94,11 +94,33 @@
         {{ content }}
 
         <div class="post-navigation" style="margin-top: 3em;">
-          {% if page.previous.url %}
-          <a href="{{ site.baseurl }}{{ page.previous.url }}">이전 글: {{ page.previous.title }} </a>
+          {% assign next = nil %}
+          {% for post in site.posts limit:1000 %}
+            {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date >= page.date %}
+              {% assign next = post %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+
+          {% assign prev = nil %}
+          {% for post in site.posts reversed limit:1000 %}
+            {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date <= page.date%}
+              {% assign prev = post %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+
+          next date: {{next.date}}, next title: {{next.title}}<br>
+          prev date: {{prev.date}}, prev title: {{prev.title}}<br>
+          page.date: {{page.date}}, page.title: {{page.title}}<br>
+
+
+          {% if prev and prev.date <= page.date %}
+            <a href="{{ site.baseurl }}{{ prev.url }}" class="prev">이전 글: {{ prev.title }} </a>
           {% endif %}
-          {% if page.next.url %}
-          <a href="{{ site.baseurl }}{{ page.next.url }}" class="next">다음 글: {{ page.next.title }} </a>
+
+          {% if next and next.date >= page.date %}
+            <a href="{{ site.baseurl }}{{ next.url }}" class="">다음 글: {{ next.title }} </a>
           {% endif %}
         </div>
 

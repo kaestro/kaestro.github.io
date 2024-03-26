@@ -93,15 +93,6 @@
 
         {{ content }}
 
-        <div class="post-navigation" style="margin-top: 3em;">
-          {% if page.previous.url %}
-          <a href="{{ site.baseurl }}{{ page.previous.url }}">이전 글: {{ page.previous.title }} </a>
-          {% endif %}
-          {% if page.next.url %}
-          <a href="{{ site.baseurl }}{{ page.next.url }}" class="next">다음 글: {{ page.next.title }} </a>
-          {% endif %}
-        </div>
-
       <footer class="site-footer">
         {% if site.github.is_project_page %}
           <span class="site-footer-owner"><a href="{{ site.github.repository_url }}">{{ site.github.repository_name }}</a> is maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a>.</span>
