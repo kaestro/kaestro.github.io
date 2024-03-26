@@ -48,6 +48,10 @@
         background-color: rgb(255, 100, 0); /* 마우스를 올렸을 때 배경색 변경 */
         color: #fff; /* 마우스를 올렸을 때 글자색 변경 */
       }
+
+      .right-align {
+        text-align: right;
+      }
     </style>
 
   </head>
@@ -95,32 +99,27 @@
 
         <div class="post-navigation" style="margin-top: 3em;">
           {% assign next = nil %}
-          {% for post in site.posts limit:1000 %}
-            {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date >= page.date %}
+          {% for post in site.posts reversed limit:1000 %}
+            {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date > page.date %}
               {% assign next = post %}
               {% break %}
             {% endif %}
           {% endfor %}
 
           {% assign prev = nil %}
-          {% for post in site.posts reversed limit:1000 %}
-            {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date <= page.date%}
+          {% for post in site.posts limit:1000 %}
+            {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date < page.date%}
               {% assign prev = post %}
               {% break %}
             {% endif %}
           {% endfor %}
 
-          next date: {{next.date}}, next title: {{next.title}}<br>
-          prev date: {{prev.date}}, prev title: {{prev.title}}<br>
-          page.date: {{page.date}}, page.title: {{page.title}}<br>
-
-
-          {% if prev and prev.date <= page.date %}
+          {% if prev %}
             <a href="{{ site.baseurl }}{{ prev.url }}" class="prev">이전 글: {{ prev.title }} </a>
           {% endif %}
 
-          {% if next and next.date >= page.date %}
-            <a href="{{ site.baseurl }}{{ next.url }}" class="">다음 글: {{ next.title }} </a>
+          {% if next %}
+            <a href="{{ site.baseurl }}{{ next.url }}" class="right-align">다음 글: {{ next.title }} </a>
           {% endif %}
         </div>
 
