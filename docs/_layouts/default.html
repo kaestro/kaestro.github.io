@@ -52,6 +52,7 @@
       .right-align {
         text-align: right;
       }
+
     </style>
 
   </head>
@@ -76,7 +77,7 @@
     </header>
 
     <aside id="category-list" style="position: fixed; left: 0; top: 500px; bottom: 0; width: 200px; overflow: auto; padding-left: 50px; transition: top 0.3s;">
-      <h2 style="color: #333;">Categories</h2>
+      <h2 style="color: #333; padding-left: 16px">Categories</h2>
       <ul>
         {% for category in site.categories %}
           {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' %}
@@ -90,15 +91,13 @@
     </aside>
 
     <aside id="header-links" style="position: fixed; right: 0; top: 500px; bottom: 0; width: 300px; overflow: auto; padding-right: 10px; transition: top 0.3s;">
-      <h2 style="color: #333; padding-left: 30px">목차</h2>
+      <h2 style="color: #333; padding-left: 0px">목차</h2>
     </aside>
 
     <script>
       window.onload = function() {
         var headers = document.querySelectorAll('h1, h2, h3');
         var headerLinks = document.getElementById('header-links');
-        var ul = document.createElement('ul');
-        ul.style.listStyleType = 'none';
 
         var foundToc = false;
         for (var i = 0; i < headers.length; i++) {
@@ -113,10 +112,9 @@
           a.href = '#' + headers[i].id;
           a.textContent = headers[i].textContent;
           li.appendChild(a);
-          ul.appendChild(li);
-        }
 
-        headerLinks.appendChild(ul);
+          headerLinks.appendChild(li);
+        }
 
         document.getElementById('scroll-bottom').onclick = function() {
           window.scrollTo(0, document.body.scrollHeight);
