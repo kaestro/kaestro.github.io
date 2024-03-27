@@ -75,7 +75,7 @@
       {% endif %}
     </header>
 
-    <aside id="category-list" style="position: fixed; left: 0; top: 450px; bottom: 0; width: 300px; overflow: auto; padding-left: 20px; transition: top 0.3s;">
+    <aside id="category-list" style="position: fixed; left: 0; top: 500px; bottom: 0; width: 200px; overflow: auto; padding-left: 50px; transition: top 0.3s;">
       <h2 style="color: #333;">Categories</h2>
       <ul>
         {% for category in site.categories %}
@@ -84,14 +84,59 @@
           {% endunless %}
         {% endfor %}
       </ul>
+      <button id="scroll-bottom" style="position: absolute; bottom: 10px; left: 25%; transform: translateX(-50%); background-color: #28A745; color: white; min-width: 60px;">아래로</button>
+      <button id="go-home" style="position: absolute; bottom: 10px; left: 55%; transform: translateX(-50%); background-color: #ffc107; color: white; min-width: 60px;">홈으로</button>
+      <button id="scroll-top" style="position: absolute; bottom: 10px; left: 75%; transform: translateX(-25%); background-color: red; color: white; min-width: 60px;">위로</button>
+    </aside>
 
+    <aside id="header-links" style="position: fixed; right: 0; top: 500px; bottom: 0; width: 300px; overflow: auto; padding-right: 10px; transition: top 0.3s;">
+      <h2 style="color: #333; padding-left: 30px">목차</h2>
     </aside>
 
     <script>
+      window.onload = function() {
+        var headers = document.querySelectorAll('h1, h2, h3');
+        var headerLinks = document.getElementById('header-links');
+        var ul = document.createElement('ul');
+        ul.style.listStyleType = 'none';
+
+        var foundToc = false;
+        for (var i = 0; i < headers.length; i++) {
+          if (headers[i].textContent === '목차') {
+            foundToc = true;
+            continue;
+          }
+          if (!foundToc) continue;
+
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.href = '#' + headers[i].id;
+          a.textContent = headers[i].textContent;
+          li.appendChild(a);
+          ul.appendChild(li);
+        }
+
+        headerLinks.appendChild(ul);
+
+        document.getElementById('scroll-bottom').onclick = function() {
+          window.scrollTo(0, document.body.scrollHeight);
+        };
+
+        document.getElementById('go-home').onclick = function() {
+          window.location.href = '/';
+        };
+
+        document.getElementById('scroll-top').onclick = function() {
+          window.scrollTo(0, 0);
+        };
+      };
+
     window.onscroll = function() {
       var categoryList = document.getElementById('category-list');
-      var topValue = Math.max(0, 400 - window.pageYOffset);
+      var headerLinks = document.getElementById('header-links');
+      var topValue = Math.max(0, 500 - window.pageYOffset);
       categoryList.style.top = topValue + 'px';
+      headerLinks.style.top = topValue + 'px';
     };
     </script>
 
