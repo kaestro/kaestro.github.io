@@ -73,7 +73,7 @@
 
     <aside id="category-list" style="position: fixed; left: 0; top: 400px; bottom: 0; width: 200px; overflow: auto; padding-left: 20px; transition: top 0.3s;">
       <h2 style="color: #333;">Categories</h2>
-      <ul style="background-color: #FFE5B4; border: 1px solid #ccc; padding: 10px; margin-bottom: 20px; list-style-position: inside;">
+      <ul>
         {% for category in site.categories %}
           {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' %}
             <li><a href="/categories/{{ category[0] }}">{{ category[0] }}</a></li>
