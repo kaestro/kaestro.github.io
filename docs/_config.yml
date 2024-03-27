@@ -5,8 +5,8 @@
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://kaestro.github.io" # the base hostname & protocol for your site, e.g. http://example.com
 github_username:  kaestro
-title: Kaestro's Blog
-description: 신변잡기적인 테크블로그
+title: Kaestro's 대장간
+description: 프로그래밍을 단련하고, 기록하는 공간
 
 # Build settings
 theme: jekyll-theme-cayman
