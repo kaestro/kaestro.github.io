@@ -1,7 +1,8 @@
 ---
 layout: default
 classes: wide
-title: "반복자 패턴 - 저녁밥도 팬케이크도 다 단비꺼야"
+title: "반복자 패턴"
+subtitle: "저녁밥도 팬케이크도 다 단비꺼야"
 date: 2024-02-23
 categories: 디자인패턴
 ---

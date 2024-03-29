@@ -1,7 +1,8 @@
 ---
 layout: default
 classes: wide
-title: "옵저버 패턴 - 어느새 빗물이 내 발목에 고이기 전에 알려줬어야지!"
+title: "옵저버 패턴"
+subtitle: "어느새 빗물이 내 발목에 고이기 전에 알려줬어야지!"
 date: 2024-02-14
 categories: 디자인패턴
 ---

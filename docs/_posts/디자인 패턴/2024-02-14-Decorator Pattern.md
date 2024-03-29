@@ -1,7 +1,8 @@
 ---
 layout: default
 classes: wide
-title: "데코레이터 패턴 - 싸구려 커피를 마시기 전에 우유를 넣으세요"
+title: "데코레이터 패턴"
+subtitle: "싸구려 커피를 마시기 전에 우유를 넣으세요"
 date: 2024-02-14
 categories: 디자인패턴
 ---

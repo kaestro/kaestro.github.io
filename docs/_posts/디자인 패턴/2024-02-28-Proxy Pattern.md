@@ -1,7 +1,8 @@
 ---
 layout: default
 classes: wide
-title: "프록시 패턴 - 당신이 나의 대리인인가"
+title: "프록시 패턴"
+subtitle: "당신이 나의 대리인인가"
 date: 2024-02-28
 categories: 디자인패턴
 ---

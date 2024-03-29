@@ -1,7 +1,8 @@
 ---
 layout: default
 classes: wide
-title: "템플릿 메소드 패턴 - 커피에 홍차를 섞어드셔보세요"
+title: "템플릿 메소드 패턴"
+subtitle: "커피에 홍차를 섞어드셔보세요"
 date: 2024-02-21
 categories: 디자인패턴
 ---

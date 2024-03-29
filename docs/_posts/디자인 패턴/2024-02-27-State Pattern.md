@@ -1,7 +1,8 @@
 ---
 layout: default
 classes: wide
-title: "상태 패턴 - 이 기계는 당첨일수도, 아닐수도 있습니다."
+title: "상태 패턴"
+subtitle: "이 기계는 당첨일수도, 아닐수도 있습니다."
 date: 2024-02-27
 categories: 디자인패턴
 ---
