@@ -14,6 +14,12 @@
     {% include head-custom.html %}
 
     <style>
+      .project-subtitle {
+        font-weight: lighter;
+        font-size: 25px;
+        margin-top: 0;
+      }
+
       .main-content {
         box-shadow: 10px 0 15px -5px rgba(128, 128, 128, 0.2), -10px 0 15px -5px rgba(128, 128, 128, 0.2); /* 좌우에 그림자 느낌의 초록색 보더 */
       }
@@ -62,6 +68,7 @@
 
     <header class="page-header" role="banner">
       <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
+      <h1 class="project-subtitle">{{ page.subtitle }}</h1>
       <h2 class="project-tagline">
         <a href="{{ '/' | relative_url }}">
           {{ page.description | default: site.description | default: site.github.project_tagline }}
