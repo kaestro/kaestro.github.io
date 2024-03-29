@@ -1,7 +1,8 @@
 ---
 layout: default
 classes: wide
-title: "2월의 코드 복기 - 알고리즘, Go 문법"
+title: "2월의 코드 복기"
+subtitle: "알고리즘, Go 문법"
 date: 2024-03-08
 categories: ETC
 ---
