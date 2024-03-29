@@ -14,7 +14,11 @@ layout: front
 <ul>
 {% for post in site.categories[category_name] limit: 5 %}
 <li>
-    <a href="{{ post.url }}">{{ post.title }}</a>
+    <a href="{{ post.url }}">{{ post.title }}
+    {% if post.subtitle %}
+        <span> - {{ post.subtitle }}</span>
+    {% endif %}
+    </a>
 </li>
 {% endfor %}
 </ul>
