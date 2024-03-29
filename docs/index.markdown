@@ -22,6 +22,6 @@ layout: front
 </li>
 {% endfor %}
 </ul>
-<a href="/categories/{{ category_name }}">See all posts in {{ category_name }}</a>
+<a href="/categories/{{ category_name }}">See all posts({{ site.categories[category_name] | size }}) in {{ category_name }}</a>
 {% endif %}
 {% endfor %}
