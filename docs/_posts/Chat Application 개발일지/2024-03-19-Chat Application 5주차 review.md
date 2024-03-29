@@ -1,7 +1,8 @@
 ---
 layout: default
 classes: wide
-title: "[ChatApplication] 5주차 Review - 기술 스택에 대한 점검"
+title: "[ChatApplication] 5주차 Review"
+subtitle: "기술 스택에 대한 점검"
 date: 2024-03-19
 categories: "개발일지"
 ---

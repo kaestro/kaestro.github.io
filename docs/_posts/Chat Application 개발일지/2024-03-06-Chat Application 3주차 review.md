@@ -1,7 +1,8 @@
 ---
 layout: default
 classes: wide
-title: "[ChatApplication] 3주차 Review - 팀원 모집, 확장성 높은 디자인, CI/CD"
+title: "[ChatApplication] 3주차 Review"
+subtitle: "팀원 모집, 확장성 높은 디자인, CI/CD"
 date: 2024-03-06
 categories: "개발일지"
 ---
