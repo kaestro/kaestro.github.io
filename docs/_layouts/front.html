@@ -62,16 +62,13 @@
           {{ page.description | default: site.description | default: site.github.project_tagline }}
         </a>
       </h2>
-      {% if site.github.is_project_page %}
-        <a href="{{ site.github.repository_url }}" class="btn">View on GitHub</a>
-      {% endif %}
       {% if site.show_downloads %}
         <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
         <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
       {% endif %}
     </header>
 
-    <aside id="category-list" style="position: fixed; left: 0; top: 500px; bottom: 0; width: 200px; overflow: auto; padding-left: 50px; transition: top 0.3s;">
+    <aside id="category-list" style="position: fixed; left: 0; top: 400px; bottom: 0; width: 200px; overflow: auto; padding-left: 50px; transition: top 0.3s;">
       <h2 style="color: #333; padding-left: 16px">Categories</h2>
       <ul>
         {% for category in site.categories %}
@@ -103,7 +100,7 @@
 
     window.onscroll = function() {
       var categoryList = document.getElementById('category-list');
-      var topValue = Math.max(0, 400 - window.pageYOffset);
+      var topValue = Math.max(100, 400 - window.pageYOffset);
       categoryList.style.top = topValue + 'px';
     };
     </script>
