@@ -6,13 +6,13 @@ date: 2024-03-03
 categories: WeeklyMedium
 ---
 
-1. https://medium.com/@limsungmook/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%8A%94-%EC%99%9C-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85%EC%9D%84-%EC%84%A0%ED%83%9D%ED%96%88%EC%9D%84%EA%B9%8C-997f985adb42
-2. https://levelup.gitconnected.com/system-design-interview-question-design-spotify-4a8a79697dda
-
+1. <https://medium.com/@limsungmook/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%8A%94-%EC%99%9C-%ED%94%84%EB%A1%9C%ED%86%A0%ED%83%80%EC%9E%85%EC%9D%84-%EC%84%A0%ED%83%9D%ED%96%88%EC%9D%84%EA%B9%8C-997f985adb42>
+2. <https://levelup.gitconnected.com/system-design-interview-question-design-spotify-4a8a79697dda>
 
 ---
 
-# 자바스크립트는 왜 프로토타입을 선택했을까?
+## 자바스크립트는 왜 프로토타입을 선택했을까?
+
 : 자바스크립트에서 추상형태 명칭을 클래스가 아니라 프로토타입을 선택한 철학적인 논의
 
 프로그래밍의 패러다임은 더욱 높은 추상화를 구현하는 방향으로 발전하고 있습니다. 클래스는 우리가 이제는 자연스럽게 받아들이는 개념이지만, 자바스크립트는 클래스가 아닌 프로토타입이라는 개념을 선택했습니다. 지금은 ES6에 들어오면서 자바스크립트 역시도 클래스를 지원하고 있다고 합니다.
@@ -23,7 +23,8 @@ categories: WeeklyMedium
 
 ---
 
-# System Design Interview Question: Design Spotify
+## System Design Interview Question: Design Spotify
+
 : 수치적으로 더 큰 규모의 시스템을 설계하는 방법에 대한 논의
 
 이 글은 spotify와 같이 많은 유저가 이용해야하는 시스템을 설계할 때 어떤 부분을 고려해야하는 지에 대해 이야기해줍니다.

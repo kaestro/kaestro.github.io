@@ -6,9 +6,9 @@ date: 2024-02-27
 categories: WeeklyMedium
 ---
 
-1. https://learningdaily.dev/2023-in-review-4-key-takeaways-for-developers-a5bcc8b86133
-2. https://medium.com/@techworldwithmilan/software-architecture-as-code-tools-331a11222da0
-3. https://levelup.gitconnected.com/build-a-personal-ai-tech-news-agent-94e7a2e508fe
+1. <https://learningdaily.dev/2023-in-review-4-key-takeaways-for-developers-a5bcc8b86133>
+2. <https://medium.com/@techworldwithmilan/software-architecture-as-code-tools-331a11222da0>
+3. <https://levelup.gitconnected.com/build-a-personal-ai-tech-news-agent-94e7a2e508fe>
 
 ---
 

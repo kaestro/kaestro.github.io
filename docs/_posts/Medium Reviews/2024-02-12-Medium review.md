@@ -12,8 +12,9 @@ categories: WeeklyMedium
 
 ---
 
-# 싱가포르의 GPT-4 프롬프트 엔지니어링 대회에서 우승한 방법
-: https://medium.com/towards-data-science/how-i-won-singapores-gpt-4-prompt-engineering-competition-34c195a93d41
+## 싱가포르의 GPT-4 프롬프트 엔지니어링 대회에서 우승한 방법
+
+: <https://medium.com/towards-data-science/how-i-won-singapores-gpt-4-prompt-engineering-competition-34c195a93d41>
 
 요즘 부쩍 생성형 ai를 쓸 일이 많아지면서, 많이 하게 되는 고민은 '어떻게 하면 더 좋은 질문을 할 수 있을까?'입니다. 해당 글에서는 이를 총 4가지로 나누어 설명합니다.
 
@@ -26,7 +27,7 @@ categories: WeeklyMedium
 
 저는 당장은 데이터 세트 분석에는 관심이 없기에 앞의 세 가지 항목만 참고했고, 굉장히 도움을 많이 받고 있는 중 입니다.
 
-## COSTAR framework
+### COSTAR framework
 
 COSTAR framework는 생성형 ai를 사용할 때 주의할 6가지의 키워드를 말합니다.
 
@@ -39,12 +40,11 @@ COSTAR framework는 생성형 ai를 사용할 때 주의할 6가지의 키워드
 
 대표적으로 요즘 활용하고 있는 방식을 예로 들자면, 제가 자료구조와 알고리즘에 관한 개념적인 복습을 면접을 보기 직전에 하려고 하는 상황을 가정해보겠습니다. 제가 처음에 접근한 방식은 이런 식이었습니다.
 
-**"회사에서 주니어 개발자에게 물어볼 만한 자료구조와 알고리즘적 질문들에는 어떤 것이 있을지 제시해줄래?"**
+#### "회사에서 주니어 개발자에게 물어볼 만한 자료구조와 알고리즘적 질문들에는 어떤 것이 있을지 제시해줄래?"
 
 이 때 제안해주는 답변은 다음과 같습니다.
 
----
-
+```md
 회사에서 주니어 개발자에게 물어볼 수 있는 몇 가지 자료구조와 알고리즘적 질문에 대해 알려드리겠습니다:
 
 해시맵 구현: 해시맵(해시 테이블)의 작동 원리를 설명하고, 이를 파이썬에서 어떻게 구현할 수 있는지에 대해 물을 수 있습니다.
@@ -52,21 +52,17 @@ COSTAR framework는 생성형 ai를 사용할 때 주의할 6가지의 키워드
 이진 탐색 트리: 이진 탐색 트리의 특징을 설명하고, 특정 값을 찾거나 삽입하는 작업을 어떻게 수행하는지에 대해 물을 수 있습니다.
 
 ...
-
----
+```
 
 물론 이 답변도 괜찮긴 합니다만, 제게 있어서 아쉬운 점은 이제 이런 키워드가 제시됐을 때 어떤 순서로 구조화된 공부를 할지에 대해서 잘 모르겠다는 것이었습니다. 이전에는 해당 답변을 받은 다음에, "리스트와 딕셔너리에 관련해서 물어볼만한 질문에는 어떤 것들이 있을까?" 와 같은 질문을 통해 공부를 했습니다. 그리고 이것은 꽤나 유용한 학습 방법이었습니다. chatgpt가 없을 때에 비교하면 많이 효율적이고요.
 
 하지만 해당 medium 글을 읽은 후에는 다음과 같은 식으로 질문을 하게 됐습니다. 
 
-**다음 주에 컴퓨터 공학부 학생들을 대상으로 자료구조와 알고리즘 강의를 하게 됐어. 해당 학생들은 곧 졸업하고 취업을 앞두고 있어. 기본적인 개념의 이해는 돼있지만, 이를 복습하고 시험을 준비하는 과정이 필요하다 할때 커리큘럼을 작성해보려하는데 도와줄래?**
-
----
+#### 다음 주에 컴퓨터 공학부 학생들을 대상으로 자료구조와 알고리즘 강의를 하게 됐어. 해당 학생들은 곧 졸업하고 취업을 앞두고 있어. 기본적인 개념의 이해는 돼있지만, 이를 복습하고 시험을 준비하는 과정이 필요하다 할때 커리큘럼을 작성해보려하는데 도와줄래?
 
 그리고 이전과 비해서 '졸업하고 취업을 앞둔 컴퓨터 공학부'라는 명확한 독자를 설정하고, '시험을 준비하는 커리큘럼 준비'라는 맥락을 제시하기 때문에 좀 더 나은 답변을 얻을 수 있게 됐습니다.
 
----
-
+```md
 물론이죠! 학생들이 기본 개념을 알고 있지만 실전 경험이 필요한 상황에서는 다음과 같은 커리큘럼을 고려해볼 수 있습니다:
 
 자료구조 복습
@@ -94,37 +90,40 @@ COSTAR framework는 생성형 ai를 사용할 때 주의할 6가지의 키워드
 
 자료구조와 알고리즘을 활용하여 간단한 프로젝트를 진행합니다.
 예를 들어, 그래프 알고리즘을 사용하여 경로 탐색 알고리즘을 구현하는 프로젝트를 할 수 있습니다.
-
----
-
+```
 
 이처럼 단순히 학습을 할 내용을 떠나 조금 더 구체적인 학습의 방식도 제안해주는 것이 꽤나 도움이 많이 됐습니다. 
 
 그 다음 항목인 ###를 통해 내용을 나누는 것도 꽤나 많은 도움을 받고 있습니다. 가령, User.py에 정의된 ORM 객체인 User를 이용해서 Login이라는 api를 구현해야한다고 할 경우에
 
-**Login api를 login.py에 작성하고 싶어. Login은 input으로 email, password를 받고 이를 Oauth2를 통해 토큰을 만들어 반환해주는 인증 api야. 해당 정보를 저장하기 위한 database 모듈과 소통하기 위한 방식은 ORM을 채용하고 있어. Login이 정보를 주고 받게 될 Model은 다음과 같아**
+```md
+Login api를 login.py에 작성하고 싶어. Login은 input으로 email, password를 받고 이를 Oauth2를 통해 토큰을 만들어 반환해주는 인증 api야. 해당 정보를 저장하기 위한 database 모듈과 소통하기 위한 방식은 ORM을 채용하고 있어. Login이 정보를 주고 받게 될 Model은 다음과 같아
 
-\###
+###
 
-**User.py의 코드 내용**
+User.py의 코드 내용
+```
 
 와 같은 방식으로 질문을 작성하게 됐습니다.
 
----
-
 3번째 항목은, chat gpt의 custom instructions에서 요구하는 두 가지 질문을 어떻게 답변할 것인지에 대해 이야기합니다. custom instructions는 우리가 프롬프트에 입력하는 것과는 별개로, 답변을 할 때 고정적으로 chatgpt가 명심해두어야하는 다음과 같은 질문에 대한 답변들을 말합니다.
 
+```md
 1. What would you like ChatGPT to know about you to provide better responses?
 2. How would you like ChatGPT to respond?
+```
 
 글의 저자는 다음과 같은 것을 작성하길 추천하고 있습니다.
 
+```md
 * Task Definition: You will answer questions using this text: [insert text].
 * Output Format: You will respond with a JSON object in this format: {`Question`: `Answer`}
 * If the text does not contain sufficient information to answer the question, do not make up information and give the answers as "NA".
+```
 
 저 같은 경우는 다음과 같은 것을 사용하고 있는 중입니다.
 
+```
 * I'm an Junior Programmer who has bachelor's degree on Electricity and computer engineering.
 * Right now I'm trying to earn a job as a software designer
 * I used to be good at algorithms and solving program problems, but not been programming for about 1.5 years
@@ -136,11 +135,13 @@ COSTAR framework는 생성형 ai를 사용할 때 주의할 6가지의 키워드
 * Try to use vocabularies that are frequently used computer programming environment.
 * 질문에 답하려면 [텍스트 삽입]이라는 텍스트를 사용하세요.
 * 본인이 질문에 답하기에 충분한 정보가 포함되어 있지 않은 경우 정보를 구성하지 말고 "NA"로 답하십시오.
+```
 
 ---
 
-# Taylor Swift Ticketmaster Meltdown: 시스템 설계 분석
-: https://learningdaily.dev/taylor-swift-ticketmaster-meltdown-a-system-design-analysis-cd326f7ed57b
+## Taylor Swift Ticketmaster Meltdown: 시스템 설계 분석
+
+: <https://learningdaily.dev/taylor-swift-ticketmaster-meltdown-a-system-design-analysis-cd326f7ed57b>
 
 요 근래 테일러 스위프트가 전세계 투어를 다닌 것이 꽤나 화제가 됐었죠. 조단위의 경제적 효과를 불러왔다는 이야기가 나올 정도니 대단하다라고 생각하고 넘어가기만 했던 일이었습니다.
 
@@ -153,8 +154,9 @@ COSTAR framework는 생성형 ai를 사용할 때 주의할 6가지의 키워드
 3. 3자 의존성: 시스템은 가장 약한 링크만큼만 강력하다.
 
 ---
-# 20년 동안 프로그래밍을 한 후배인 나와 당신에게 주는 조언
-: https://medium.com/dev-publicity/advice-to-my-younger-self-and-you-after-20-years-in-programming-a3a2ccc7a942
+## 20년 동안 프로그래밍을 한 후배인 나와 당신에게 주는 조언
+
+: <https://medium.com/dev-publicity/advice-to-my-younger-self-and-you-after-20-years-in-programming-a3a2ccc7a942>
 
 미디엄에서 최근에 가장 많이 읽은 글이라고 추천이 돼서 읽은 글입니다. 저자는 Alexey Inkin이라는 IEEE 시니어 멤버인 20년 경력 개발자입니다.
 
@@ -166,7 +168,7 @@ COSTAR framework는 생성형 ai를 사용할 때 주의할 6가지의 키워드
 
 과 같은 이야기를 하는 것이죠. 초기 단계의 기술에 참여하라는 항목에서 제시한 링크가 꽤나 재밌었습니다.
 
-https://survey.stackoverflow.co/2023/#section-salary-salary-and-experience-by-language
+<https://survey.stackoverflow.co/2023/#section-salary-salary-and-experience-by-language>
 
 위의 링크는 프로그래밍 언어별 평균 연차와, 중위 연봉을 스택오버플로우에서 통계낸 것입니다. 빨간 것일수록 사용자가 많고, 파란 것일수록 적어서 신뢰도가 떨어진다 할 수 있죠.
 

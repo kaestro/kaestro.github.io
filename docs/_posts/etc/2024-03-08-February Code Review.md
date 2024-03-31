@@ -7,10 +7,6 @@ date: 2024-03-08
 categories: ETC
 ---
 
-# 2월 코드 복기
-
----
-
 ## https://github.com/kaestro/algorithms_v3/commit/886b271b3be97d6af2af270d2754ebb8127f4d88
 
 binary search tree가 있을 때, 이를 펴는 방법
