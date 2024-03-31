@@ -104,8 +104,8 @@
       <button id="scroll-top" style="position: absolute; bottom: 10px; left: 75%; transform: translateX(-25%); background-color: red; color: white; min-width: 60px;">위로</button>
     </aside>
 
-    <aside id="header-links" style="position: fixed; right: 0; top: 400px; bottom: 0; width: 300px; overflow: auto; padding-right: 10px; transition: top 0.3s;">
-      <h2 style="color: #333; padding-left: 0px">목차</h2>
+    <aside id="header-links" style="position: fixed; left: 50%; top: 400px; margin-left: 510px; width: 300px;">
+      <h2 style="color: #333; padding-left: 55px">목차</h2>
     </aside>
 
     <script>
@@ -114,6 +114,8 @@
         var headerLinks = document.getElementById('header-links');
 
         var foundToc = false;
+        var currentList = headerLinks;
+        var currentLevel = 0;
         for (var i = 0; i < headers.length; i++) {
           if (headers[i].textContent === '목차') {
             foundToc = true;
@@ -121,13 +123,25 @@
           }
           if (!foundToc) continue;
 
+          var level = parseInt(headers[i].nodeName.substring(1));
+          while (currentLevel < level) {
+            var newList = document.createElement('ul');
+            currentList.appendChild(newList);
+            currentList = newList;
+            currentLevel++;
+          }
+          while (currentLevel > level) {
+            currentList = currentList.parentNode;
+            currentLevel--;
+          }
+
           var li = document.createElement('li');
           var a = document.createElement('a');
           a.href = '#' + headers[i].id;
           a.textContent = headers[i].textContent;
           li.appendChild(a);
 
-          headerLinks.appendChild(li);
+          currentList.appendChild(li);
         }
 
         document.getElementById('scroll-bottom').onclick = function() {
@@ -150,7 +164,7 @@
       categoryList.style.top = topValue + 'px';
       headerLinks.style.top = topValue + 'px';
     };
-    </script>
+    </script>    
 
     <main id="content" class="main-content" role="main">
 
