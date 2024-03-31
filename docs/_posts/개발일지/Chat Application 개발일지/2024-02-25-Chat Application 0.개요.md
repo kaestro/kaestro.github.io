@@ -6,10 +6,6 @@ date: 2024-02-25
 categories: "개발일지"
 ---
 
-# ChatApplication 1주차
-
----
-
 ## 목차
 
 1. 프로젝트 소개

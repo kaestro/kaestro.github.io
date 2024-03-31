@@ -7,10 +7,6 @@ date: 2024-03-29
 categories: "개발일지"
 ---
 
-# ChatApplication 6주차
-
----
-
 ## 목차
 
 1. **느낀 점**
