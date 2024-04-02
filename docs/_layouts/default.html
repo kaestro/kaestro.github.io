@@ -14,18 +14,21 @@
     {% include head-custom.html %}
 
     <style>
-      @media (orientation: portrait) {
-        #category-list {
-          display: none; /* 모바일 화면에서 aside 요소 숨기기 */
-        }
-        #header-links {
-          display: none; /* 모바일 화면에서 aside 요소 숨기기 */
-        }
-      } 
+      /* Default styles: both elements are hidden */
+      #category-list, #header-links {
+        display: none;
+      }
+      .site-footer {
+        display: block;
+      }
 
-      @media (orientation: landscape) {
+      /* When the screen is 64em or larger, show both elements */
+      @media (min-width: 90em) {
+        #category-list, #header-links {
+          display: block;
+        }
         .site-footer {
-          display: none; /* 모바일 화면에서 footer 요소 숨기기 */
+          display: none;
         }
       }
 
