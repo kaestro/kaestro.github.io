@@ -4,7 +4,7 @@ classes: wide
 title: "헤드 퍼스트 디자인 패턴"
 subtitle: "이렇게 코드를 짜면 장점이 뭔가요?"
 date: 2024-03-01
-categories: 리뷰
+categories: 서평
 ---
 
 ## 출판사 및 저자
