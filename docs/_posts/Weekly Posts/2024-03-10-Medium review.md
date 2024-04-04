@@ -1,9 +1,9 @@
 ---
 layout: default
 classes: wide
-title: "3월 1주차 선정 미디엄"
+title: "3월 1주차 미디엄"
 date: 2024-03-10
-categories: WeeklyMedium
+categories: WeeklyPosts
 ---
 
 1. <https://medium.com/musinsa-tech/journey-of-a-frontend-monorepo-8f5480b80661>

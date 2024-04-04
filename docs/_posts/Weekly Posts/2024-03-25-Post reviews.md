@@ -1,9 +1,9 @@
 ---
 layout: default
 classes: wide
-title: "3월 3주차 선정 블로그 포스트"
+title: "3월 3주차 블로그 포스트"
 date: 2024-03-25
-categories: WeeklyMedium
+categories: WeeklyPosts
 ---
 
 ## 목차

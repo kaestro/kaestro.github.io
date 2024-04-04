@@ -1,9 +1,9 @@
 ---
 layout: default
 classes: wide
-title: "2월 4주차 선정 미디엄"
+title: "2월 4주차 미디엄"
 date: 2024-02-27
-categories: WeeklyMedium
+categories: WeeklyPosts
 ---
 
 1. <https://learningdaily.dev/2023-in-review-4-key-takeaways-for-developers-a5bcc8b86133>

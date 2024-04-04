@@ -1,9 +1,9 @@
 ---
 layout: default
 classes: wide
-title: "2월 2주차 선정 미디엄"
+title: "2월 2주차 미디엄"
 date: 2024-02-12
-categories: WeeklyMedium
+categories: WeeklyPosts
 ---
 
 1. How I Won Singapore’s GPT-4 Prompt Engineering Competition
