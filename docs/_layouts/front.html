@@ -21,10 +21,16 @@
       .site-footer {
         display: block;
       }
+      #recent-posts {
+        display: none;
+      }
 
       /* When the screen is 64em or larger, show both elements */
       @media (min-width: 90em) {
         #category-list{
+          display: block;
+        }
+        #recent-posts {
           display: block;
         }
         .site-footer {
@@ -107,6 +113,21 @@
       <button id="scroll-top" style="position: absolute; bottom: 10px; left: 75%; transform: translateX(-20%); background-color: red; color: white; min-width: 60px;">위로</button>
     </aside>
 
+    <aside id="recent-posts" style="position: fixed; left: 53%; top: 400px; margin-left: 510px; width: 300px;">
+      <h2 style="color: #333; padding-left: 7px">최신 글</h2>
+      {% assign recent_posts = site.posts | sort: 'date' | reverse %}
+      {% assign count = 0 %}
+      {% for post in recent_posts %}
+        {% unless post.title contains '작성중' or post.subtitle contains '작성중' %}
+          <a href="{{ post.url }}">{{ post.title }}</a><br>
+          {% assign count = count | plus: 1 %}
+          {% if count >= 5 %}
+            {% break %}
+          {% endif %}
+        {% endunless %}
+      {% endfor %}
+    </aside>
+
     <script>
       window.onload = function() {
         document.getElementById('scroll-bottom').onclick = function() {
@@ -124,8 +145,10 @@
 
     window.onscroll = function() {
       var categoryList = document.getElementById('category-list');
+      var recentPosts = document.getElementById('recent-posts');
       var topValue = Math.max(100, 400 - window.pageYOffset);
       categoryList.style.top = topValue + 'px';
+      recentPosts.style.top = topValue + 'px';
     };
     </script>
 
