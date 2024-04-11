@@ -1,7 +1,7 @@
 ---
 layout: default
 classes: wide
-title: "3월 1주차 미디엄"
+title: "3월 1주차 포스트"
 date: 2024-03-10
 categories: WeeklyPosts
 ---

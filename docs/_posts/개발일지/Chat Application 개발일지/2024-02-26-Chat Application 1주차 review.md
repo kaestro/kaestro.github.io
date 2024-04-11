@@ -1,7 +1,7 @@
 ---
 layout: default
 classes: wide
-title: "[ChatApplication] 1주차 Review"
+title: "ChatApplication 1주차 Review"
 subtitle: "Login API, DBManager, SessionManager"
 date: 2024-02-26
 categories: "개발일지"
