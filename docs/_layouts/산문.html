@@ -1,0 +1,238 @@
+<!--_layouts/default.html-->
+<!DOCTYPE html>
+<html lang="{{ site.lang | default: "en-US" }}">
+  <head>
+    <meta charset="UTF-8">
+
+{% seo %}
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preload" href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&display=swap" as="style" type="text/css" crossorigin>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#157878">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    {% include head-custom.html %}
+
+    <script type="text/x-mathjax-config">
+
+    MathJax.Hub.Config({
+
+      tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+
+    });
+
+    </script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>    
+
+    <style>
+      /* Default styles: both elements are hidden */
+      #category-list, #header-links {
+        display: none;
+      }
+      .site-footer {
+        display: block;
+      }
+
+      /* When the screen is 64em or larger, show both elements */
+      @media (min-width: 90em) {
+        #category-list, #header-links {
+          display: block;
+        }
+        .site-footer {
+          display: none;
+        }
+      }
+
+      .project-subtitle {
+        font-weight: lighter;
+        font-size: 25px;
+        margin-top: 0;
+      }
+
+      p {
+        text-indent: 1em;
+      }
+
+      .main-content {
+        box-shadow: 10px 0 15px -5px rgba(128, 128, 128, 0.2), -10px 0 15px -5px rgba(128, 128, 128, 0.2); /* 좌우에 그림자 느낌의 초록색 보더 */
+      }
+      .post-navigation {
+        display: flex;
+        flex-direction: column;
+        font-weight: bold;
+      }
+      .post-navigation a {
+        color: green;
+        margin: 10px 0;
+      }
+      .post-navigation .next {
+        text-align: right;
+      }
+      .content {
+        background-color: #FFFFFF; /* 본문 배경색을 밝은 색상으로 설정 */
+      }
+      .project-tagline a {
+        display: inline-block;
+        padding: 10px 20px;
+        color: green; /* 더 붉은 느낌의 주황색 */
+        background: white; /* 왼쪽에서 오른쪽으로 그라데이션 */        
+        border: 1px solid white; /* 버튼 테두리 */
+        border-radius: 5px; /* 버튼 모서리 둥글게 */
+        text-decoration: none; /* 밑줄 제거 */
+        transition: background-color 0.3s ease; /* 배경색 변경 애니메이션 */
+        font-weight: bold;
+      }
+
+      .project-tagline a:hover {
+        background-color: rgb(255, 100, 0); /* 마우스를 올렸을 때 배경색 변경 */
+        color: #fff; /* 마우스를 올렸을 때 글자색 변경 */
+      }
+
+      .right-align {
+        text-align: right;
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+    <a id="skip-to-content" href="#content">Skip to the content.</a>
+
+    <header class="page-header" role="banner">
+      <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
+      <h1 class="project-subtitle">{{ page.subtitle }}</h1>
+      {% if site.show_downloads %}
+        <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
+        <a href="{{ site.github.tar_url }}" class="btn">Download .tar.gz</a>
+      {% endif %}
+    </header>
+
+    <aside id="category-list" style="position: fixed; left: 0; top: 400px; bottom: 0; width: 200px; overflow: auto; padding-left: 50px;">
+      <h2 style="color: #333; padding-left: 16px">Categories</h2>
+      <ul>
+        {% for category in site.categories %}
+          {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' %}
+            <li><a href="/categories/{{ category[0] }}">{{ category[0] }}</a></li>
+          {% endunless %}
+        {% endfor %}
+      </ul>
+      <button id="scroll-bottom" style="position: absolute; bottom: 10px; left: 25%; transform: translateX(-50%); background-color: #28A745; color: white; min-width: 60px;">아래로</button>
+      <button id="go-home" style="position: absolute; bottom: 10px; left: 55%; transform: translateX(-50%); background-color: #ffc107; color: white; min-width: 60px;">홈으로</button>
+      <button id="scroll-top" style="position: absolute; bottom: 10px; left: 75%; transform: translateX(-20%); background-color: red; color: white; min-width: 60px;">위로</button>
+    </aside>
+
+    <aside id="header-links" style="position: fixed; left: 50%; top: 400px; margin-left: 510px; width: 300px;"></aside>
+
+    <script>
+      window.onload = function() {
+        var headers = document.querySelectorAll('h1, h2, h3');
+        var headerLinks = document.getElementById('header-links');
+
+        var foundToc = false;
+        var currentList = headerLinks;
+        var currentLevel = 0;
+        for (var i = 0; i < headers.length; i++) {
+          if (headers[i].textContent === '목차') {
+            foundToc = true;
+            continue;
+          }
+          if (!foundToc) continue;
+
+          var level = parseInt(headers[i].nodeName.substring(1));
+          while (currentLevel < level) {
+            var newList = document.createElement('ul');
+            currentList.appendChild(newList);
+            currentList = newList;
+            currentLevel++;
+          }
+          while (currentLevel > level) {
+            currentList = currentList.parentNode;
+            currentLevel--;
+          }
+
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.href = '#' + headers[i].id;
+          a.innerHTML = headers[i].innerHTML; // Use innerHTML instead of textContent
+          li.appendChild(a);
+
+          currentList.appendChild(li);
+        }
+
+        document.getElementById('scroll-bottom').onclick = function() {
+          window.scrollTo(0, document.body.scrollHeight);
+        };
+
+        document.getElementById('go-home').onclick = function() {
+          window.location.href = '/';
+        };
+
+        document.getElementById('scroll-top').onclick = function() {
+          window.scrollTo(0, 0);
+        };
+      };
+
+    window.onscroll = function() {
+      var categoryList = document.getElementById('category-list');
+      var headerLinks = document.getElementById('header-links');
+      var topValue = Math.max(100, 400 - window.pageYOffset);
+      categoryList.style.top = topValue + 'px';
+      headerLinks.style.top = topValue + 'px';
+    };
+    </script>    
+
+    <main id="content" class="main-content" role="main">
+
+        {{ content }}
+
+        <div class="post-navigation" style="margin-top: 3em;">
+          {% assign next = nil %}
+          {% for post in site.posts reversed limit:1000 %}
+            {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date > page.date %}
+              {% assign next = post %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+
+          {% assign prev = nil %}
+          {% for post in site.posts limit:1000 %}
+            {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date < page.date%}
+              {% assign prev = post %}
+              {% break %}
+            {% endif %}
+          {% endfor %}
+
+          {% if prev %}
+            <a href="{{ site.baseurl }}{{ prev.url }}" class="prev">이전 글: {{ prev.title }} </a>
+          {% endif %}
+
+          {% if next %}
+            <a href="{{ site.baseurl }}{{ next.url }}" class="right-align">다음 글: {{ next.title }} </a>
+          {% endif %}
+        </div>
+
+        {% if site.disqus.shortname %}
+        <div id="disqus_thread" style="margin-top: 6em;"></div>
+        <script>
+            var disqus_config = function () {
+                this.page.url = '{{ page.url | prepend: site.url | prepend: site.baseurl }}';
+                this.page.identifier = '{{ page.url | prepend: site.github.repository_nwo }}';
+            };
+            (function() {
+                var d = document, s = d.createElement('script');
+                s.src = 'https://{{ site.disqus.shortname }}.disqus.com/embed.js';
+                s.setAttribute('data-timestamp', +new Date());
+                (d.head || d.body).appendChild(s);
+            })();
+        </script>
+        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+        {% endif %}
+
+      <footer class="site-footer">
+        <span><a href="{{ '/' | relative_url }}">홈으로</a></span>
+      </footer>
+    </main>
+  </body>
+</html>
