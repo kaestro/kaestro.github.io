@@ -11,7 +11,7 @@ layout: front
         <h2>추천 글</h2>
         <hr>
         <ul>
-            {% for post in site.posts limit %}
+            {% for post in site.posts %}
                 {% assign count = 0%}
                 {% if post.recommended == true %}
                     {% assign count = count | plus: 1 %}
