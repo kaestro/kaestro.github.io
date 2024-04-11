@@ -1,7 +1,7 @@
 ---
 layout: default
 classes: wide
-title: "[ChatApplication] 4주차 Review"
+title: "ChatApplication 4주차 Review"
 subtitle: "code study, 설계도, azure cost analysis"
 date: 2024-03-17
 categories: "개발일지"

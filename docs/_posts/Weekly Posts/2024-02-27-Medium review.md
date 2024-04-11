@@ -1,7 +1,7 @@
 ---
 layout: default
 classes: wide
-title: "2월 4주차 미디엄"
+title: "2월 4주차 포스트"
 date: 2024-02-27
 categories: WeeklyPosts
 ---

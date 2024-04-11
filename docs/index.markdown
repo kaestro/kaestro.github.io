@@ -8,20 +8,23 @@ layout: front
 
 {% assign ordered_categories = "신변잡기,개발일지,서평,개발이야기,CodeReviews,kubernetes,디자인패턴,WeeklyPosts,ETC,작성중," | split: "," %}
 
+<div class="grid-container">
 {% for category_name in ordered_categories %}
 {% if site.categories[category_name] %}
+<div class="grid-item {% if category_name == '작성중' %}in-progress{% endif %}">
 <h2>{{ category_name }}</h2>
+
+<hr>
+
 <ul>
 {% for post in site.categories[category_name] limit: 5 %}
 <li>
-    <a href="{{ post.url }}">{{ post.title }}
-    {% if post.subtitle %}
-        <span> - {{ post.subtitle }}</span>
-    {% endif %}
-    </a>
+    <a href="{{ post.url }}">{{ post.title }}</a>
 </li>
 {% endfor %}
 </ul>
 <a href="/categories/{{ category_name }}">See all posts({{ site.categories[category_name] | size }}) in {{ category_name }}</a>
+</div>
 {% endif %}
 {% endfor %}
+</div>

@@ -1,7 +1,7 @@
 ---
 layout: default
 classes: wide
-title: "[ChatApplication] 6주차 Review"
+title: "ChatApplication 6주차 Review"
 subtitle: "MVP, Develop Branch, Chat 모듈"
 date: 2024-03-29
 categories: "개발일지"

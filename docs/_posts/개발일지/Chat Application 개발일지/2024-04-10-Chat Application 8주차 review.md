@@ -1,10 +1,10 @@
 ---
 layout: default
 classes: wide
-title: "[ChatApplication] 8주차 Review"
+title: "ChatApplication 8주차 Review"
 subtitle: "[작성중]"
 date: 2024-04-10
-categories: "개발일지"
+categories: "작성중"
 ---
 
 ## 목차

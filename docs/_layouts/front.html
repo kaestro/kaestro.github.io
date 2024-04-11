@@ -78,6 +78,30 @@
         background-color: rgb(255, 100, 0); /* 마우스를 올렸을 때 배경색 변경 */
         color: #fff; /* 마우스를 올렸을 때 글자색 변경 */
       }
+      .grid-container {
+        display: grid;
+        grid-template-columns: auto auto; /* Adjust this to change the number of columns */
+        gap: 20px;
+        padding: 10px;
+        font-size: 85%; /* Reduce font size by 30% */
+      }
+
+      .grid-item {
+        text-align: left;
+      }
+
+      .grid-item.in-progress h2 {
+        color: red;
+      }
+
+      .grid-item ul {
+        list-style-type: none; /* Remove bullet points from list items */
+        padding-left: 0;
+      }
+
+      .grid-item ul li:first-child::before {
+        content: ""; /* Remove the pipe from the first list item */
+      }
     </style>
 
   </head>

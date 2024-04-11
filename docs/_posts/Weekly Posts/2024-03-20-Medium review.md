@@ -1,7 +1,7 @@
 ---
 layout: default
 classes: wide
-title: "3월 2주차 블로그 포스트"
+title: "3월 2주차 포스트"
 date: 2024-03-20
 categories: WeeklyPosts
 ---
