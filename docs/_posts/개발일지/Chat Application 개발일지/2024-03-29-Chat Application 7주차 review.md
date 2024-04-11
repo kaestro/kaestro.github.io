@@ -1,7 +1,7 @@
 ---
 layout: default
 classes: wide
-title: "[ChatApplication] 7주차 Review"
+title: "ChatApplication 7주차 Review"
 subtitle: "사양이 불명확할 때의 구현, 추상화를 통한 역할 분리"
 date: 2024-04-09
 categories: "개발일지"
