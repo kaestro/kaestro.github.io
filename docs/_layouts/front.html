@@ -142,7 +142,7 @@
       {% assign recent_posts = site.posts | sort: 'date' | reverse %}
       {% assign count = 0 %}
       {% for post in recent_posts %}
-        {% unless post.title contains '작성중' or post.subtitle contains '작성중' %}
+        {% unless post.title contains '작성중' or post.subtitle contains '작성중' or post.categories[0] contains '작성중' %}
           <a href="{{ post.url }}">{{ post.title }}</a><br>
           {% assign count = count | plus: 1 %}
           {% if count >= 7 %}
