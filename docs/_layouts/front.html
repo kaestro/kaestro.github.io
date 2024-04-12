@@ -149,7 +149,7 @@
         {% unless post.title contains '작성중' or post.subtitle contains '작성중' or post.categories[0] contains '작성중' %}
           <a href="{{ post.url }}">{{ post.title }}</a><br>
           {% assign count = count | plus: 1 %}
-          {% if count >= 7 %}
+          {% if count >= 10 %}
             {% break %}
           {% endif %}
         {% endunless %}
