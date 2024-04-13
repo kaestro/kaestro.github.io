@@ -115,17 +115,34 @@ client는 사용자를 나타내는 구조체로, 사용자의 정보와 사용�
 
 ### api
 
-api는 사용자의 요청을 받아 처리하는 역할을 합니다. 사용자의 요청을 받아 처리하는 handler, 데이터베이스와 통신하는 model, 비즈니스 로직을 처리하는 service로 나누어져 있습니다.
+```plaintext
+api
+│
+├───handlers
+│   ├───userHandler
+│   └───chatHandler
+│
+├───service
+│   ├───userService
+│   └───chatService
+│
+└───models
+```
 
-작성하게 될 api의 종류에는 user의 인증, 채팅방의 생성 및 입장, 채팅 메시지의 전송 및 수신 등이 있습니다.
+api는 사용자의 http request를 받아 처리하는 역할을 합니다. 사용자의 요청을 받아 처리하는 handler, 데이터베이스와 통신하는 model, 비즈니스 로직을 처리하는 service로 나누어져 있습니다.
+
+작성한 될 api의 종류에는 user의 인증, 채팅방의 생성 및 입장, 채팅 메시지의 전송 및 수신 등이 있습니다.
 
 주로 사용하는 기술 스택은 goLang과 gin framework입니다.
 
 ### db/session
 
+![db](/images/chatapplication%20소개/db.png)
+![session](/images/chatapplication%20소개/session.png)
+
 db와 session은 데이터베이스와 세션을 관리하는 역할을 합니다. 데이터베이스는 사용자의 정보, 채팅방의 정보, 채팅 메시지 등을 저장하고, 세션은 사용자의 로그인 상태를 관리합니다.
 
-데이터베이스는 postgresql을 사용하고, 세션은 redis를 사용합니다.
+데이터베이스는 postgresql을 사용하고, 세션은 redis를 사용합니다. interface로 추상화돼 있어 추후 다른 데이터베이스나 세션 관리 시스템을 사용할 수 있도록 설계했고, factory 패턴을 사용해 데이터베이스와 세션을 생성합니다. 각각의 객체는 싱글톤 패턴을 사용해 객체를 생성하고 관리합니다.
 
 ---
 
@@ -141,7 +158,7 @@ db와 session은 데이터베이스와 세션을 관리하는 역할을 합니�
 
 ### git branch 전략
 
-- main branch는 배포 가능한 상태를 유지한다
+- main branch는 통합 테스트가 완료된 안정적인 상태를 유지한다
 - develop branch는 feature를 병합해서 테스트하는 최신 상태를 유지한다.
 - feature branch는 기능별로 나누어 작성한다
 
@@ -151,6 +168,7 @@ db와 session은 데이터베이스와 세션을 관리하는 역할을 합니�
 - 소스 코드의 test코드는 _test.go로 작성한다
   - ex) chat.go -> chat_test.go
 - 모든 코드는 테스트 가능한 상태를 유지한다
+- 테스트는 가능한 자동화한다
 
 ### github actions
 
@@ -171,11 +189,14 @@ db와 session은 데이터베이스와 세션을 관리하는 역할을 합니�
   - 내부 로직 처리의 로그 기능 추가
   - 로그 기능의 debugging, running mode 추가
   - 미들웨어를 통한 반복적인 검증 로직 추가
-- [의문점 예시](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/Questions.md)
+  - **[github issues](https://github.com/kaestro/ChatApplication/issues)**
+
+- **[의문점 예시](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/Questions.md)**
   - clientManager/roomManager는 얼마나 오랫동안, 얼마나 많은 client/room를 관리할 수 있는가?
   - garbage collection을 통해 client/room을 어떻게 관리할 것인가?
   - key의 충돌 등이 일어나는 예외 사항에 대한 처리는 어떻게 할 것인가?
-- [TODO](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/TODO.md)
+
+- **[TODO](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/TODO.md)**
 
 ### 2차 목표
 
@@ -184,8 +205,8 @@ db와 session은 데이터베이스와 세션을 관리하는 역할을 합니�
 **목표**로하고 있는 대규모 인원과 트래픽은 다음과 같이 **정의**했습니다.
 
 ```md
-1. 15000명 이상의 동시 접속자
-2. 분당 7000건 이상의 메시지 전송
+1. 15000명 이상의 동시 접속자 - steam 기준 인기 순위 100위의 동접자
+2. 분당 7000건 이상의 메시지 전송 - 아프리카 TV 기준 채팅방이 감당할 수 없었던 트래픽
 ```
 
 이는 **분당 1억건** 이상의 메시지 전송을 처리할 수 있는 서버를 구축해야 한다는 것을 의미합니다. 이를 위해 추가적으로 **도입할 계획이 있는 기술**들은 다음과 같습니다.
@@ -210,10 +231,9 @@ db와 session은 데이터베이스와 세션을 관리하는 역할을 합니�
 ```md
 1. github actions
 2. docker
-3. 개인 서버
-4. go web server
-5. postgresql
-6. redis
+3. go web server
+4. postgresql
+5. redis
 ```
 
 확장 계획이 완성된 이후의 인프라 구성 및 설계도는 다음과 같습니다.
