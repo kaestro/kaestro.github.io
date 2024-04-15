@@ -4,7 +4,7 @@ classes: wide
 title: "ChatApplication 8주차 Review"
 subtitle: "팀 해체, 모듈 재설계 및 구현, CI 환경 구축"
 date: 2024-04-10
-categories: "작성중"
+categories: "개발일지"
 ---
 
 ## 목차
@@ -49,8 +49,8 @@ categories: "작성중"
 ### 팀 해체
 
 - **문제**
-  - 팀원 간의 실력, 투여 시간 등의 차이로 협업의 장점이 발휘되지 않음
-  - 상대방에게 의존성을 강제한 협업 방식 때문에 진행 속도가 느려짐
+  - 팀원 간의 기술 스택 이해도, 투여 시간 등의 차이로 협업의 장점이 발휘되지 않음
+  - 상대방에게 의존성을 강제한 협업 방식이 참여율이 저조해지면서
     - code review가 없으면 pull request가 승인 되지 않음
     - 독립적인 모듈들의 개발의 통합까지 도달하지 못함
 - **해결**
@@ -76,19 +76,20 @@ categories: "작성중"
 
 - **[해결](https://github.com/kaestro/ChatApplication/tree/main/myapp/internal/chat)**
   - Client, Room의 역할을 분리하는 객체를 추가
-    - clientManager, roomManager: client, room의 수명과 조회를 담당
+    - clientManager, roomManager: client, room의 관리를 담당. 생성, 삭제, 조회 등의 기능을 제공한다.
     - clientSession: client에서 room으로의 연결을 담당. client의 메시지를 room에 전달한다.
     - roomClientHandler: room에서 client로의 연결을 담당. room의 메시지를 client에 전달한다.
   - 구조 변경
     - roomManager에서 관리하는 key를 roomName이라는 변수로 고정. 이에 따라 roomId를 삭제
     - client는 여러 연결을 clientSession으로 관리
     - room은 여러 연결을 roomClientHandler로 관리
+    - chatManager를 제외한 객체의 메소드는 private으로 변경
   - client 재설계
     - client는 websocket을 하나만 가지고, room 별로 chan을 clientSession을 통해 가진다.
     - 이에 따라 메시지는 단순 byte가 아니라 ChatMessage 구조체로 전달한다.
     - 이를 위한 ChatMessage 구조체를 정의하고, json으로 marshal/unmarshal하는 함수를 추가한다.
 
-여러 연결을 서로 가져야 하는 m to n 관계에서 중간 객체를 추가하여 관리하는 방법을 배웠다. 이를 통해 client와 room의 역할을 명확히 구분하고, 각 객체의 역할을 명확히 할 수 있었다. 이를 통해 client와 room의 수명을 분리하여 관리할 수 있게 됐고 코드의 전반적인 유연성과 가독성이 향상되었다.
+여러 연결을 서로 가져야 하는 m to n 관계에서 중간 객체를 추가하여 관리하는 방법을 배웠다. 이를 통해 client와 room의 역할을 명확히 구분하고, 각 객체의 역할을 명확히 할 수 있었다. 결과적으로 client와 room의 수명을 분리하여 관리할 수 있게 되는 등 코드의 전반적인 유연성과 가독성이 향상되었다.
 
 #### 디버깅 및 테스트
 
@@ -97,8 +98,8 @@ categories: "작성중"
   - 소켓 프로그래밍 프로세스 및 프로토콜에 대한 이해 부족
   - 설계 이상으로 필요한 하위 모듈이 많아짐
 - **해결 방안**
-  - 현재는 ISSUE화 하고 봉합한 상태이다. MVP 완성 이후 처리할 예정
-  - loginSessionID와 같은 값은 string이 아닌 typealias 혹은 구조체로 관리하는 것이 좋을 것이다.
+  - types, jsonProperties 패키지를 추가하여 타입을 명확히 구분
+  - 이들을 이용한 재구조화 진행 예정.
   - 모듈의 추가적인 분리 및 통합을 진행하고 테스트 코드를 작성할 예정
   - 소켓의 handshake와 같은 프로토콜에 대한 이해를 높이기 위한 학습 예정
 
