@@ -35,7 +35,7 @@ recommended: true
 - [확장 계획](#확장-계획)
   - [1차 목표](#1차-목표)
   - [2차 목표](#2차-목표)
-- [인프라 현상황 및 확장 계획](#인프라-현상황-및-확장-계획)
+- [인프라 현상황 및 차후 구상](#인프라-현상황-및-차후-구상)
 
 ---
 
@@ -107,11 +107,13 @@ chat
 └── clientSession.go
 ```
 
-chatManager는 chat 모듈 외부에서 chat 모듈을 사용하기 위한 인터페이스를 제공합니다. 이 때 room과 관련된 요청은 roomManager에게, client와 관련된 요청은 clientManager에게 전달합니다.
+[chatManager](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/chatManager.go)는 chat 모듈 외부에서 chat 모듈을 사용하기 위한 인터페이스를 제공합니다.
 
-room은 채팅방을 나타내는 구조체로, 채팅방의 정보와 채팅방에 속한 클라이언트들을 관리합니다. 이 때 roomClientHandler를 통해 클라이언트와의 상호작용을 처리합니다.
+[roomManager](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/roomManager.go)/[clientManager](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/clientManager.go)는 room/client의 생성 및 삭제와 같은 기능을 처리합니다.
 
-client는 사용자를 나타내는 구조체로, 사용자의 정보와 사용자의 세션을 관리합니다. 이 때 clientSession을 통해 room과의 상호작용을 처리합니다.
+[room](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/room.go)은 채팅방을 나타내는 구조체로, 채팅방의 정보와 채팅방에 속한 클라이언트들을 관리합니다. 이 때 roomClientHandler를 통해 클라이언트에게 메시지를 전송하는 등의 상호작용을 처리합니다.
+
+[client](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/client.go)는 사용자를 나타내는 구조체로, 사용자의 정보와 사용자의 세션을 관리합니다. 이 때 clientSession을 통해 room에 메시지를 전송하는 등의 상호작용을 처리합니다.
 
 ### api
 
@@ -159,7 +161,7 @@ db와 session은 데이터베이스와 세션을 관리하는 역할을 합니�
 ### git branch 전략
 
 - main branch는 통합 테스트가 완료된 안정적인 상태를 유지한다
-- develop branch는 feature를 병합해서 테스트하는 최신 상태를 유지한다.
+- develop branch는 feature를 병합해서 테스트 중인 최신 상태를 유지한다.
 - feature branch는 기능별로 나누어 작성한다
 
 ### test
@@ -167,15 +169,14 @@ db와 session은 데이터베이스와 세션을 관리하는 역할을 합니�
 - 모든 코드는 unit test를 작성한다
 - 소스 코드의 test코드는 _test.go로 작성한다
   - ex) chat.go -> chat_test.go
-- 모든 코드는 테스트 가능한 상태를 유지한다
+- 모든 코드는 테스트 통과 후 pull request를 진행한다
 - 테스트는 가능한 자동화한다
 
 ### github actions
 
 - develop/main branch에 대해 pull request가 올라오면 자동으로 [다음의 테스트](https://github.com/kaestro/ChatApplication/blob/main/.github/workflows/ci.yml)를 진행한다
-  - 웹서버 빌드
   - docker 빌드
-  - go test
+  - 웹서버 테스트
 
 ---
 
@@ -222,7 +223,7 @@ db와 session은 데이터베이스와 세션을 관리하는 역할을 합니�
 
 ---
 
-## 인프라 현상황 및 확장 계획
+## 인프라 현상황 및 차후 구상
 
 현재 진행 중인 프로젝트의 인프라 구성 및 [설계도](https://github.com/kaestro/ChatApplication/wiki/%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EB%8F%84)는 다음과 같습니다.
 
@@ -236,7 +237,7 @@ db와 session은 데이터베이스와 세션을 관리하는 역할을 합니�
 5. redis
 ```
 
-확장 계획이 완성된 이후의 인프라 구성 및 설계도는 다음과 같습니다.
+차후 구상중인 인프라 구성 및 설계도는 다음과 같습니다.
 
 ![image](https://github.com/kaestro/ChatApplication/assets/32026095/5d97f107-028d-476d-803e-e64a1f86e078)
 
