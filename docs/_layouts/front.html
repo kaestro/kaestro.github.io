@@ -74,6 +74,15 @@
         font-weight: bold;
       }
 
+      #category-list {
+        font-size: 85%;
+      }
+
+      #category-list ul {
+        list-style-type: none; /* Remove bullet points from list items */
+        padding-left: 1.5rem;
+      }
+
       .project-tagline a:hover {
         background-color: rgb(255, 100, 0); /* 마우스를 올렸을 때 배경색 변경 */
         color: #fff; /* 마우스를 올렸을 때 글자색 변경 */
@@ -141,12 +150,12 @@
       <button id="scroll-top" style="position: absolute; bottom: 10px; left: 75%; transform: translateX(-20%); background-color: red; color: white; min-width: 60px;">위로</button>
     </aside>
 
-    <aside id="recent-posts" style="position: fixed; left: 53%; top: 400px; margin-left: 510px; width: 300px;">
+    <aside id="recent-posts" style="position: fixed; left: 52%; top: 400px; margin-left: 510px; width: 300px; font-size: 80%;">
       <h2 style="color: #333; padding-left: 7px">최신 글</h2>
       {% assign recent_posts = site.posts | sort: 'date' | reverse %}
       {% assign count = 0 %}
       {% for post in recent_posts %}
-        {% unless post.title contains '작성중' or post.subtitle contains '작성중' or post.categories[0] contains '작성중' %}
+        {% unless post.categories[0] contains '작성중' or post.title contains '주차' %}
           <a href="{{ post.url }}">{{ post.title }}</a><br>
           {% assign count = count | plus: 1 %}
           {% if count >= 10 %}
