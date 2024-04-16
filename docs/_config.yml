@@ -12,6 +12,7 @@ description: 프로그래밍을 단련하고, 기록하는 공간
 theme: jekyll-theme-cayman
 plugins:
   - jekyll-feed
+  - jekyll-sitemap
 
 google_site_verification: "swFW3uc8I4itY8f-nuRC4KyC8OevDsMkTn_SnB_sOGE"
 
