@@ -4,7 +4,7 @@ classes: wide
 title: "4월 2주차 포스트"
 subtitle: "첫번째 팬케이크는 버려라, 기술 직군 경력 우선순위, 2023년 top programming languages"
 date: 2024-04-15
-categories: 작성중
+categories: "WeeklyPosts"
 ---
 
 ### 목차
