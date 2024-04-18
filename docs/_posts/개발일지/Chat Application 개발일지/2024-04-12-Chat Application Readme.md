@@ -1,7 +1,7 @@
 ---
 layout: default
 classes: wide
-title: "ChatApplication 소개"
+title: "API Server For ChatApplication"
 date: 2024-04-12
 categories: 개발일지
 recommended: true
@@ -9,7 +9,7 @@ recommended: true
 
 ## 개요
 
-백엔드 개발에서 요구되는 능력들 중 **실시간 통신, 데이터베이스 및 API 서버 구축, 인증 및 보안** 등의 능력 향상을 목적으로 한 **[채팅 어플리케이션](https://github.com/kaestro/chatapplication)**입니다.
+백엔드 개발에서 요구되는 능력들 중 **실시간 통신, 데이터베이스 및 API 서버 구축, 인증 및 보안** 등의 능력 향상을 목적으로 한 **[채팅 어플리케이션 API 서버](https://github.com/kaestro/chatapplication)**입니다.
 
 기초적인 채팅 메시지 전송 및 수신, 사용자 인증, 사용자 정보 관리에서 시작해, 최종적으로는 대규모 인원의 동시 접속 및 트래픽을 처리할 수 있는 서버를 구축하는 것을 목표로 하고 있습니다.
 

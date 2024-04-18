@@ -70,7 +70,7 @@ a:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(ul a):not(ol a) {
   position: fixed;
   right: 20px;
   width: 48px;
-  height: 48px;
+  height: 36px;
   font-size: 10px;
   color: #fff;
   background: rgba(51, 51, 51, 0.5);
@@ -101,12 +101,12 @@ a:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(ul a):not(ol a) {
 }
 
 .scroll-top {
-  bottom: 96px;  /* Adjust this value as needed */
+  bottom: 100px;
   border-radius: 30px 30px 0 0;  /* Make the top button round */
 }
 
 .scroll-bottom {
-  bottom: 0px;
+  bottom: 8px;
   border-radius: 0 0 30px 30px;  /* Make the bottom button round */
 }
 
