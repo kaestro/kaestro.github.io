@@ -15,26 +15,6 @@
     <link rel="stylesheet" href="{{ '/assets/css/myStyleSheet.css' | relative_url }}">    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
 
-    <style>
-     /* Default styles: both elements are hidden */
-      #category-list {
-        display: none;
-      }
-      .site-footer {
-        display: block;
-      }
-
-      /* When the screen is 64em or larger, show both elements */
-      @media (min-width: 90em) {
-        #category-list {
-          display: block;
-        }
-        .site-footer {
-          display: none;
-        }
-      }
-   </style>
-
   </head>
   <body>
     <a id="skip-to-content" href="#content">Skip to the content.</a>
@@ -60,14 +40,7 @@
 
     <script src="/javascripts/scrollButtons.js"></script>
     <script src="/javascripts/homeButton.js"></script>
-
-    <script>
-      window.onscroll = function() {
-        var categoryList = document.getElementById('category-list');
-        var topValue = Math.max(100, 300 - window.pageYOffset);
-        categoryList.style.top = topValue + 'px';
-      };
-    </script>
+    <script src="/javascripts/categoryScroller.js"></script>
 
     <main id="content" class="main-content" role="main">
         {{ content }}
