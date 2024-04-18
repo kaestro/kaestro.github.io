@@ -52,70 +52,58 @@
           {% endunless %}
         {% endfor %}
       </ul>
-      <button id="scroll-bottom" style="position: absolute; bottom: 10px; left: 25%; transform: translateX(-50%); background-color: #28A745; color: white; min-width: 60px;">아래로</button>
-      <button id="go-home" style="position: absolute; bottom: 10px; left: 55%; transform: translateX(-50%); background-color: #ffc107; color: white; min-width: 60px;">홈으로</button>
-      <button id="scroll-top" style="position: absolute; bottom: 10px; left: 75%; transform: translateX(-20%); background-color: red; color: white; min-width: 60px;">위로</button>
     </aside>
 
     <aside id="header-links" style="position: fixed; left: 50%; top: 400px; margin-left: 510px; width: 300px;"></aside>
 
+    <script src="/javascripts/scrollButtons.js"></script>
+    <script src="/javascripts/homeButton.js"></script>
+
     <script>
-      window.onload = function() {
-        var headers = document.querySelectorAll('h1, h2, h3');
-        var headerLinks = document.getElementById('header-links');
+        document.addEventListener('DOMContentLoaded', function() {
+          var headers = document.querySelectorAll('h1, h2, h3');
+          var headerLinks = document.getElementById('header-links');
 
-        var foundToc = false;
-        var currentList = headerLinks;
-        var currentLevel = 0;
-        for (var i = 0; i < headers.length; i++) {
-          if (headers[i].textContent === '목차') {
-            foundToc = true;
-            continue;
+          var foundToc = false;
+          var currentList = headerLinks;
+          var currentLevel = 0;
+          for (var i = 0; i < headers.length; i++) {
+            if (headers[i].textContent === '목차') {
+              foundToc = true;
+              continue;
+            }
+            if (!foundToc) continue;
+
+            var level = parseInt(headers[i].nodeName.substring(1));
+            while (currentLevel < level) {
+              var newList = document.createElement('ul');
+              currentList.appendChild(newList);
+              currentList = newList;
+              currentLevel++;
+            }
+            while (currentLevel > level) {
+              currentList = currentList.parentNode;
+              currentLevel--;
+            }
+
+            var li = document.createElement('li');
+            var a = document.createElement('a');
+            a.href = '#' + headers[i].id;
+            a.innerHTML = headers[i].innerHTML; // Use innerHTML instead of textContent
+            li.appendChild(a);
+
+            currentList.appendChild(li);
           }
-          if (!foundToc) continue;
+        });
 
-          var level = parseInt(headers[i].nodeName.substring(1));
-          while (currentLevel < level) {
-            var newList = document.createElement('ul');
-            currentList.appendChild(newList);
-            currentList = newList;
-            currentLevel++;
-          }
-          while (currentLevel > level) {
-            currentList = currentList.parentNode;
-            currentLevel--;
-          }
-
-          var li = document.createElement('li');
-          var a = document.createElement('a');
-          a.href = '#' + headers[i].id;
-          a.innerHTML = headers[i].innerHTML; // Use innerHTML instead of textContent
-          li.appendChild(a);
-
-          currentList.appendChild(li);
-        }
-
-        document.getElementById('scroll-bottom').onclick = function() {
-          window.scrollTo(0, document.body.scrollHeight);
+        window.onscroll = function() {
+          var categoryList = document.getElementById('category-list');
+          var headerLinks = document.getElementById('header-links');
+          var topValue = Math.max(100, 400 - window.pageYOffset);
+          categoryList.style.top = topValue + 'px';
+          headerLinks.style.top = topValue + 'px';
         };
-
-        document.getElementById('go-home').onclick = function() {
-          window.location.href = '/';
-        };
-
-        document.getElementById('scroll-top').onclick = function() {
-          window.scrollTo(0, 0);
-        };
-      };
-
-    window.onscroll = function() {
-      var categoryList = document.getElementById('category-list');
-      var headerLinks = document.getElementById('header-links');
-      var topValue = Math.max(100, 400 - window.pageYOffset);
-      categoryList.style.top = topValue + 'px';
-      headerLinks.style.top = topValue + 'px';
-    };
-    </script>    
+    </script>
 
     <main id="content" class="main-content" role="main">
 
@@ -168,5 +156,9 @@
         <span><a href="{{ '/' | relative_url }}">홈으로</a></span>
       </footer>
     </main>
+
+    <button id="go-top" class="scroll-top"></button>
+    <button id="go-home" class="home-button">홈으로</button>
+    <button id="go-bottom" class="scroll-bottom"></button> 
   </body>
 </html>

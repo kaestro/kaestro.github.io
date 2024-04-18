@@ -65,3 +65,66 @@
 a:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(ul a):not(ol a) {
     font-weight: 600;
 }
+
+.scroll-top, .scroll-bottom {
+  position: fixed;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  font-size: 10px;
+  color: #fff;
+  background: rgba(51, 51, 51, 0.5);
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  line-height: 48px;
+  z-index: 1;
+}
+
+.scroll-top::before, .scroll-bottom::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+}
+
+.scroll-top::before {
+  transform: translate(-50%, -50%) rotate(-135deg);
+}
+
+.scroll-bottom::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.scroll-top {
+  bottom: 96px;  /* Adjust this value as needed */
+  border-radius: 30px 30px 0 0;  /* Make the top button round */
+}
+
+.scroll-bottom {
+  bottom: 0px;
+  border-radius: 0 0 30px 30px;  /* Make the bottom button round */
+}
+
+#go-home {
+  bottom: 48px;  /* Adjust this value as needed */
+}
+
+.home-button {
+  position: fixed;
+  right: 20px;
+  width: 48px;
+  height: 48px;
+  font-size: 10px;
+  color: #fff;
+  background: rgba(51, 51, 51, 0.6);
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  line-height: 48px;
+  z-index: 2;
+}
