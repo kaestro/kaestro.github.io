@@ -50,7 +50,7 @@
       {% assign recent_posts = site.posts | sort: 'date' | reverse %}
       {% assign count = 0 %}
       {% for post in recent_posts %}
-        {% unless post.categories[0] contains '작성중' or post.title contains '주차' %}
+        {% unless post.categories[0] contains '작성중' or post.title contains '주차' or post.subtitle contains '작성중' %}
           <a href="{{ post.url }}">{{ post.title }}</a><br>
           {% assign count = count | plus: 1 %}
           {% if count >= 10 %}
