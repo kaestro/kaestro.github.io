@@ -11,6 +11,7 @@
     <meta name="theme-color" content="#157878">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/myStyleSheet.css' | relative_url }}">    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
 
     <style>
@@ -144,10 +145,6 @@
           {% endunless %}
         {% endfor %}
       </ul>
-
-      <button id="scroll-bottom" style="position: absolute; bottom: 10px; left: 25%; transform: translateX(-50%); background-color: #28A745; color: white; min-width: 60px;">아래로</button>
-      <button id="go-home" style="position: absolute; bottom: 10px; left: 55%; transform: translateX(-50%); background-color: #ffc107; color: white; min-width: 60px;">홈으로</button>
-      <button id="scroll-top" style="position: absolute; bottom: 10px; left: 75%; transform: translateX(-20%); background-color: red; color: white; min-width: 60px;">위로</button>
     </aside>
 
     <aside id="recent-posts" style="position: fixed; left: 52%; top: 400px; margin-left: 510px; width: 300px; font-size: 80%;">
@@ -165,28 +162,17 @@
       {% endfor %}
     </aside>
 
+    <script src="/javascripts/scrollButtons.js"></script>
+    <script src="/javascripts/homeButton.js"></script>
+
     <script>
-      window.onload = function() {
-        document.getElementById('scroll-bottom').onclick = function() {
-          window.scrollTo(0, document.body.scrollHeight);
-        };
-
-        document.getElementById('go-home').onclick = function() {
-          window.location.href = '/';
-        };
-
-        document.getElementById('scroll-top').onclick = function() {
-          window.scrollTo(0, 0);
-        };
+      window.onscroll = function() {
+        var categoryList = document.getElementById('category-list');
+        var recentPosts = document.getElementById('recent-posts');
+        var topValue = Math.max(100, 400 - window.pageYOffset);
+        categoryList.style.top = topValue + 'px';
+        recentPosts.style.top = topValue + 'px';
       };
-
-    window.onscroll = function() {
-      var categoryList = document.getElementById('category-list');
-      var recentPosts = document.getElementById('recent-posts');
-      var topValue = Math.max(100, 400 - window.pageYOffset);
-      categoryList.style.top = topValue + 'px';
-      recentPosts.style.top = topValue + 'px';
-    };
     </script>
 
     <main id="content" class="main-content" role="main">
@@ -194,5 +180,8 @@
         {{ content }}
 
     </main>
+    <button id="go-top" class="scroll-top"></button>
+    <button id="go-home" class="home-button">홈으로</button>
+    <button id="go-bottom" class="scroll-bottom"></button>
   </body>
 </html>

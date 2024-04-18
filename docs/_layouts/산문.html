@@ -55,12 +55,12 @@
           {% endunless %}
         {% endfor %}
       </ul>
-      <button id="scroll-bottom" style="position: absolute; bottom: 10px; left: 25%; transform: translateX(-50%); background-color: #28A745; color: white; min-width: 60px;">아래로</button>
-      <button id="go-home" style="position: absolute; bottom: 10px; left: 55%; transform: translateX(-50%); background-color: #ffc107; color: white; min-width: 60px;">홈으로</button>
-      <button id="scroll-top" style="position: absolute; bottom: 10px; left: 75%; transform: translateX(-20%); background-color: red; color: white; min-width: 60px;">위로</button>
     </aside>
 
     <aside id="header-links" style="position: fixed; left: 50%; top: 400px; margin-left: 510px; width: 300px;"></aside>
+
+    <script src="/javascripts/scrollButtons.js"></script>
+    <script src="/javascripts/homeButton.js"></script>
 
     <script>
       window.onload = function() {
@@ -97,20 +97,8 @@
 
           currentList.appendChild(li);
         }
-
-        document.getElementById('scroll-bottom').onclick = function() {
-          window.scrollTo(0, document.body.scrollHeight);
-        };
-
-        document.getElementById('go-home').onclick = function() {
-          window.location.href = '/';
-        };
-
-        document.getElementById('scroll-top').onclick = function() {
-          window.scrollTo(0, 0);
-        };
       };
-
+    
     window.onscroll = function() {
       var categoryList = document.getElementById('category-list');
       var headerLinks = document.getElementById('header-links');
@@ -171,5 +159,8 @@
         <span><a href="{{ '/' | relative_url }}">홈으로</a></span>
       </footer>
     </main>
+    <button id="go-top" class="scroll-top"></button>
+    <buttom id="go-home" class="home-button">홈으로</button>
+    <button id="go-bottom" class="scroll-bottom"></button> 
   </body>
 </html>
