@@ -2,7 +2,7 @@
 layout: default
 classes: wide
 title: "ChatApplication 9주차 Review"
-subtitle: ""
+subtitle: "작성중"
 date: 2024-04-15
 categories: "작성중"
 ---
