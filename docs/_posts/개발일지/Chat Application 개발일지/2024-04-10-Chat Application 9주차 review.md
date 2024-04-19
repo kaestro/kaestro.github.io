@@ -4,7 +4,7 @@ classes: wide
 title: "ChatApplication 9주차 Review"
 subtitle: "작성중"
 date: 2024-04-15
-categories: "작성중"
+categories: "개발일지"
 ---
 
 ## 목차
@@ -14,6 +14,8 @@ categories: "작성중"
 - [진행 내용](#진행-내용)
 - [진행 과정](#진행-과정)
   - [EnterChat 재설계 및 구현](#enterchat-재설계-및-구현)
+  - [logging 기능 구현](#logging-기능-구현)
+  - [routes 패키지 추가](#routes-패키지-추가)
 
 ---
 
@@ -30,6 +32,8 @@ categories: "작성중"
 ## 진행 내용
 
 - EnterChat 재설계 및 구현
+- logging 기능 구현
+- routes 패키지 추가
 
 ---
 
@@ -47,5 +51,21 @@ categories: "작성중"
   - 이 때 request body가 아닌 header에 저장
 - **결과**
   - 채팅 메시지 송수신 확인
+
+### logging 기능 구현
+
+- **문제**
+  - 로그를 print로만 출력하고 있어서 디버깅이 어려움
+  - debug 로그만 남기고 있어, release 버전용 로그 기능이 필요함
+- **해결**
+  - gin의 Logger middleware를 통한 initialization을 구현
+  - 해당 과정에서 logging 패키지 추가
+
+### routes 패키지 추가
+
+- **문제**
+  - routes를 main.go에 직접 작성하고 있어 가독성과 확장성이 떨어짐
+- **해결**
+  - routes 패키지를 추가하여 routes를 분리
 
 ---
