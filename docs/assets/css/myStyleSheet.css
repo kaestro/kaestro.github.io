@@ -13,6 +13,7 @@
 }
 
 #category-list {
+  display: none;
   position: fixed;
   left: 0;
   top: 400px;
