@@ -20,3 +20,7 @@ disqus:
   shortname: https-kaestro-github-io
 
 timezone: Asia/Seoul
+
+feed:
+  exclude:
+    - categories: ["작성중", "CodeReviews", "WeeklyPosts"]
