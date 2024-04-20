@@ -3,13 +3,24 @@
   display: block;
 }
 
+#header-links-toggler {
+  position: fixed;
+  left: 50%;
+  top: 380px; /* Adjust this value to move the button up */
+  margin-left: 530px;
+}
+
 #header-links {
-  display: none;
+  width: 0; /* Hide the sidebar by default */
   position: fixed;
   left: 50%;
   top: 400px;
   margin-left: 520px;
-  width: 300px;
+  overflow: hidden; /* Hide the content when the sidebar is collapsed */
+}
+
+#header-links.expanded {
+  width: 300px; /* Show the sidebar when expanded */
 }
 
 #category-list {
