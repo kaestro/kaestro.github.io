@@ -1,3 +1,15 @@
+// docs/javascripts/tocGenerator.js
+
+// Description: This script generates a table of contents (TOC) based on the headers in the document.
+// It also adds a button to toggle the visibility of the TOC.
+// The TOC is generated as an unordered list with links to the headers.
+document.addEventListener('DOMContentLoaded', function() {
+    let { headers, foundToc, currentList, currentLevel } = initializeTocGeneratorVariables();
+
+    generateTocFromHeaders(headers, foundToc, currentList, currentLevel);
+    addToggleButtonListener();
+});
+
 function createHeaderListElement(header) {
     const li = document.createElement('li');
     const a = document.createElement('a');
@@ -48,9 +60,7 @@ function initializeTocGeneratorVariables() {
     return { headers, headerLinks, foundToc, currentList, currentLevel };
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    let { headers, foundToc, currentList, currentLevel } = initializeTocGeneratorVariables();
-
+function generateTocFromHeaders(headers, foundToc, currentList, currentLevel) {
     for (let i = 0; i < headers.length; i++) {
         const { foundToc: newToc, skip } = checkIfHeaderShouldBeSkipped(headers[i], foundToc);
         foundToc = newToc;
@@ -60,4 +70,12 @@ document.addEventListener('DOMContentLoaded', function() {
         currentList = result.currentList;
         currentLevel = result.currentLevel;
     }
-});
+}
+
+function addToggleButtonListener() {
+    const headerLinks = document.getElementById('header-links');
+    const toggleButton = document.getElementById('header-links-toggler');
+    toggleButton.addEventListener('click', function() {
+        headerLinks.classList.toggle('expanded');
+    });
+}
