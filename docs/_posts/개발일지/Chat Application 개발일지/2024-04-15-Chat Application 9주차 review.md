@@ -2,7 +2,7 @@
 layout: default
 classes: wide
 title: "ChatApplication 9주차 Review"
-subtitle: "작성중"
+subtitle: "EnterChat 재설계, logging 기능 구현, routes 패키지 추가"
 date: 2024-04-15
 categories: "개발일지"
 ---
@@ -16,6 +16,7 @@ categories: "개발일지"
   - [EnterChat 재설계 및 구현](#enterchat-재설계-및-구현)
   - [logging 기능 구현](#logging-기능-구현)
   - [routes 패키지 추가](#routes-패키지-추가)
+  - [chat 테스트 CI에 추가](#chat-테스트-ci에-추가)
 
 ---
 
@@ -34,6 +35,7 @@ categories: "개발일지"
 - EnterChat 재설계 및 구현
 - logging 기능 구현
 - routes 패키지 추가
+- chat 테스트 CI에 추가
 
 ---
 
@@ -67,5 +69,14 @@ categories: "개발일지"
   - routes를 main.go에 직접 작성하고 있어 가독성과 확장성이 떨어짐
 - **해결**
   - routes 패키지를 추가하여 routes를 분리
+
+### chat 테스트 CI에 추가
+
+- **문제**
+  - 기존에 db와의 연결 혹은 websocket 연결이 필요한 테스트를 CI에 추가하지 않음
+  - 이에 대한 테스트를 수동으로 진행함
+- **해결**
+  - chat 테스트를 CI에 추가
+  - github actions의 로그를 별도의 파일로 저장해서 확인 기능 추가
 
 ---
