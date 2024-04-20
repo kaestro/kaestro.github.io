@@ -1,9 +1,29 @@
 /* Default styles: both elements are hidden */
-#category-list, #header-links {
-  display: none;
-}
 .site-footer {
   display: block;
+}
+
+#header-links {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 400px;
+  margin-left: 520px;
+  width: 300px;
+}
+
+#category-list {
+  position: fixed;
+  left: 0;
+  top: 400px;
+  bottom: 0;
+  width: 200px;
+  overflow: auto;
+  padding-left: 50px;
+}
+#category-list h2 {
+  color: #333;
+  padding-left: 16px;
 }
 
 /* When the screen is 64em or larger, show both elements */

@@ -32,13 +32,12 @@ function checkIfHeaderShouldBeSkipped(header, foundToc) {
 }
 
 function processHeaderAndAdjustList(header, currentList, currentLevel) {
-    const level = parseInt(header.nodeName.substring(1));
+    const level = parseInt(header.nodeName.substring(1)) - 1; // Subtract 1 to start from h2
     const result = adjustListLevelToMatchHeader(level, currentList, currentLevel);
     const li = createHeaderListElement(header);
     result.currentList.appendChild(li);
     return result;
 }
-
 function initializeTocGeneratorVariables() {
     const headers = document.querySelectorAll('h1, h2, h3');
     const headerLinks = document.getElementById('header-links');

@@ -44,8 +44,8 @@
       {% endif %}
     </header>
 
-    <aside id="category-list" style="position: fixed; left: 0; top: 400px; bottom: 0; width: 200px; overflow: auto; padding-left: 50px;">
-      <h2 style="color: #333; padding-left: 16px">Categories</h2>
+    <aside id="category-list">
+      <h2>Categories</h2>
       <ul>
         {% for category in site.categories %}
           {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' %}
@@ -55,7 +55,7 @@
       </ul>
     </aside>
 
-    <aside id="header-links" style="position: fixed; left: 50%; top: 400px; margin-left: 510px; width: 300px;"></aside>
+    <aside id="header-links"></aside>
 
     <main id="content" class="main-content" role="main">
 
