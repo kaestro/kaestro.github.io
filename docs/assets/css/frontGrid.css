@@ -1,28 +1,27 @@
 .grid-container {
-display: grid;
-grid-template-columns: auto auto; /* Adjust this to change the number of columns */
-gap: 20px;
-padding: 10px;
-font-size: 85%; /* Reduce font size by 30% */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 10px;
+    font-size: 85%;
 }
-
 .grid-item {
-text-align: left;
+    text-align: left;
 }
 
 .grid-item.in-progress h2 {
-color: red;
+    color: red;
 }
 
 .grid-item.recommended h2 {
-color: black;
+    color: black;
 }
 
 .grid-item ul {
-list-style-type: none; /* Remove bullet points from list items */
-padding-left: 0;
+    list-style-type: none; /* Remove bullet points from list items */
+    padding-left: 0;
 }
 
 .grid-item ul li:first-child::before {
-content: ""; /* Remove the pipe from the first list item */
+    content: ""; /* Remove the pipe from the first list item */
 }
