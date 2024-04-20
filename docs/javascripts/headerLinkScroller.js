@@ -4,5 +4,5 @@ window.addEventListener('scroll', function() {
     var headerLinksToggler = document.getElementById('header-links-toggler');
     var topValue = Math.max(100, 420 - window.scrollY);
     headerLinks.style.top = topValue + 20 + 'px';
-    headerLinksToggler.style.top = topValue + 'px';
+    headerLinksToggler.style.top = topValue - 20 + 'px';
 });
