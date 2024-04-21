@@ -5,6 +5,13 @@
     padding: 10px;
     font-size: 85%;
 }
+
+@media screen and (max-width: 730px) {
+    .grid-container {
+        grid-template-columns: 1fr;
+    }
+}
+
 .grid-item {
     text-align: left;
 }
