@@ -3,6 +3,7 @@ layout: default
 title:  "Welcome to Jekyll!"
 categories: Legacy
 date:   2020-10-19 19:57:23 +0900
+published: false
 ---
 You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
 
