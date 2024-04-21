@@ -6,40 +6,41 @@
 #header-links-toggler {
     position: fixed;
     left: 50%;
-    top: 360px; /* Adjust this value to move the button up */
+    top: 400px;
     margin-left: 530px;
-    background-color: #008000; /* Change the button color to a less bright green */
-    color: white; /* Change the text color to white for better visibility */
+    background-color: #008000;
+    color: white;
     border: none;
     width: 300px;
     height: 40px; 
     font-size: 20px;
-    border-radius: 25px; /* Add rounding to the edges */
+    border-radius: 25px;
 }
 
 #header-links {
-  width: 0; /* Hide the sidebar by default */
+  width: 0;
   position: fixed;
   left: 50%;
-  top: 400px;
+  top: 430px;
   margin-left: 520px;
-  overflow: hidden; /* Hide the content when the sidebar is collapsed */
+  overflow: hidden;
 }
 
 #header-links.expanded {
-  width: 300px; /* Show the sidebar when expanded */
+  width: 300px;
 }
 
 #category-list {
   display: none;
   position: fixed;
   left: 0;
-  top: 400px;
+  top: 370px;
   bottom: 0;
   width: 200px;
   overflow: auto;
   padding-left: 50px;
 }
+
 #category-list h2 {
   color: #333;
   padding-left: 16px;
