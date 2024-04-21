@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: [https://kaestro.github.io/sitemap.xml](https://kaestro.github.io/sitemap.xml)
+Sitemap: https://kaestro.github.io/sitemap.xml
