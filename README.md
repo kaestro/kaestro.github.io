@@ -6,9 +6,9 @@ github pages를 서비스를 통해 운영중인 [개인 블로그](https://kaes
 
 ## 최신 글 목록
 <!-- BLOG-POST-LIST:START -->
+- [re: 제로부터 시작하는 기술 블로그&lpar;2&rpar;](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80/2024/04/22/re-%EC%A0%9C%EB%A1%9C%EB%B6%80%ED%84%B0-%EC%8B%9C%EC%9E%91%ED%95%98%EB%8A%94-%EB%B8%94%EB%A1%9C%EA%B7%B8(2).html)
 - [4월 4주차 알고리즘 문제](https://kaestro.github.io/codereviews/2024/04/21/4%EC%9B%94-4%EC%A3%BC%EC%B0%A8-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C.html)
 - [4월 3주차 포스트](https://kaestro.github.io/weeklyposts/2024/04/21/Post-reviews.html)
 - [Locust vs k6 - 부하 테스트 도구 선택](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/04/21/k6-vs-Locust.html)
-- [re: 제로부터 시작하는 블로그&lpar;1&rpar;](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80/2024/04/21/re-%EC%A0%9C%EB%A1%9C%EB%B6%80%ED%84%B0-%EC%8B%9C%EC%9E%91%ED%95%98%EB%8A%94-%EB%B8%94%EB%A1%9C%EA%B7%B8(1).html)
-- [반항이 소멸하는 세상에서 가운데 손가락을 치켜세우는 소녀들](https://kaestro.github.io/etc/2024/04/20/%EA%B1%B8%EC%A6%88-%EB%B0%B4%EB%93%9C-%ED%81%AC%EB%9D%BC%EC%9D%B4.html)
+- [re: 제로부터 시작하는 기술 블로그&lpar;1&rpar;](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80/2024/04/21/re-%EC%A0%9C%EB%A1%9C%EB%B6%80%ED%84%B0-%EC%8B%9C%EC%9E%91%ED%95%98%EB%8A%94-%EB%B8%94%EB%A1%9C%EA%B7%B8(1).html)
 <!-- BLOG-POST-LIST:END -->
