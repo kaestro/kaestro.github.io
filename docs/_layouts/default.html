@@ -58,16 +58,20 @@
           {% assign next = nil %}
           {% for post in site.posts reversed limit:1000 %}
             {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date > page.date %}
-              {% assign next = post %}
-              {% break %}
+              {% unless post.subtitle contains '작성중' %}
+                {% assign next = post %}
+                {% break %}
+              {% endunless %}
             {% endif %}
           {% endfor %}
 
           {% assign prev = nil %}
           {% for post in site.posts limit:1000 %}
             {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date < page.date%}
-              {% assign prev = post %}
-              {% break %}
+              {% unless post.subtitle contains '작성중' %}
+                {% assign prev = post %}
+                {% break %}
+              {% endunless %}
             {% endif %}
           {% endfor %}
 
