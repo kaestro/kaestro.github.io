@@ -170,3 +170,25 @@ a:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(ul a):not(ol a) {
   line-height: 48px;
   z-index: 2;
 }
+
+.content.post-navigation {
+  margin-top: 3em;
+}
+
+#disqus_thread {
+  margin-top: 6em;
+}
+
+#recent-posts {
+  position: fixed;
+  left: 52%;
+  top: 400px;
+  margin-left: 510px;
+  width: 300px;
+  font-size: 80%;
+}
+
+#recent-posts h2 {
+  color: #333;
+  padding-left: 7px;
+}

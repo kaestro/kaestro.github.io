@@ -1,7 +1,8 @@
 <!--_layouts/default.html-->
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="{{ site.lang | default: 'en-US' }}">
   <head>
+    <title>{{ page.title }}</title>
     <meta charset="UTF-8">
 
 {% seo %}
@@ -21,7 +22,7 @@
 
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
-    <header class="page-header" role="banner">
+    <header class="page-header">
       <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
       <h2 class="project-tagline">
         <a href="{{ '/' | relative_url }}">
@@ -34,8 +35,8 @@
       {% endif %}
     </header>
 
-    <aside id="category-list" style="position: fixed; left: 0; top: 400px; bottom: 0; width: 200px; overflow: auto; padding-left: 50px;">
-      <h2 style="color: #333; padding-left: 16px">Categories</h2>
+    <aside id="category-list" aria-label="Category List">
+      <h2>Categories</h2>
       <ul>
         {% for category in site.categories %}
           {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' %}
@@ -45,8 +46,8 @@
       </ul>
     </aside>
 
-    <aside id="recent-posts" style="position: fixed; left: 52%; top: 400px; margin-left: 510px; width: 300px; font-size: 80%;">
-      <h2 style="color: #333; padding-left: 7px">최신 글</h2>
+    <aside id="recent-posts" aria-label="recent-posts">
+      <h2>최신 글</h2>
       {% assign recent_posts = site.posts | sort: 'date' | reverse %}
       {% assign count = 0 %}
       {% for post in recent_posts %}
@@ -65,13 +66,15 @@
     <script src="/javascripts/recentPostsScroller.js"></script>
     <script src="/javascripts/categoryScroller.js"></script>
 
-    <main id="content" class="main-content" role="main">
+    <main id="content" class="main-content">
 
         {{ content }}
 
     </main>
-    <button id="go-top" class="scroll-top"></button>
-    <button id="go-home" class="home-button">홈으로</button>
-    <button id="go-bottom" class="scroll-bottom"></button>
+
+    <button type="button" id="go-top" class="scroll-top" aria-label="top"></button>
+    <button type="button" id="go-home" class="home-button" aria-label="home">홈으로</button>
+    <button type="button" id="go-bottom" class="scroll-bottom" aria-label="bottom"></button>
+
   </body>
 </html>
