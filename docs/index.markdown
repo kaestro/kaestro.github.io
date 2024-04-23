@@ -2,8 +2,6 @@
 layout: front
 ---
 
-<head> <meta name="google-site-verification" content="swFW3uc8I4itY8f-nuRC4KyC8OevDsMkTn_SnB_sOGE"/> </head>
-
 {% assign ordered_categories = "신변잡기,개발일지,서평,개발이야기,게임이야기,CodeReviews,kubernetes,디자인패턴,WeeklyPosts,ETC,작성중," | split: "," %}
 
 <div class="grid-container">
