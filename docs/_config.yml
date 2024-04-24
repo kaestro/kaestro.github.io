@@ -13,6 +13,7 @@ theme: jekyll-theme-cayman
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-spaceship
 
 google_site_verification: "swFW3uc8I4itY8f-nuRC4KyC8OevDsMkTn_SnB_sOGE"
 
@@ -20,6 +21,10 @@ disqus:
   shortname: https-kaestro-github-io
 
 timezone: Asia/Seoul
+
+spaceship:
+  mathjax:
+    enable: true
 
 feed:
   exclude:

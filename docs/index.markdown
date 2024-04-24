@@ -1,10 +1,9 @@
 ---
 layout: front
+title: Kaestro's 대장간
 ---
 
-<head> <meta name="google-site-verification" content="swFW3uc8I4itY8f-nuRC4KyC8OevDsMkTn_SnB_sOGE"/> </head>
-
-{% assign ordered_categories = "신변잡기,개발일지,서평,개발이야기,게임이야기,CodeReviews,kubernetes,디자인패턴,WeeklyPosts,ETC,작성중," | split: "," %}
+{% assign ordered_categories = "신변잡기,개발일지,서평,개발이야기,게임이야기,애니이야기,디자인패턴,Algorithm,WeeklyPosts,CodeReviews,ETC,작성중," | split: "," %}
 
 <div class="grid-container">
     <div class="grid-item recommended">
@@ -24,6 +23,7 @@ layout: front
         </ul>
     </div>
 
+<!-- 기존 카테고리 그리드 -->
 {% for category_name in ordered_categories %}
     {% if site.categories[category_name] %}
         <div class="grid-item {% if category_name == '작성중' %}in-progress{% endif %}">
@@ -45,3 +45,16 @@ layout: front
         </div>
     {% endif %}
 {% endfor %}
+
+<!-- '작성중'인 포스트를 모아놓는 새로운 그리드 -->
+<div class="grid-item in-progress">
+    <h2>작성중</h2>
+    <hr>
+    <ul>
+        {% for post in site.posts %}
+            {% if post.subtitle contains '작성중' %}
+                <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>

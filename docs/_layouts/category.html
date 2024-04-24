@@ -1,8 +1,9 @@
 <!--_layouts/category.html-->
 <!--_layouts/default.html-->
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
+<html lang="{{ site.lang | default: 'en-US' }}">
   <head>
+    <title>{{ page.title }}</title>
     <meta charset="UTF-8">
 
 {% seo %}
@@ -19,7 +20,7 @@
   <body>
     <a id="skip-to-content" href="#content">Skip to the content.</a>
 
-    <header class="page-header" role="banner">
+    <header class="page-header">
       <h1 class="project-name">{{ page.title | default: site.title | default: site.github.repository_name }}</h1>
       {% if site.show_downloads %}
         <a href="{{ site.github.zip_url }}" class="btn">Download .zip</a>
@@ -27,8 +28,8 @@
       {% endif %}
     </header>
 
-    <aside id="category-list" style="position: fixed; left: 0; top: 300px; bottom: 0; width: 200px; overflow: auto; padding-left: 50px;">
-      <h2 style="color: #333; padding-left: 16px">Categories</h2>
+    <aside id="category-list">
+      <h2>Categories</h2>
       <ul>
         {% for category in site.categories %}
           {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' %}
@@ -42,19 +43,13 @@
     <script src="/javascripts/homeButton.js"></script>
     <script src="/javascripts/categoryScroller.js"></script>
 
-    <main id="content" class="main-content" role="main">
+    <main id="content" class="main-content">
         {{ content }}
 
         {% for post in site.categories[page.title] %}
-          <h3><a href="{{ post.url }}">{{ post.title }}
-            {% if post.subtitle %}
-              {% if post.subtitle contains '작성중' %}
-                <span style="color: red;"> - {{ post.subtitle }}</span>
-              {% else %}
-                <span> - {{ post.subtitle }}</span>
-              {% endif %}
-            {% endif %}
-          </a></h3>
+          {% unless post.subtitle contains '작성중' %}
+            <h3><a href="{{ post.url }}">{{ post.title }}</a></h3>
+          {% endunless %}
         {% endfor %}
 
       <footer class="site-footer">
@@ -62,8 +57,10 @@
       </footer>
 
     </main>
-    <button id="go-top" class="scroll-top"></button>
-    <button id="go-home" class="home-button">홈으로</button>
-    <button id="go-bottom" class="scroll-bottom"></button> 
+
+    <button type="button" id="go-top" class="scroll-top" aria-label="top"></button>
+    <button type="button" id="go-home" class="home-button" aria-label="home">홈으로</button>
+    <button type="button" id="go-bottom" class="scroll-bottom" aria-label="bottom"></button>
+
   </body>
 </html>

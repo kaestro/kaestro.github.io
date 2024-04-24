@@ -3,6 +3,7 @@ layout: default
 title:  "알고리즘 스터디 2주차!"
 categories: Legacy
 date:   2020-12-28 20:20:23 +0900
+published: false
 ---
 
 지난번에 취준생이라 하셨던 한 분은 단톡방을 나가면서 스터디를 그만두게 되셨고, codeforce round round #692의 Div.2를 가지고 스터디를 진행했다.
