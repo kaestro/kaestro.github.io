@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: mathjax
 classes: 산문
 title: "Dynamic Programming"
 subtitle: "최적해를 구하기 위해, 부분 문제의 최적해를 이용하는 방법"
