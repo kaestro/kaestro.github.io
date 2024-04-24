@@ -7,7 +7,7 @@ date: 2024-04-24
 categories: Algorithm
 ---
 
-## Dynamic Programming은 Optimization Problem을 푸는 방법 중 하나이다
+## Dynamic Programming은 Optimization Problem 해결 방법이다
 
 여러 가지 문제 중에 Dynamic Programming을 사용해서 푸는 문제들은 Optimization Problem을 푸는 경우로 한정됩니다. 그렇다면 Optimization Problem은 무엇을 의미하는 것일까요?
 
@@ -46,9 +46,11 @@ $$Price_5 = \max_{k=1}^{3}(Price_k + Price_{5-k})$$
 
 Dynamic Programming을 구현하는 방법은 요약하자면 다음과 같습니다.
 
+```markdown
 1. 최적해를 구하는 경우를 나타내는 함수를 부분 문제의 최적해를 이용해 표현합니다.
 2. 부분 문제가 더 나눌 수 없는 경우를 찾아내고, 이를 기저 조건으로 설정합니다.
 3. 부분 문제를 구하는 과정에서 중복되는 계산을 피하기 위해, 부분 문제의 최적해를 저장하는 배열을 사용합니다.
+```
 
 ### Top-Down Approach
 
