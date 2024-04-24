@@ -3,7 +3,7 @@ layout: front
 title: Kaestro's 대장간
 ---
 
-{% assign ordered_categories = "신변잡기,개발일지,서평,개발이야기,게임이야기,CodeReviews,kubernetes,디자인패턴,WeeklyPosts,ETC,작성중," | split: "," %}
+{% assign ordered_categories = "신변잡기,개발일지,서평,개발이야기,게임이야기,애니이야기,디자인패턴,Algorithm,WeeklyPosts,CodeReviews,ETC,작성중," | split: "," %}
 
 <div class="grid-container">
     <div class="grid-item recommended">
