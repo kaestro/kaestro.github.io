@@ -1,6 +1,6 @@
 ---
 layout: mathjax
-classes: 산문
+classes: wide
 title: "Dynamic Programming"
 subtitle: "최적해를 구하기 위해, 부분 문제의 최적해를 이용하는 방법"
 date: 2024-04-24
