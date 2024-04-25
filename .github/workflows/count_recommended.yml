@@ -20,15 +20,16 @@ jobs:
 
       - name: Count recommended posts and update file
         run: |
-              require 'yaml'
-              recommended_count = Dir.glob('_posts/**/*.md').count { |f| File.read(f).include?('recommended: true') }
-              File.write('_data/recommended_count.yml', { 'count' => recommended_count }.to_yaml)
-              puts "Counted #{recommended_count} recommended posts"
+          ruby -e "
+          require 'yaml'
+          recommended_count = Dir.glob('_posts/**/*.md').count { |f| File.read(f).include?('recommended: true') }
+          File.write('_data/recommended_count.yml', { 'count' => recommended_count }.to_yaml)
+          puts \"Counted #{recommended_count} recommended posts\""
 
       - name: Commit changes
         run: |
-              git config --local user.email "action@github.com"
-              git config --local user.name "GitHub Action"
-              git add _data/recommended_count.yml
-              git commit -m "Update recommended count" || echo "No changes to commit"
-              git push
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add _data/recommended_count.yml
+          git commit -m "Update recommended count" || echo "No changes to commit"
+          git push
