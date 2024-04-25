@@ -192,3 +192,7 @@ a:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(ul a):not(ol a) {
   color: #333;
   padding-left: 7px;
 }
+
+.subtitle {
+  color: #999999;
+}

@@ -10,17 +10,18 @@ title: Kaestro's 대장간
         <h2>추천 글</h2>
         <hr>
         <ul>
+            {% assign count = 0%}
             {% for post in site.posts %}
-                {% assign count = 0%}
                 {% if post.recommended == true %}
                     {% assign count = count | plus: 1 %}
                     <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-                    {% if count > 5 %}
+                    {% if count >= 5 %}
                         {% break %}
                     {% endif %}
                 {% endif %}
             {% endfor %}
         </ul>
+        <a href="/categories/recommended">See all posts({{ site.data.recommended_count.count }}) in 추천글 </a>
     </div>
 
 <!-- 기존 카테고리 그리드 -->
