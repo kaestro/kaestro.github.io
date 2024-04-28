@@ -4,7 +4,7 @@ classes: wide
 title: "2월의 코드 복기"
 subtitle: "알고리즘, Go 문법"
 date: 2024-03-08
-categories: CodeReviews
+categories: 개발이야기
 ---
 
 ## <https://github.com/kaestro/algorithms_v3/commit/886b271b3be97d6af2af270d2754ebb8127f4d88>
