@@ -197,3 +197,9 @@ a:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(ul a):not(ol a) {
 .subtitle {
   color: #999999;
 }
+
+.about-link {
+  color: orange;
+  display: flex;
+  justify-content: flex-end;
+}
