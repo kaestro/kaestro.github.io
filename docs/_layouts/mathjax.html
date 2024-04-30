@@ -62,6 +62,11 @@
 
         {{ content }}
 
+        <hr>
+        <div class="date-right-align">
+          {{ page.date | date: "%Y-%m-%d" }}
+        </div>
+
         <div class="post-navigation">
           {% assign next = nil %}
           {% for post in site.posts reversed limit:1000 %}
