@@ -207,3 +207,9 @@ a:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(ul a):not(ol a) {
 .date-right-align {
   text-align: right;
 }
+
+@media screen {
+  p {
+    margin-bottom: 3vh !important;
+  }
+}
