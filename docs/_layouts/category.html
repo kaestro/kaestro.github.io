@@ -48,7 +48,8 @@
 
         {% for post in site.categories[page.title] %}
           {% unless post.subtitle contains '작성중' %}
-            <h3><a href="{{ post.url }}">{{ post.title }} <span class="subtitle">- {{ post.subtitle }}</span></a></h3>
+            <h3><a href="{{ post.url }}">{{ post.title }} </a></h3>
+            <span class="subtitle">{{ post.subtitle }}</span>
           {% endunless %}
         {% endfor %}
 
