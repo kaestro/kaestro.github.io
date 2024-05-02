@@ -33,21 +33,32 @@ title: Kaestro's 대장간
                 {% assign count = 0 %}
                 {% assign category_posts = site.categories[category_name] %}
                 {% assign series_names = category_posts | map: "series" | uniq %}
+                {% assign recent_posts = "" | split: "" %}
+
                 {% for series_name in series_names %}
-                    {% if series_name and count < 5 %}
+                    {% if series_name %}
                         {% assign series_posts = category_posts | where: "series", series_name %}
-                        {% assign min_index = series_posts | map: "seriesIndex" | sort | first %}
-                        {% assign max_index = series_posts | map: "seriesIndex" | sort | last %}
-                        <li><a href="{{ series_posts.last.url }}">{{ series_name }} ({{ min_index }} ~ {{ max_index }})</a></li>
-                        {% assign count = count | plus: 1 %}
+                        {% assign series_posts = series_posts | sort: "date" | reverse %}
+                        {% assign recent_posts = recent_posts | push: series_posts.first %}
                     {% endif %}
                 {% endfor %}
+
                 {% assign non_series_posts = category_posts | where_exp: "post", "post.series == nil" %}
-                {% for post in non_series_posts %}
-                    {% unless post.subtitle contains '작성중' or count >= 5 %}
+                {% assign non_series_posts = non_series_posts | sort: "date" | reverse %}
+                {% assign recent_posts = recent_posts | concat: non_series_posts %}
+                {% assign recent_posts = recent_posts | sort: "date" | reverse %}
+
+                {% for post in recent_posts limit: 5 %}
+                    {% if post.series %}
+                        {% assign series_posts = category_posts | where: "series", post.series %}
+                        {% assign min_index = series_posts | map: "seriesIndex" | sort | first %}
+                        {% assign max_index = series_posts | map: "seriesIndex" | sort | last %}
+                        {% assign first_post_in_series = series_posts | where_exp: "post", "post.seriesIndex == min_index" | first %}
+                        <li><a href="{{ first_post_in_series.url }}">{{ post.series }} ({{ min_index }} ~ {{ max_index }})</a></li>
+                    {% else %}
                         <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-                        {% assign count = count | plus: 1 %}
-                    {% endunless %}
+                    {% endif %}
+                    {% assign count = count | plus: 1 %}
                 {% endfor %}
             </ul>
             <a href="/categories/{{ category_name }}">See all posts({{ site.categories[category_name] | size }}) in {{ category_name }}</a>
