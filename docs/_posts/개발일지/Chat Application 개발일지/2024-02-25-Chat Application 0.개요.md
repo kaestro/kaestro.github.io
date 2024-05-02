@@ -1,5 +1,7 @@
 ---
-layout: default
+layout: series
+series: Chat Application 개발일지
+seriesIndex: 0
 classes: wide
 title: "ChatApplication 개요"
 date: 2024-02-25

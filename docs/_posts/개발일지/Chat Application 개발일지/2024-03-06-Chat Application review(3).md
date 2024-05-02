@@ -1,7 +1,9 @@
 ---
-layout: default
+layout: series
+series: Chat Application 개발일지
+seriesIndex: 3
 classes: wide
-title: "ChatApplication 3주차 Review"
+title: "ChatApplication Review(3)"
 subtitle: "팀원 모집, 확장성 높은 디자인, CI/CD"
 date: 2024-03-06
 categories: "개발일지"
@@ -14,15 +16,11 @@ categories: "개발일지"
 2. 진행 내용
 3. 문제 및 해결 방법
 
-
 ---
-
 
 ## 느낀 점
 
-
 ---
-
 
 ## 진행 내용
 
@@ -30,7 +28,6 @@ categories: "개발일지"
 * 채팅 기능을 위한 모듈들의 작성
 * 설계 조건 맞추기 위한 이론적인 구상
 * 협업을 위한 환경 설정
-
 
 ---
 
@@ -72,7 +69,7 @@ func (factory *RedisStoreFactory) Create(sessionTypeNum SessionType) SessionStor
 
 ---
 
-### 문제: 여러가지 측면에서 다른 사람의 도움이 있으면 속도가 빨라질 것 같다는 생각이 듬.
+### 문제: 여러가지 측면에서 다른 사람의 도움이 있으면 속도가 빨라질 것 같다는 생각이 듬
 
 1. 설계적인 측면에서 second opinion이 필요함.
 2. 코드 리뷰를 통해 유지보수성을 높일 필요가 있음.
@@ -80,8 +77,8 @@ func (factory *RedisStoreFactory) Create(sessionTypeNum SessionType) SessionStor
 
 ### 해결 방법
 
-* 커뮤니티에 모집글을 게시
-* 연락이 온 사람과 화상 미팅 진행
+- 커뮤니티에 모집글을 게시
+- 연락이 온 사람과 화상 미팅 진행
   - 2명 모집.
   - 일주일간 진행해보고 계속할 지 여부에 대해 결정하기로 함.
 

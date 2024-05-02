@@ -1,7 +1,9 @@
 ---
-layout: default
+layout: series
+series: Chat Application 개발일지
+seriesIndex: 2
 classes: wide
-title: "ChatApplication 2주차 Review"
+title: "ChatApplication Review(2)"
 subtitle: "컨테이너화, ChatDBManager"
 date: 2024-02-27
 categories: "개발일지"

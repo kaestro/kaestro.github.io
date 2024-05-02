@@ -1,7 +1,9 @@
 ---
-layout: default
+layout: series
+series: Chat Application 개발일지
+seriesIndex: 8
 classes: wide
-title: "ChatApplication 8주차 Review"
+title: "ChatApplication Review(8)"
 subtitle: "팀 해체, 모듈 재설계 및 구현, CI 환경 구축"
 date: 2024-04-10
 categories: "개발일지"

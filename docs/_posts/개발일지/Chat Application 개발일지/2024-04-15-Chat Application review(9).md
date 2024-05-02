@@ -1,7 +1,9 @@
 ---
-layout: default
+layout: series
+series: Chat Application 개발일지
+seriesIndex: 9
 classes: wide
-title: "ChatApplication 9주차 Review"
+title: "ChatApplication Review(9)"
 subtitle: "EnterChat 재설계, logging 기능 구현, routes 패키지 추가"
 date: 2024-04-15
 categories: "개발일지"

@@ -1,7 +1,9 @@
 ---
-layout: default
+layout: series
+series: Chat Application 개발일지
+seriesIndex: 6
 classes: wide
-title: "ChatApplication 6주차 Review"
+title: "ChatApplication Review(6)"
 subtitle: "MVP, Develop Branch, Chat 모듈"
 date: 2024-03-29
 categories: "개발일지"

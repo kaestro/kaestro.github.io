@@ -1,7 +1,9 @@
 ---
-layout: default
+layout: series
+series: Chat Application 개발일지
+seriesIndex: 1
 classes: wide
-title: "ChatApplication 1주차 Review"
+title: "ChatApplication Review(1)"
 subtitle: "Login API, DBManager, SessionManager"
 date: 2024-02-26
 categories: "개발일지"

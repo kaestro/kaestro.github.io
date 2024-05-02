@@ -1,7 +1,9 @@
 ---
-layout: default
+layout: series
+series: Chat Application 개발일지
+seriesIndex: 4
 classes: wide
-title: "ChatApplication 4주차 Review"
+title: "ChatApplication Review(4)"
 subtitle: "code study, 설계도, azure cost analysis"
 date: 2024-03-17
 categories: "개발일지"
