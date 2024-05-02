@@ -88,12 +88,13 @@
           {% endfor %}
 
           {% if prev %}
-            <a href="{{ site.baseurl }}{{ prev.url }}" class="prev">이전 글: {{ prev.title }} </a>
+            <a href="{{ site.baseurl }}{{ prev.url }}" class="prev">←이전 글: {{ prev.title }} </a>
           {% endif %}
 
           {% if next %}
-            <a href="{{ site.baseurl }}{{ next.url }}" class="right-align">다음 글: {{ next.title }} </a>
+            <a href="{{ site.baseurl }}{{ next.url }}" class="right-align">다음 글: {{ next.title }} →</a>
           {% endif %}
+          <a href="{{ site.baseurl }}/categories/{{ page.categories[0] }}" class="back-to-category">카테고리로 돌아가기 ↩</a>
         </div>
 
         {% if site.disqus.shortname %}

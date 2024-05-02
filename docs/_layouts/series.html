@@ -1,4 +1,4 @@
-<!--_layouts/default.html-->
+<!--_layouts/series.html-->
 <!DOCTYPE html>
 <html lang="{{ site.lang | default: 'en-US' }}">
   <head>
@@ -60,33 +60,34 @@
         </div>
 
         <div class="post-navigation">
-          {% assign next = nil %}
-          {% for post in site.posts reversed limit:1000 %}
-            {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date > page.date %}
-              {% unless post.subtitle contains '작성중' %}
-                {% assign next = post %}
-                {% break %}
-              {% endunless %}
+          {% assign series_posts = site.posts | where: "series", page.series %}
+          {% assign next_in_series = nil %}
+          {% assign prev_in_series = nil %}
+
+          {% for post in series_posts %}
+            {% assign next_index = page.seriesIndex | plus: 1 %}
+            {% if post.seriesIndex == next_index %}
+              {% assign next_in_series = post %}
+              {% break %}
             {% endif %}
           {% endfor %}
 
-          {% assign prev = nil %}
-          {% for post in site.posts limit:1000 %}
-            {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date < page.date%}
-              {% unless post.subtitle contains '작성중' %}
-                {% assign prev = post %}
-                {% break %}
-              {% endunless %}
+          {% for post in series_posts reversed %}
+            {% assign prev_index = page.seriesIndex | minus: 1 %}
+            {% if post.seriesIndex == prev_index %}
+              {% assign prev_in_series = post %}
+              {% break %}
             {% endif %}
           {% endfor %}
 
-          {% if prev %}
-            <a href="{{ site.baseurl }}{{ prev.url }}" class="prev">←이전 글: {{ prev.title }} </a>
+          {% if prev_in_series %}
+            <a href="{{ site.baseurl }}{{ prev_in_series.url }}" class="prev-post">← 이전 글(시리즈): {{ prev_in_series.title }}</a>
           {% endif %}
 
-          {% if next %}
-            <a href="{{ site.baseurl }}{{ next.url }}" class="right-align">다음 글: {{ next.title }} →</a>
+          {% if next_in_series %}
+            <a href="{{ site.baseurl }}{{ next_in_series.url }}" class="next-post">다음 글(시리즈): {{ next_in_series.title }} →</a>
           {% endif %}
+
           <a href="{{ site.baseurl }}/categories/{{ page.categories[0] }}" class="back-to-category">카테고리로 돌아가기 ↩</a>
         </div>
 

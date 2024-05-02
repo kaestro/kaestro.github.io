@@ -24,7 +24,6 @@ title: Kaestro's 대장간
         <a href="/categories/recommended">See all posts({{ site.data.recommended_count.count }}) in 추천글 </a>
     </div>
 
-<!-- 기존 카테고리 그리드 -->
 {% for category_name in ordered_categories %}
     {% if site.categories[category_name] %}
         <div class="grid-item {% if category_name == '작성중' %}in-progress{% endif %}">
@@ -32,13 +31,22 @@ title: Kaestro's 대장간
             <hr>
             <ul>
                 {% assign count = 0 %}
-                {% for post in site.categories[category_name] %}
-                    {% unless post.subtitle contains '작성중' %}
+                {% assign category_posts = site.categories[category_name] %}
+                {% assign series_names = category_posts | map: "series" | uniq %}
+                {% for series_name in series_names %}
+                    {% if series_name and count < 5 %}
+                        {% assign series_posts = category_posts | where: "series", series_name %}
+                        {% assign min_index = series_posts | map: "seriesIndex" | sort | first %}
+                        {% assign max_index = series_posts | map: "seriesIndex" | sort | last %}
+                        <li><a href="{{ series_posts.last.url }}">{{ series_name }} ({{ min_index }} ~ {{ max_index }})</a></li>
+                        {% assign count = count | plus: 1 %}
+                    {% endif %}
+                {% endfor %}
+                {% assign non_series_posts = category_posts | where_exp: "post", "post.series == nil" %}
+                {% for post in non_series_posts %}
+                    {% unless post.subtitle contains '작성중' or count >= 5 %}
                         <li><a href="{{ post.url }}">{{ post.title }}</a></li>
                         {% assign count = count | plus: 1 %}
-                        {% if count >= 5 %}
-                            {% break %}
-                        {% endif %}
                     {% endunless %}
                 {% endfor %}
             </ul>

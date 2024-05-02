@@ -1,4 +1,4 @@
 ---
-layout: recommended
+layout: category_recommended
 tytle: "recommended"
 ---

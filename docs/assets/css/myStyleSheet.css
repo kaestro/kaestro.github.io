@@ -213,3 +213,13 @@ a:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(ul a):not(ol a) {
     margin-bottom: 3vh !important;
   }
 }
+
+.next-post {
+  margin-top: 3em;
+  text-align: right;
+}
+
+.back-to-category {
+  margin-top: 3em;
+  text-align: center;
+}
