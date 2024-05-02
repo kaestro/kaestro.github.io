@@ -67,33 +67,66 @@
 
         <div class="post-navigation">
           {% assign series_posts = site.posts | where: "series", page.series %}
+          {% assign category_posts = site.posts | where: "categories", page.categories[0] %}
+
           {% assign next_in_series = nil %}
           {% assign prev_in_series = nil %}
+          {% assign next_in_category = nil %}
+          {% assign prev_in_category = nil %}
 
           {% for post in series_posts %}
-            {% assign next_index = page.seriesIndex | plus: 1 %}
-            {% if post.seriesIndex == next_index %}
-              {% assign next_in_series = post %}
-              {% break %}
+            {% if post.seriesIndex != nil %}
+              {% assign next_index = page.seriesIndex | plus: 1 %}
+              {% if post.seriesIndex == next_index %}
+                {% assign next_in_series = post %}
+                {% break %}
+              {% endif %}
             {% endif %}
           {% endfor %}
+
+          {% if next_in_series == nil%}
+            {% for post in category_posts %}
+              {% if post.date > page.date %}
+                {% assign next_in_category = post %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+          {% endif %}
 
           {% for post in series_posts reversed %}
-            {% assign prev_index = page.seriesIndex | minus: 1 %}
-            {% if post.seriesIndex == prev_index %}
-              {% assign prev_in_series = post %}
-              {% break %}
+            {% if post.seriesIndex != nil %}
+              {% assign prev_index = page.seriesIndex | minus: 1 %}
+              {% if post.seriesIndex == prev_index %}
+                {% assign prev_in_series = post %}
+                {% break %}
+              {% endif %}
             {% endif %}
           {% endfor %}
 
-          {% if prev_in_series %}
-            <a href="{{ site.baseurl }}{{ prev_in_series.url }}" class="prev-post">← 이전 글(시리즈): {{ prev_in_series.title }}</a>
+          {% if prev_in_series == nil%}
+            {% for post in category_posts %}
+              {% if post.date < page.date %}
+                {% assign prev_in_category = post %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
           {% endif %}
 
-          {% if next_in_series %}
-            <a href="{{ site.baseurl }}{{ next_in_series.url }}" class="next-post">다음 글(시리즈): {{ next_in_series.title }} →</a>
+          {% if prev_in_series or prev_in_category %}
+            {% if prev_in_series %}
+              <a href="{{ site.baseurl }}{{ prev_in_series.url }}" class="prev-post">← 이전 글(시리즈): {{ prev_in_series.title }}</a>
+            {% else %}
+              <a href="{{ site.baseurl }}{{ prev_in_category.url }}" class="prev-post">← 이전 글: {{ prev_in_category.title }}</a>
+            {% endif %}
           {% endif %}
 
+          {% if next_in_series or next_in_category %}
+            {% if next_in_series %}
+              <a href="{{ site.baseurl }}{{ next_in_series.url }}" class="next-post">다음 글(시리즈): {{ next_in_series.title }} →</a>
+            {% else %}
+              <a href="{{ site.baseurl }}{{ next_in_category.url }}" class="next-post">다음 글: {{ next_in_category.title }} →</a>
+            {% endif %}
+          {% endif %}
           <a href="{{ site.baseurl }}/categories/{{ page.categories[0] }}" class="back-to-category">카테고리로 돌아가기 ↩</a>
         </div>
 
