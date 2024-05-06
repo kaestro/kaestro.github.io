@@ -1,7 +1,7 @@
 ---
 layout: series_mathjax
 classes: wide
-title: "Introduction"
+title: "Introduction to Shortest Path algorithm"
 subtitle: "single-source shortest path algorithm(1)"
 date: 2024-05-07
 categories: Algorithm
