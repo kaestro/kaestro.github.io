@@ -7,7 +7,6 @@ title: "ChatApplication Review(10)"
 subtitle: ""
 date: 2024-05-06
 categories: "개발일지"
-published: false
 ---
 
 ## 목차
@@ -16,7 +15,9 @@ published: false
 - [배운 점](#배운-점)
 - [진행 내용](#진행-내용)
 - [진행 과정](#진행-과정)
-  - [EnterChat 재설계 및 구현](#enterchat-재설계-및-구현)
+  - [grafana k6를 통한 테스트용 client 작성](#grafana-k6를-통한-테스트용-client-작성)
+  - [pre-commit을 통한 코드 품질 관리 도입](#pre-commit을-통한-코드-품질-관리-도입)
+  - [docker를 통한 시스템 구축 시도 및 실패](#docker를-통한-시스템-구축-시도-및-실패)
 
 ---
 
@@ -29,22 +30,41 @@ published: false
 
 ## 진행 내용
 
-- grafana k6를 통한 테스트용 client 구축
+- grafana k6를 통한 테스트용 client 작성
+- pre-commit을 통한 코드 품질 관리 도입
 - docker를 통한 시스템 구축 시도 및 실패
 
 ---
 
 ## 진행 과정
 
-### EnterChat 재설계 및 구현
+### grafana k6를 통한 테스트용 client 작성
+
+![테스트 클라이언트](/images/chatapplication%20review/testclient.png)
+
+- javascript, grafana k6를 통해 테스트용 클라이언트 작성
+- httpRequests, loadTest, utils 패키지로 구성
+- 기본 모듈단 작성 완료했으며, 이후에는 테스트 케이스를 작성할 예정
+
+---
+
+### pre-commit을 통한 코드 품질 관리 도입
 
 - **문제**
-  - websocket이 연결되는 방식에 대한 이해 부족에 따른 잘못된 설계
-    - 접속 정보를 request body로 전송
-    - http request로 접속 정보를 전송 후 소켓 연결을 저장해두지 않음
+  - 완전히 코드가 저장되지 않은 상태로 커밋을 하거나, 코드의 품질이 낮은 상태로 커밋을 하는 경우가 발생
 - **해결**
-  - websocket을 요청할 때 client.do가 아니라 dialer.Dial로 연결해서 connection을 저장
-  - 접속 정보 중 비밀번호를 제외한 정보를 loginSessionInfo라는 새로운 구조체로 전송
-  - 이 때 request body가 아닌 header에 저장
+  - pre-commit을 통해 코드 품질을 관리하고, 코드가 저장되지 않은 상태로 커밋하는 것을 방지
 - **결과**
-  - 채팅 메시지 송수신 확인
+
+![pre-commit](/images/chatapplication%20review/precommit.png)
+
+---
+
+### docker를 통한 시스템 구축 시도 및 실패
+
+- **문제**
+  - docker를 통해 부하 테스트 시스템을 구축하려 했으나, mounting volume이나 복잡한 명령어 사용 등에 어려움을 겪음
+- **해결**
+  - docker를 통한 부하 테스트 시스템 구축 포기 및 로컬 환경에서 진행하기로 결정
+- **결과**
+  - 부하테스트 작성 시작
