@@ -7,8 +7,8 @@ github pages를 서비스를 통해 운영중인 [개인 블로그](https://kaes
 ## 최신 글 목록
 <!-- BLOG-POST-LIST:START -->
 - [정리를 통해 잠만 자는 공간에서 나로써 존재할 수 있는 공간으로](https://kaestro.github.io/%EC%8B%A0%EB%B3%80%EC%9E%A1%EA%B8%B0/2024/05/07/from-odds-and-ends-to-room.html)
+- [Introduction](https://kaestro.github.io/algorithm/2024/05/07/Shortest-Path(1).html)
 - [ChatApplication Review&lpar;10&rpar;](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80/2024/05/06/Chat-Application-review(10).html)
 - [5월 1주차 포스트](https://kaestro.github.io/weeklyposts/2024/05/05/Post-reviews.html)
 - [5월 1주차 알고리즘 문제](https://kaestro.github.io/algorithm/2024/05/05/5%EC%9B%94-1%EC%A3%BC%EC%B0%A8-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C.html)
-- [최근 내 삶을 바꾼 제품들 총 6선](https://kaestro.github.io/etc/2024/05/04/%EC%B5%9C%EA%B7%BC-%EB%82%B4-%EC%82%B6%EC%9D%84-%EB%B0%94%EA%BE%BC-%EC%A0%9C%ED%92%88%EB%93%A4.html)
 <!-- BLOG-POST-LIST:END -->
