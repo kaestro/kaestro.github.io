@@ -34,14 +34,14 @@ seriesIndex: 2
 
 ```plaintext
 BELLMAN-FORD(G, w, s)
-1  INITIALIZE-SINGLE-SOURCE(G, s)
-2  for i = 1 to |V[G]| - 1
-3      for each edge (u, v) in E[G]
-4          RELAX(u, v, w)
-5  for each edge (u, v) in E[G]
-6      if d[v] > d[u] + w(u, v)
-7          return false
-8  return true
+1  INITIALIZE-SINGLE-SOURCE(G, s)  // 모든 정점의 거리 값을 무한대로 초기화하고, 시작점의 거리 값을 0으로 설정합니다.
+2  for i = 1 to |V[G]| - 1  // 그래프의 정점 수 - 1만큼 반복합니다.
+3      for each edge (u, v) in E[G]  // 그래프의 모든 간선에 대해
+4          RELAX(u, v, w)  // u를 통해 v로 가는 경로가 더 짧은지 확인하고, 더 짧다면 v의 거리 값을 갱신합니다.
+5  for each edge (u, v) in E[G]  // 그래프의 모든 간선에 대해
+6      if d[v] > d[u] + w(u, v)  // u를 통해 v로 가는 경로가 v의 현재 거리 값보다 작다면
+7          return false  // 음의 사이클이 존재하므로 false를 반환합니다.
+8  return true  // 모든 간선에 대해 음의 사이클이 없다면 true를 반환합니다.
 ```
 
 `BELLMAN-FORD(G, w, s)`: 그래프 `G`와 가중치 함수 `w`, 시작 정점 `s`를 입력으로 받아 최단 경로를 계산한다.
@@ -50,14 +50,7 @@ BELLMAN-FORD(G, w, s)
 
 - `d`: 정점 `s`로부터 정점 `v`까지의 최단 거리를 저장하는 배열
 - V[G]: 그래프 `G`의 정점 집합
-
-`INITIALIZE-SINGLE-SOURCE(G, s)`: 그래프 `G`의 정점 `s`로부터의 최단 거리를 초기화한다.
-`RELAX(u, v, w)`: 정점 `u`에서 정점 `v`로의 간선 `w`를 통해 최단 거리를 갱신한다.
-
-`for i = 1 to |V[G]| - 1`: 모든 정점에 대해 최단 거리를 갱신한다.
-`for each edge (u, v) in E[G]`: 모든 간선에 대해 최단 거리를 갱신한다.
-
-`if d[v] > d[u] + w(u, v)`: 음수 사이클이 존재하는 경우 false를 반환한다.
+- E[G]: 그래프 `G`의 간선 집합
 
 ---
 
