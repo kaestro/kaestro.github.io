@@ -2,7 +2,7 @@
 layout: 산문
 classes: wide
 title: "5월 2주차 포스트"
-subtitle: "rate limit, retry 전략, "
+subtitle: "rate limit, retry 전략, 자기연민"
 date: 2024-05-12
 categories: "WeeklyPosts"
 ---
