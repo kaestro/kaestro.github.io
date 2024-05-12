@@ -7,8 +7,8 @@ github pages를 서비스를 통해 운영중인 [개인 블로그](https://kaes
 ## 최신 글 목록
 <!-- BLOG-POST-LIST:START -->
 - [5월 2주차 포스트](https://kaestro.github.io/weeklyposts/2024/05/12/Post-reviews.html)
+- [인체공학을 염두에 둔 내 pc용 책상 세팅&lpar;1&rpar;](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/05/12/Desk-setting.html)
 - [5월 2주차 알고리즘 문제](https://kaestro.github.io/algorithm/2024/05/12/5%EC%9B%94-2%EC%A3%BC%EC%B0%A8-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C.html)
 - [Graph](https://kaestro.github.io/algorithm/2024/05/10/Graph.html)
 - [정리를 통해 잠만 자는 공간에서 나로써 존재할 수 있는 공간으로](https://kaestro.github.io/%EC%8B%A0%EB%B3%80%EC%9E%A1%EA%B8%B0/2024/05/07/from-odds-and-ends-to-room.html)
-- [docker mount: volume vs bind](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/05/07/Docker-mount.html)
 <!-- BLOG-POST-LIST:END -->
