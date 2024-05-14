@@ -6,9 +6,9 @@ github pages를 서비스를 통해 운영중인 [개인 블로그](https://kaes
 
 ## 최신 글 목록
 <!-- BLOG-POST-LIST:START -->
+- [비어있는 공백기가 아니라 충만했던 탐색기&lpar;1&rpar;](https://kaestro.github.io/%EC%8B%A0%EB%B3%80%EC%9E%A1%EA%B8%B0/2024/05/15/%EC%83%88%EB%A1%9C%EC%9B%80%EC%9D%84-%EA%B2%BD%ED%97%98%ED%95%98%EB%A9%B0-%EB%82%98%EB%A5%BC-%EB%8F%8C%EC%95%84%EB%B3%B4%EB%8B%A4.html)
 - [5월 2주차 포스트](https://kaestro.github.io/weeklyposts/2024/05/12/Post-reviews.html)
 - [인체공학을 염두에 둔 내 pc용 책상 세팅&lpar;1&rpar;](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/05/12/Desk-setting.html)
 - [인체공학을 염두에 둔 내 pc용 책상 세팅&lpar;2&rpar;](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/05/12/Desk-setting(2).html)
 - [5월 2주차 알고리즘 문제](https://kaestro.github.io/algorithm/2024/05/12/5%EC%9B%94-2%EC%A3%BC%EC%B0%A8-%EC%95%8C%EA%B3%A0%EB%A6%AC%EC%A6%98-%EB%AC%B8%EC%A0%9C.html)
-- [Graph](https://kaestro.github.io/algorithm/2024/05/10/Graph.html)
 <!-- BLOG-POST-LIST:END -->
