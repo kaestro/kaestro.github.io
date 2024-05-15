@@ -4,7 +4,7 @@ series: Chat Application 개발일지
 seriesIndex: 10
 classes: wide
 title: "ChatApplication Review(10)"
-subtitle: ""
+subtitle: "test용 클라이언트 작성, pre-commit 도입, docker 시스템 구축 시도 및 실패"
 date: 2024-05-06
 categories: "개발일지"
 ---
