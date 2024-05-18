@@ -7,9 +7,15 @@ import React from 'react'
 import { getAllPosts, getCategories, getLatestPostsByCategory } from '../utils'
 
 const HomePage: React.FC<{ posts: { id: string, title: string, content: string }[], latestPostsByCategory: any[] }> = ({ posts, latestPostsByCategory }) => {
+  // 원하는 카테고리 순서
+  const categoryOrder = ["신변잡기", "개발일지", "서평", "개발이야기", "게임이야기", "Algorithm", "디자인패턴", "WeeklyPosts", "ETC"];
+
+  // 카테고리를 원하는 순서대로 정렬
+  const sortedCategories = [...latestPostsByCategory].sort((a, b) => categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category));
+
   return (
-    <div className="grid grid-cols-3 gap-4">
-      {latestPostsByCategory.map(({ category, posts }: { category: string, posts: { id: string, title: string }[] }) => (
+    <div className="grid grid-cols-2 gap-4">
+      {sortedCategories.map(({ category, posts }: { category: string, posts: { id: string, title: string }[] }) => (
         <div key={category} className="p-4 border rounded-md">
           <h2 className="text-xl font-bold">{category}</h2>
           <ul>
@@ -24,7 +30,6 @@ const HomePage: React.FC<{ posts: { id: string, title: string, content: string }
     </div>
   )
 }
-
 export const getStaticProps: GetStaticProps = async () => {
   const postsDirectory = path.join(process.cwd(), '_posts')
   const filePaths = getAllPosts(postsDirectory)
