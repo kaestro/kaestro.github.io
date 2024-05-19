@@ -1,16 +1,29 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'fs';
+import matter from 'gray-matter';
+import path from 'path';
 
-export function getAllPosts(dirPath: string, arrayOfFiles: string[] = []) {
-  const files = fs.readdirSync(dirPath)
+export function getAllPosts(postsDirectory: string): any[] {
+  const fileNames = fs.readdirSync(postsDirectory);
 
-  files.forEach(file => {
-    if (fs.statSync(path.join(dirPath, file)).isDirectory()) {
-      arrayOfFiles = getAllPosts(path.join(dirPath, file), arrayOfFiles)
-    } else {
-      arrayOfFiles.push(path.join(dirPath, file))
+  return fileNames.flatMap(fileName => {
+    const fullPath = path.join(postsDirectory, fileName);
+    const stat = fs.statSync(fullPath);
+
+    // If the item is a directory, recursively call getAllPosts
+    if (stat.isDirectory()) {
+      return getAllPosts(fullPath);
     }
-  })
 
-  return arrayOfFiles
+    const fileContents = fs.readFileSync(fullPath, 'utf8');
+    const matterResult = matter(fileContents);
+
+    // Extract the directory from the file path
+    const directory = path.relative(path.dirname(postsDirectory), path.dirname(fullPath));
+
+    return [{
+      id: fileName.replace(/\.md$/, ''),
+      directory: directory, // Add the directory to the returned object
+      fullPath: fullPath // Add the full path to the returned object
+    }];
+  });
 }

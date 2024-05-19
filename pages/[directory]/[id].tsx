@@ -1,21 +1,22 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { getAllPostIds, getPostData } from '../utils/posts';
+import { getAllPostIdsAndDirectories, getAllPosts } from '../../utils';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getAllPostIds();
-  console.log("HELLO getStaticPaths")
-  console.log(paths)
+  const pathsData = await getAllPostIdsAndDirectories();
+  const paths = pathsData.map(({ id, directory }) => ({
+    params: {
+      id: id.toString(),
+      directory: directory.toString(),
+    },
+  }));
   return {
     paths,
-    fallback: false
+    fallback: false,
   };
 };
-
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  console.log("HELLO getStaticProps for param")
-  console.log(params)
-  // Check if params, params.directory, or params.id is undefined
-  if (!params || !params.directory || !params.id) {
+  // Check if params, params.postId, or params.postDirectory is undefined
+  if (!params || !params.postId || !params.postDirectory) {
     return {
       props: {
         postData: {
@@ -26,10 +27,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
 
-  // Use directory and id to get post data
-  const postData = await getPostData(params.directory as string, params.id as string);
+  // Use postId and postDirectory to get post data
+  const postData = await getAllPosts(params.postDirectory as string);
   console.log("HELLO POST DATA")
-  console.log(postData)
+  console.log(postData[0])
+  console.log("END POST DATA")
   return {
     props: {
       postData
