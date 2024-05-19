@@ -1,27 +1,30 @@
 import fs from 'fs'
 import matter from 'gray-matter'
 import { GetStaticProps } from 'next'
-import Link from 'next/link'
 import path from 'path'
 import React from 'react'
 import { getAllPosts, getCategories, getLatestPostsByCategory } from '../utils'
 
-const HomePage: React.FC<{ posts: { id: string, title: string, content: string }[], latestPostsByCategory: any[] }> = ({ posts, latestPostsByCategory }) => {
-  // 원하는 카테고리 순서
-  const categoryOrder = ["신변잡기", "개발일지", "서평", "개발이야기", "게임이야기", "Algorithm", "디자인패턴", "WeeklyPosts", "ETC"];
+import { useRouter } from 'next/router'
 
-  // 카테고리를 원하는 순서대로 정렬
+const HomePage: React.FC<{ posts: { id: string, title: string, content: string, directory: string }[], latestPostsByCategory: any[] }> = ({ posts, latestPostsByCategory }) => {
+  const router = useRouter();
+  const categoryOrder = ["신변잡기", "개발일지", "서평", "개발이야기", "게임이야기", "Algorithm", "디자인패턴", "WeeklyPosts", "ETC"];
   const sortedCategories = [...latestPostsByCategory].sort((a, b) => categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category));
+
+  const handlePostClick = (postId: string) => {
+    router.push(`/${postId}.html`); // 새 URL로 이동
+  };
 
   return (
     <div className="grid grid-cols-2 gap-4">
-      {sortedCategories.map(({ category, posts }: { category: string, posts: { id: string, title: string }[] }) => (
+      {sortedCategories.map(({ category, posts }: { category: string, posts: { id: string, title: string, directory: string }[] }) => (
         <div key={category} className="p-4 border rounded-md">
           <h2 className="text-xl font-bold">{category}</h2>
           <ul>
-            {posts.map((post: { id: string, title: string })  => (
+            {posts.map((post: { id: string, title: string, directory: string })  => (
               <li key={post.id} className="my-2">
-                <Link href={`/posts/${post.id}`} className="text-blue-500 hover:underline">{post.title}</Link>
+                <a onClick={() => handlePostClick(post.id)} className="text-blue-500 hover:underline">{post.title}, {post.id}, {post.directory} </a>
               </li>
             ))}
           </ul>
