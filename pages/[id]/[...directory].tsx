@@ -6,7 +6,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const paths = pathsData.map(({ id, directory }) => ({
     params: {
       id: id.toString(),
-      directory: directory.toString(),
+      directory: directory.split('/')
     },
   }));
   return {
