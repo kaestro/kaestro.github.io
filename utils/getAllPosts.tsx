@@ -1,29 +1,53 @@
 import fs from 'fs';
-import matter from 'gray-matter';
 import path from 'path';
+import { PostData } from './PostData';
 
-export function getAllPosts(postsDirectory: string): any[] {
-  const fileNames = fs.readdirSync(postsDirectory);
+function getPostData(postPath: string, postName: string): PostData {
+  const postData = new PostData(postPath, postName);
+  return postData;
+}
 
-  return fileNames.flatMap(fileName => {
-    const fullPath = path.join(postsDirectory, fileName);
-    const stat = fs.statSync(fullPath);
+function processFileEntry(entry: fs.Dirent, currentDirectory: string, PostsData: PostData[]) {
+  const fullPath = path.join(currentDirectory, entry.name);
+  const postName = path.basename(entry.name, '.md');
+  const postData = getPostData(fullPath, postName);
+  PostsData.push(postData);
+}
 
-    // If the item is a directory, recursively call getAllPosts
-    if (stat.isDirectory()) {
-      return getAllPosts(fullPath);
+function getPostsInCategory(postsDirectory: string, category: string): PostData[] {
+  const { queue, postsData } = initializeGetPostsInCategory(postsDirectory, category);
+
+  while (queue.length > 0) {
+    const currentDirectory = queue.shift();
+
+    if (!currentDirectory) {
+      continue;
     }
 
-    const fileContents = fs.readFileSync(fullPath, 'utf8');
-    const matterResult = matter(fileContents);
+    const entries = fs.readdirSync(currentDirectory, { withFileTypes: true });
 
-    // Extract the directory from the file path
-    const directory = path.relative(path.dirname(postsDirectory), path.dirname(fullPath));
+    for (const entry of entries) {
+      if (entry.isDirectory()) {
+        queue.push(path.join(currentDirectory, entry.name));
+      } else if (entry.isFile() && path.extname(entry.name) === '.md') {
+        processFileEntry(entry, currentDirectory, postsData);
+      }
+    }
+  }
 
-    return [{
-      id: fileName.replace(/\.md$/, ''),
-      directory: directory, // Add the directory to the returned object
-      fullPath: fullPath // Add the full path to the returned object
-    }];
-  });
+  return postsData;
+}
+
+export function getAllPosts(postsDirectory: string): any[] {
+  const categories = fs.readdirSync(postsDirectory);
+
+  return categories.flatMap(category => getPostsInCategory(postsDirectory, category));
+}
+
+function initializeGetPostsInCategory(postsDirectory: string, category: string) {
+  const categoryDirectory = path.join(postsDirectory, category);
+  const queue = [categoryDirectory];
+  const postsData: PostData[] = [];
+
+  return { queue, postsData };
 }
