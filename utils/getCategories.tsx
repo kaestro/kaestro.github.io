@@ -1,11 +1,11 @@
-export function getCategories(posts: any[]): Array<string> {
+import { PostData } from '../utils';
+
+export function getCategories(posts: PostData[]): Set<string> {
   const categorieSet: Set<string> = new Set();
 
   posts.forEach(post => {
-    const postCategories = Array.isArray(post.categories) ? post.categories : [post.categories];
-    postCategories.forEach((category: unknown) => categorieSet.add(category as string));
+    categorieSet.add(post.category);
   });
 
-  const allCategories = Array.from(categorieSet);
-  return allCategories;
+  return categorieSet
 }

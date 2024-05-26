@@ -1,78 +1,74 @@
-import fs from 'fs'
-import matter from 'gray-matter'
 import { GetStaticProps } from 'next'
 import path from 'path'
 import React from 'react'
-import { getAllPosts, getCategories, getLatestPostsByCategory } from '../utils'
+import { getAllPosts, getCategories, getLatestPostsByCategory, PostData } from '../utils'
 
 import { useRouter } from 'next/router'
 
-const HomePage: React.FC<{ posts: { id: string, title: string, content: string, directory: string }[], latestPostsByCategory: any[] }> = ({ posts, latestPostsByCategory }) => {
+const HomePage: React.FC<{ postsJson: PostData[], latestPostsByCategory: { category: string, posts: PostData[] }[] }> = ({ postsJson, latestPostsByCategory }) => {
   const router = useRouter();
-  const categoryOrder = ["신변잡기", "개발일지", "서평", "개발이야기", "게임이야기", "Algorithm", "디자인패턴", "WeeklyPosts", "ETC"];
-  const sortedCategories = [...latestPostsByCategory].sort((a, b) => categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category));
+  const customOrder = ['신변잡기', '개발일지', '서평', '개발이야기', '게임이야기', '디자인패턴', 'Algorithm', 
+    'WeeklyPosts', 'ETC'
+  ]; // 사용자 정의 순서
 
-const handlePostClick = async (postId: string, postDirectory: string) => {
-  console.log(`Clicked on post ${postId}, postDirectory ${postDirectory}`)
-  router.push(`/posts/${postId}/${postDirectory}`); // 새 URL로 이동
-};
+  const sortedPosts = [...latestPostsByCategory].sort((a, b) => customOrder.indexOf(a.category) - customOrder.indexOf(b.category))
+  const recommendedPosts = postsJson.filter(post => post.data && post.data.recommended);
+  const postCountByCategory = postsJson.reduce((count, post) => {
+    count[post.category] = (count[post.category] || 0) + 1;
+    return count;
+  }, {} as { [category: string]: number });
+
+  const handlePostClick = async (category: string, postName: string) => {
+    console.log(`Clicked on post ${category}, postDirectory ${postName}`)
+    router.push(`/posts/${category}/${postName}`); // 새 URL로 이동
+  };
+
   return (
     <div className="grid grid-cols-2 gap-4">
-      {sortedCategories.map(({ category, posts }: { category: string, posts: { id: string, title: string, directory: string }[] }) => (
+
+      <div className="p-4 border rounded-md">
+        <h2 className="text-xl font-bold text-red-500 mb-4">추천 글</h2>
+        {recommendedPosts.slice(0, 5).map((post) => (
+          <div key={post.title}>
+            <p onClick={() => handlePostClick(post.category, post.title)} className="text-blue-500 hover:underline cursor-pointer">{post.title}</p>
+          </div>
+        ))}
+        <p className="mt-4 text-blue-500 hover:underline cursor-pointer">see all posts({recommendedPosts.length}) in 추천 글</p>
+      </div>
+
+      {sortedPosts.map(({ category, posts }) => (
         <div key={category} className="p-4 border rounded-md">
-          <h2 className="text-xl font-bold">{category}</h2>
-          <ul>
-            {posts.map((post: { id: string, title: string, directory: string })  => (
-              <li key={post.id} className="my-2">
-                <a onClick={(event) => { event.preventDefault(); handlePostClick(post.directory , post.id); }} className="text-blue-500 hover:underline">{post.title}, {post.id}, {post.directory} </a>
-              </li>
-            ))}
-          </ul>
+          <h2 className="text-xl font-bold mb-4">{category}</h2>
+          {posts.map((post) => (
+            <div key={post.title}>
+              <p onClick={() => handlePostClick(post.category, post.title)} className="text-blue-500 hover:underline cursor-pointer">{post.title}</p>
+            </div>
+          ))}
+          <p className="mt-4 text-blue-500 hover:underline cursor-pointer" onClick={() => router.push(`/category/${category}`)}>see all posts({postCountByCategory[category]}) in {category}</p>
         </div>
       ))}
+
     </div>
-  )
+  );
 }
+
 export const getStaticProps: GetStaticProps = async () => {
   const postsDirectory = path.join(process.cwd(), '_posts')
-  const filePaths = getAllPosts(postsDirectory)
+  const posts: PostData[] = getAllPosts(postsDirectory)
 
-  const posts = filePaths.flatMap(({ id, directory, fullPath }) => {
-    const fileContents = fs.readFileSync(fullPath, 'utf8')
-    const { data, content } = matter(fileContents)
-
-    return [{
-      id: id,
-      directory: directory,
-      ...data,
-      date: data.date instanceof Date ? data.date.toISOString() : data.date, // Date 객체를 ISO 문자열로 변환
-    }]
-  })
-
-  const categories = getCategories(posts)
+  const categoriesSet: Set<string> = getCategories(posts)
+  const categories = Array.from(categoriesSet)
 
   const latestPostsByCategory = categories.map(category => ({
     category,
-    posts: getLatestPostsByCategory(posts, category),
+    posts: getLatestPostsByCategory(posts, category).map(post => post.toJSON()),
   }))
 
-  /*
-  console.log("HELLO CATEGORIES")
-  console.log(categories[0])
-  console.log("END CATEGORIES")
-
-  console.log("HELLO LATEST POSTS BY CATEGORY")
-  console.log(latestPostsByCategory)
-  console.log("END LATEST POSTS BY CATEGORY")
-
-  console.log("HELLO POSTS")
-  console.log(posts[0])
-  console.log("END POSTS")
-  */
+  const postsJson = posts.map(post => ({ ...post.toJSON() }))
 
   return {
     props: {
-      posts,
+      postsJson,
       categories,
       latestPostsByCategory,
     },

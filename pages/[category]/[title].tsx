@@ -1,5 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { getAllPostIdsAndDirectories, getAllPosts } from '../../utils';
+import { getAllPostIdsAndDirectories, getAllPosts, PostData } from '../../utils';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const pathsData = await getAllPostIdsAndDirectories();
@@ -39,11 +39,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-const Post: React.FC<{ postData: { title: string, contentHtml: string } }> = ({ postData }) => {
+const Post: React.FC<{ postData: PostData }> = ({ postData }) => {
   return (
     <div>
-      <h1>{postData.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
+      <h1>{postData.getPostName()}</h1>
+      <div>{postData.getData()}</div>
     </div>
   );
 };
