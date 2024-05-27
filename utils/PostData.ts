@@ -7,10 +7,11 @@ export class PostData {
   category: string;
   title: string;
   data: any;
+  content: string;
 
   constructor(postPath: string, postName: string) {
     const fileContents = fs.readFileSync(postPath, 'utf8');
-    const { data } = matter(fileContents);
+    const { data, content } = matter(fileContents);
 
     if (!data.date) {
       throw new Error(`Missing date in ${postPath}`);
@@ -25,6 +26,7 @@ export class PostData {
     this.fullPath = postPath;
     this.data = data;
     this.title = data.title;
+    this.content = content;
   }
 
   getDate(): Date {
@@ -51,6 +53,10 @@ export class PostData {
     return this.data.title;
   }
 
+  getContent(): string {
+    return this.content;
+  }
+
   getMetaData(key: string): any {
     return this.data[key];
   }
@@ -61,6 +67,7 @@ export class PostData {
       fullPath: this.getFullPath(),
       category: this.getCategory(),
       title: this.getTitle(),
+      content: this.getContent(),
       data: {
         ...this.data,
         date: this.getDate().toISOString(),

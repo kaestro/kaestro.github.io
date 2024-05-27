@@ -1,6 +1,6 @@
-import matter from 'gray-matter';
+import { marked } from 'marked';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { getAllPosts, PostData } from '../../utils';
+import { getAllPosts, getPostByTitleAndCategory, PostData } from '../../utils';
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
@@ -20,7 +20,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-
   if (!params || !params.title || !params.category) {
     return {
       props: {
@@ -32,31 +31,40 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     };
   }
 
-  const postData: PostData[] = await getAllPosts();
-  const postDataJson = postData.map(post => post.toJSON());
+  const post: PostData | null = await getPostByTitleAndCategory(params.title as string, params.category as string);
+
+  if (!post) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const postDataJson = post.toJSON();
+
   return {
     props: {
       postDataJson,
-      title: params?.title as string,
+      title: params.title as string,
+      category: params.category as string,
     }
   };
 };
 
 
-const Post: React.FC<{ postDataJson: PostData[]; title: string }> = ({ postDataJson, title }) => {
-  const postData = postDataJson.find(post => post.title === title);
-
-  if (!postData) {
+const Post: React.FC<{ postDataJson: PostData; title: string, category: string }> =
+  ({ postDataJson, title, category }) => {
+  if (!postDataJson) {
     return <div>Post not found</div>;
   }
 
-  const { data, content } = matter(postData.data);
+  const htmlContent = marked(postDataJson.content);
 
   return (
     <div>
-      <h1>{data.title}</h1>
-      <div>{content}</div>
+      <h1>{postDataJson.title}</h1>
+      <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
     </div>
   );
 };
+
 export default Post;
