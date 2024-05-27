@@ -20,7 +20,7 @@ const HomePage: React.FC<{ postsJson: PostData[], latestPostsByCategory: { categ
 
   const handlePostClick = async (category: string, postName: string) => {
     console.log(`Clicked on post ${category}, postDirectory ${postName}`)
-    router.push(`/posts/${category}/${postName}`); // 새 URL로 이동
+    router.push(`/${category}/${postName}`); // 새 URL로 이동
   };
 
   return (
@@ -54,7 +54,7 @@ const HomePage: React.FC<{ postsJson: PostData[], latestPostsByCategory: { categ
 
 export const getStaticProps: GetStaticProps = async () => {
   const postsDirectory = path.join(process.cwd(), '_posts')
-  const posts: PostData[] = getAllPosts(postsDirectory)
+  const posts: PostData[] = getAllPosts()
 
   const categoriesSet: Set<string> = getCategories(posts)
   const categories = Array.from(categoriesSet)
