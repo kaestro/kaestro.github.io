@@ -38,10 +38,16 @@ function getPostsInCategory(postsDirectory: string, category: string): PostData[
   return postsData;
 }
 
-export function getAllPosts(postsDirectory: string): any[] {
+export function getAllPostsFromPostsDirectory(postsDirectory: string): any[] {
   const categories = fs.readdirSync(postsDirectory);
 
   return categories.flatMap(category => getPostsInCategory(postsDirectory, category));
+}
+
+export function getAllPosts(): any[] {
+  const posts = getAllPostsFromPostsDirectory(path.join(process.cwd(), '_posts'));
+
+  return posts;
 }
 
 function initializeGetPostsInCategory(postsDirectory: string, category: string) {
