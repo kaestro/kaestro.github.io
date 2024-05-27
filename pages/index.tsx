@@ -24,7 +24,7 @@ const HomePage: React.FC<{ postsJson: PostData[], latestPostsByCategory: { categ
   };
 
   return (
-    <div className="grid grid-cols-2 gap-4">
+    <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
 
       <div className="p-4 border rounded-md">
         <h2 className="text-xl font-bold text-red-500 mb-4">추천 글</h2>
