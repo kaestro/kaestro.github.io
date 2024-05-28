@@ -44,7 +44,7 @@ const HomePage: React.FC<{ postsJson: PostData[], latestPostsByCategory: { categ
               <p onClick={() => handlePostClick(post.category, post.title)} className="text-blue-500 hover:underline cursor-pointer">{post.title}</p>
             </div>
           ))}
-          <p className="mt-4 text-blue-500 hover:underline cursor-pointer" onClick={() => router.push(`/category/${category}`)}>see all posts({postCountByCategory[category]}) in {category}</p>
+          <p className="mt-4 text-blue-500 hover:underline cursor-pointer" onClick={() => router.push(`/${category}`)}>see all posts({postCountByCategory[category]}) in {category}</p>
         </div>
       ))}
 
