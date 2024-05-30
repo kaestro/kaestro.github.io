@@ -6,9 +6,9 @@ github pages를 서비스를 통해 운영중인 [개인 블로그](https://kaes
 
 ## 최신 글 목록
 <!-- BLOG-POST-LIST:START -->
+- [전술을 수립하고 룸매치를 통해 최종 점검하자](https://kaestro.github.io/%EA%B2%8C%EC%9E%84%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/05/30/%EC%9A%B0%EB%A7%88%EB%AC%B4%EC%8A%A4%EB%A9%94-%EA%B0%9C%EB%A1%A0-3.html)
 - [인자작 없는 육성은 도박이다](https://kaestro.github.io/%EA%B2%8C%EC%9E%84%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/05/28/%EC%9A%B0%EB%A7%88%EB%AC%B4%EC%8A%A4%EB%A9%94-%EA%B0%9C%EB%A1%A0-2.html)
 - [200만원으로 우마무스메 12/15관을 달성한 비결](https://kaestro.github.io/%EA%B2%8C%EC%9E%84%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/05/27/%EC%9A%B0%EB%A7%88%EB%AC%B4%EC%8A%A4%EB%A9%94-%EA%B0%9C%EB%A1%A0-1.html)
 - [From Jekyll To Next.js&lpar;1&rpar;](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80/2024/05/27/From-Jekyll-To-Next.js(1).html)
 - [Props and State in React](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/05/25/Props-and-State-in-React.html)
-- [CallBack, Promise, Async, Await](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/05/24/CallBack,-Promise,-Async,-Await.html)
 <!-- BLOG-POST-LIST:END -->
