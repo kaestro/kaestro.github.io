@@ -6,6 +6,7 @@ export class PostData {
   fullPath: string;
   category: string;
   title: string;
+  subtitle: string;
   data: any;
   content: string;
   layout: string;
@@ -22,6 +23,10 @@ export class PostData {
       throw new Error(`Missing categories in ${postPath}`);
     }
 
+    if (!data.subtitle) {
+      data.subtitle = '';
+    }
+
     this.postName = postName;
     this.category = data.categories;
     this.fullPath = postPath;
@@ -29,6 +34,7 @@ export class PostData {
     this.title = data.title;
     this.content = content;
     this.layout = data.layout;
+    this.subtitle = data.subtitle;
   }
 
   getDate(): Date {
@@ -67,12 +73,17 @@ export class PostData {
     return this.layout;
   }
 
+  getSubtitle(): string {
+    return this.subtitle;
+  }
+
   toJSON() {
     return {
       postName: this.getPostName(),
       fullPath: this.getFullPath(),
       category: this.getCategory(),
       title: this.getTitle(),
+      subtitle: this.getSubtitle(),
       content: this.getContent(),
       layout: this.getLayout(),
       data: {

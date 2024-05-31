@@ -1,6 +1,7 @@
 import { GetStaticProps } from 'next'
 import path from 'path'
 import React from 'react'
+import DefaultLayout from '../layouts/DefaultLayout'
 import { getAllPosts, getCategories, getLatestPostsByCategory, PostData } from '../utils'
 
 import { useRouter } from 'next/router'
@@ -23,32 +24,36 @@ const HomePage: React.FC<{ postsJson: PostData[], latestPostsByCategory: { categ
     router.push(`/${category}/${postName}`); // 새 URL로 이동
   };
 
+  const Layout = DefaultLayout;
+
   return (
-    <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
+    <Layout title="Kaestro's BlackSmith" subtitle='프로그래밍을 단련하고, 기록하는 공간'>
+      <div className="grid lg:grid-cols-2 grid-cols-1 gap-4">
 
-      <div className="p-4 border rounded-md">
-        <h2 className="text-xl font-bold text-red-500 mb-4">추천 글</h2>
-        {recommendedPosts.slice(0, 5).map((post) => (
-          <div key={post.title}>
-            <p onClick={() => handlePostClick(post.category, post.title)} className="text-blue-500 hover:underline cursor-pointer">{post.title}</p>
-          </div>
-        ))}
-        <p className="mt-4 text-blue-500 hover:underline cursor-pointer">see all posts({recommendedPosts.length}) in 추천 글</p>
-      </div>
-
-      {sortedPosts.map(({ category, posts }) => (
-        <div key={category} className="p-4 border rounded-md">
-          <h2 className="text-xl font-bold mb-4">{category}</h2>
-          {posts.map((post) => (
+        <div className="p-4 border rounded-md">
+          <h2 className="font-bold text-mb-4" style={{ color: 'black' }}>추천 글</h2>
+          {recommendedPosts.slice(0, 5).map((post) => (
             <div key={post.title}>
               <p onClick={() => handlePostClick(post.category, post.title)} className="text-blue-500 hover:underline cursor-pointer">{post.title}</p>
             </div>
           ))}
-          <p className="mt-4 text-blue-500 hover:underline cursor-pointer" onClick={() => router.push(`/${category}`)}>see all posts({postCountByCategory[category]}) in {category}</p>
+          <p className="mt-4 text-blue-500 hover:underline cursor-pointer font-bold" onClick={() => router.push(`/추천글`)}>see all posts({recommendedPosts.length}) in 추천 글</p>
         </div>
-      ))}
 
-    </div>
+        {sortedPosts.map(({ category, posts }) => (
+          <div key={category} className="p-4 border rounded-md">
+            <h2 className="font-bold mb-4">{category}</h2>
+            {posts.map((post) => (
+              <div key={post.title}>
+                <p onClick={() => handlePostClick(post.category, post.title)} className="text-blue-500 hover:underline cursor-pointer">{post.title}</p>
+              </div>
+            ))}
+            <p className="mt-4 text-blue-500 hover:underline cursor-pointer font-bold" onClick={() => router.push(`/${category}`)}>see all posts({postCountByCategory[category]}) in {category}</p>
+          </div>
+        ))}
+
+      </div>
+    </Layout>
   );
 }
 
