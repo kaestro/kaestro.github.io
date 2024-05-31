@@ -8,6 +8,7 @@ export class PostData {
   title: string;
   data: any;
   content: string;
+  layout: string;
 
   constructor(postPath: string, postName: string) {
     const fileContents = fs.readFileSync(postPath, 'utf8');
@@ -27,6 +28,7 @@ export class PostData {
     this.data = data;
     this.title = data.title;
     this.content = content;
+    this.layout = data.layout;
   }
 
   getDate(): Date {
@@ -61,6 +63,10 @@ export class PostData {
     return this.data[key];
   }
 
+  getLayout(): string {
+    return this.layout;
+  }
+
   toJSON() {
     return {
       postName: this.getPostName(),
@@ -68,6 +74,7 @@ export class PostData {
       category: this.getCategory(),
       title: this.getTitle(),
       content: this.getContent(),
+      layout: this.getLayout(),
       data: {
         ...this.data,
         date: this.getDate().toISOString(),

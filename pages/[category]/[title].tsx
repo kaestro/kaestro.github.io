@@ -1,5 +1,6 @@
 import { marked } from 'marked';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import layouts from '../../layouts/layouts';
 import { getAllPosts, getPostByTitleAndCategory, PostData } from '../../utils';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -10,6 +11,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
       title: post.getTitle(),
       category: post.getCategory(),
       fullPath: post.getFullPath(),
+      layout: post.getLayout(),
     }
   }));
 
@@ -19,24 +21,32 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
+const handleInvalidParams = () => {
+  return {
+    props: {
+      postData: {
+        title: 'Error: Invalid parameters',
+        contentHtml: 'Error: Invalid parameters',
+      },
+    },
+  };
+};
+
+const handlePostNotFound = (): { notFound: true } => {
+  return {
+    notFound: true,
+  };
+};
+
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!params || !params.title || !params.category) {
-    return {
-      props: {
-        postData: {
-          title: 'Error: Invalid parameters',
-          contentHtml: 'Error: Invalid parameters',
-        },
-      },
-    };
+    return handleInvalidParams();
   }
 
   const post: PostData | null = await getPostByTitleAndCategory(params.title as string, params.category as string);
 
   if (!post) {
-    return {
-      notFound: true,
-    };
+    return handlePostNotFound();
   }
 
   const postDataJson = post.toJSON();
@@ -50,7 +60,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   };
 };
 
-
 const Post: React.FC<{ postDataJson: PostData; title: string, category: string }> =
   ({ postDataJson, title, category }) => {
   if (!postDataJson) {
@@ -59,11 +68,26 @@ const Post: React.FC<{ postDataJson: PostData; title: string, category: string }
 
   const htmlContent = marked(postDataJson.content);
 
+  const layoutJson = postDataJson.layout;
+
+  if (!layoutJson) {
+    return <div>Layout not found</div>;
+  }
+
+  let Layout;
+
+  if (!(layoutJson in layouts)) {
+    Layout = layouts['defaultLayout'];
+  } else {
+    Layout = layouts[layoutJson as keyof typeof layouts];
+  }
+
   return (
-    <div>
-      <h1>{postDataJson.title}</h1>
-      <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
-    </div>
+    <Layout title={postDataJson.title} subtitle={postDataJson.data.subtitle}>
+      <div>
+        <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+      </div>
+    </Layout>
   );
 };
 
