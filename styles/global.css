@@ -43,7 +43,9 @@ dfn { font-style: italic; }
 /** Address variable `h1` font-size and margin within `section` and `article` contexts in Firefox 4+, Safari, and Chrome. */
 h1 { font-size: 3em; margin: 0.67em 0; }
 
-h2, h3 { font-size: 1.25em; margin: 0.83em 0; }
+h2 { font-size: 1.25em; margin: 0.83em 0; }
+
+h3 { font-size: 1.12em; margin: 1em 0; }
 
 /** Address styling not present in IE 8/9. */
 mark { background: #ff0; color: #000; }
@@ -336,3 +338,6 @@ a:hover { text-decoration: underline; }
 .site-footer-credits { color: #819198; }
 
 .main-content { box-shadow: 10px 0 15px -10px rgba(0, 0, 0, 0.5), -10px 0 15px -10px rgba(0, 0, 0, 0.5); }
+
+ul { list-style-type: disc; margin: 0; padding: 0; }
+ol { list-style-type: decimal; margin: 0; padding: 0; }

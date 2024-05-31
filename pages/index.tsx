@@ -37,7 +37,7 @@ const HomePage: React.FC<{ postsJson: PostData[], latestPostsByCategory: { categ
               <p onClick={() => handlePostClick(post.category, post.title)} className="text-blue-500 hover:underline cursor-pointer">{post.title}</p>
             </div>
           ))}
-          <p className="mt-4 text-blue-500 hover:underline cursor-pointer font-bold">see all posts({recommendedPosts.length}) in 추천 글</p>
+          <p className="mt-4 text-blue-500 hover:underline cursor-pointer font-bold" onClick={() => router.push(`/추천글`)}>see all posts({recommendedPosts.length}) in 추천 글</p>
         </div>
 
         {sortedPosts.map(({ category, posts }) => (
