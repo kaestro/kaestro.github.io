@@ -11,13 +11,13 @@ const 산문: React.FC<PageProps> = ({ title, subtitle, children }) => (
       <h1 className="project-subtitle">{subtitle}</h1>
       {/* Add your download buttons here if needed */}
     </header>
-    {/* Add your category list here */}
-    <button type="button" id="header-links-toggler">목차 열기</button>
-    <aside id="header-links" aria-label="header links"></aside>
-    <main id="content" className="main-content">
-      {children}
-      <hr />
-    </main>
+    <div className="flex justify-between">
+      {/* Add your category list here */}
+      <main id="content" className="main-content" style={{ textIndent: '0.7em' }}>
+        {children}
+        <hr />
+      </main>
+    </div>
   </div>
 );
 
