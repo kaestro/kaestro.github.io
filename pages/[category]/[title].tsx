@@ -1,5 +1,7 @@
+import { ScrollBottomButton, ScrollTopButton } from '@/components/scrollButtons';
 import { marked } from 'marked';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import HomeButton from '../../components/homeButton';
 import layouts from '../../layouts/layouts';
 import { getAllPosts, getPostByTitleAndCategory, PostData } from '../../utils';
 
@@ -86,6 +88,9 @@ const Post: React.FC<{ postDataJson: PostData; title: string, category: string }
     <Layout title={postDataJson.title} subtitle={postDataJson.data.subtitle}>
       <div>
         <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+        <div><HomeButton /></div>
+        <div><ScrollBottomButton /></div>
+        <div><ScrollTopButton /></div>
       </div>
     </Layout>
   );

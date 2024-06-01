@@ -1,0 +1,35 @@
+.home-button-container {
+  position: fixed;
+  right: 20px;
+  bottom: 60px;
+  width: 80px; /* 버튼의 너비 */
+  height: 50px; /* 버튼의 높이 */
+  background-color: #808080; /* 버튼의 배경색 */
+  border: 1px solid #ced4da; /* 버튼의 테두리 */
+  display: flex; /* 내부 요소를 가운데 정렬하기 위한 설정 */
+  justify-content: center; /* 가로 방향으로 내부 요소를 가운데 정렬 */
+  align-items: center; /* 세로 방향으로 내부 요소를 가운데 정렬 */
+  color: white;
+}
+
+.scroll-top {
+  position: fixed;
+  bottom: 120px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-bottom: 30px solid #808080;
+}
+
+.scroll-bottom {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 0;
+  height: 0;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  border-top: 30px solid #808080;
+}
