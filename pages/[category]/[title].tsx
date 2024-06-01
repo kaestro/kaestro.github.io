@@ -1,9 +1,10 @@
+import CategoryList from '@/components/CategoryList';
 import { ScrollBottomButton, ScrollTopButton } from '@/components/scrollButtons';
 import { marked } from 'marked';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import HomeButton from '../../components/homeButton';
 import layouts from '../../layouts/layouts';
-import { getAllPosts, getPostByTitleAndCategory, PostData } from '../../utils';
+import { fetchAllCategories, getAllPosts, getPostByTitleAndCategory, PostData } from '../../utils';
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
@@ -52,18 +53,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   const postDataJson = post.toJSON();
+  const categories = await fetchAllCategories();
 
   return {
     props: {
       postDataJson,
       title: params.title as string,
       category: params.category as string,
+      categories,
     }
   };
 };
 
-const Post: React.FC<{ postDataJson: PostData; title: string, category: string }> =
-  ({ postDataJson, title, category }) => {
+const Post: React.FC<{ postDataJson: PostData; title: string, category: string, categories: string[] }> =
+  ({ postDataJson, title, category, categories }) => {
   if (!postDataJson) {
     return <div>Post not found</div>;
   }
@@ -87,6 +90,7 @@ const Post: React.FC<{ postDataJson: PostData; title: string, category: string }
   return (
     <Layout title={postDataJson.title} subtitle={postDataJson.data.subtitle}>
       <div>
+        <CategoryList categories={categories} />
         <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
         <div><HomeButton /></div>
         <div><ScrollBottomButton /></div>
