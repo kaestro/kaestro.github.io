@@ -68,20 +68,20 @@ const Post: React.FC<{ postDataJson: PostData; title: string, category: string }
     return <div>Post not found</div>;
   }
 
-  const htmlContent = marked(postDataJson.content);
-
   const layoutJson = postDataJson.layout;
 
-  if (!layoutJson) {
-    return <div>Layout not found</div>;
+  let Layout;
+  try {
+    Layout = initializeLayout(layoutJson);
+  } catch (error) {
+    return <div>post에 오류가 있습니다</div>;
   }
 
-  let Layout;
-
-  if (!(layoutJson in layouts)) {
-    Layout = layouts['defaultLayout'];
-  } else {
-    Layout = layouts[layoutJson as keyof typeof layouts];
+  let htmlContent;
+  try {
+    htmlContent = initializeHtmlContent(postDataJson.content);
+  } catch (error) {
+    return <div>post에 오류가 있습니다</div>;
   }
 
   return (
@@ -95,5 +95,38 @@ const Post: React.FC<{ postDataJson: PostData; title: string, category: string }
     </Layout>
   );
 };
+
+const initializeLayout = (layoutJson: string) => {
+  if (!layoutJson) {
+    throw new Error('Layout not found');
+  }
+
+  let Layout;
+
+  if (!(layoutJson in layouts)) {
+    Layout = layouts['defaultLayout'];
+  } else {
+    Layout = layouts[layoutJson as keyof typeof layouts];
+  }
+
+  return Layout;
+}
+
+const initializeHtmlContent = (content: string) => {
+  if (!content) {
+    throw new Error('Content not found');
+  }
+
+  const renderer = new marked.Renderer();
+  renderer.link = (href, title, text) => {
+    return `<a target="_blank" href="${href}" title="${title}">${text}</a>`;
+  };
+
+  marked.setOptions({
+    renderer,
+  })
+
+  return marked(content);
+}
 
 export default Post;
