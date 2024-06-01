@@ -1,3 +1,5 @@
+import HomeButton from '@/components/homeButton';
+import { ScrollBottomButton, ScrollTopButton } from '@/components/scrollButtons';
 import DefaultLayout from '@/layouts/DefaultLayout';
 import { getAllPosts, PostData } from '@/utils';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -27,6 +29,9 @@ const CategoryPage: React.FC<CategoryPageProps> = ({ posts, category }) => {
           </Link>
         ))}
       </div>
+      <div><HomeButton /></div>
+      <div><ScrollBottomButton /></div>
+      <div><ScrollTopButton /></div>
     </Layout>
   );
 };

@@ -4,6 +4,8 @@ import React from 'react'
 import DefaultLayout from '../layouts/DefaultLayout'
 import { getAllPosts, getCategories, getLatestPostsByCategory, PostData } from '../utils'
 
+import HomeButton from '@/components/homeButton'
+import { ScrollBottomButton, ScrollTopButton } from '@/components/scrollButtons'
 import { useRouter } from 'next/router'
 
 const HomePage: React.FC<{ postsJson: PostData[], latestPostsByCategory: { category: string, posts: PostData[] }[] }> = ({ postsJson, latestPostsByCategory }) => {
@@ -53,6 +55,9 @@ const HomePage: React.FC<{ postsJson: PostData[], latestPostsByCategory: { categ
         ))}
 
       </div>
+      <div><HomeButton /></div>
+      <div><ScrollBottomButton /></div>
+      <div><ScrollTopButton /></div>
     </Layout>
   );
 }
