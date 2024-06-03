@@ -10,6 +10,7 @@ export class PostData {
   data: any;
   content: string;
   layout: string;
+  recommended: boolean;
 
   constructor(postPath: string, postName: string) {
     const fileContents = fs.readFileSync(postPath, 'utf8');
@@ -35,6 +36,7 @@ export class PostData {
     this.content = content;
     this.layout = data.layout;
     this.subtitle = data.subtitle;
+    this.recommended = data.recommended || false;
   }
 
   getDate(): Date {
@@ -77,6 +79,10 @@ export class PostData {
     return this.subtitle;
   }
 
+  getRecommended(): boolean {
+    return this.recommended;
+  }
+
   toJSON() {
     return {
       postName: this.getPostName(),
@@ -86,6 +92,7 @@ export class PostData {
       subtitle: this.getSubtitle(),
       content: this.getContent(),
       layout: this.getLayout(),
+      recommended: this.getRecommended(),
       data: {
         ...this.data,
         date: this.getDate().toISOString(),
