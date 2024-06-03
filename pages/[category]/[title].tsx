@@ -4,7 +4,7 @@ import { marked } from 'marked';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import HomeButton from '../../components/homeButton';
 import layouts from '../../layouts/layouts';
-import { fetchAllCategories, getAllPosts, getPostByTitleAndCategory, PostData } from '../../utils';
+import { fetchAllCategories, getAdjacentPosts, getAllPosts, getPostByTitleAndCategory, PostData } from '../../utils';
 
 export const getStaticPaths: GetStaticPaths = async () => {
 
@@ -55,18 +55,21 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const postDataJson = post.toJSON();
   const categories = await fetchAllCategories();
 
+  const adjacentPosts = await getAdjacentPosts(params.title as string, params.category as string);
+
   return {
     props: {
       postDataJson,
       title: params.title as string,
       category: params.category as string,
       categories,
+      adjacentPosts,
     }
   };
 };
 
-const Post: React.FC<{ postDataJson: PostData; title: string, category: string, categories: string[] }> =
-  ({ postDataJson, title, category, categories }) => {
+const Post: React.FC<{ postDataJson: PostData; title: string, category: string, categories: string[], adjacentPosts: { prev: PostData | null, next: PostData | null} }> =
+  ({ postDataJson, title, category, categories, adjacentPosts }) => {
   if (!postDataJson) {
     return <div>Post not found</div>;
   }
@@ -92,9 +95,13 @@ const Post: React.FC<{ postDataJson: PostData; title: string, category: string, 
       <div>
         <CategoryList categories={categories} />
         <div dangerouslySetInnerHTML={{ __html: htmlContent }} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+          {adjacentPosts.prev && <div><a href={`/${adjacentPosts.prev.category}/${adjacentPosts.prev.title}`}>이전 포스트: {adjacentPosts.prev.title}</a></div>}
+          {adjacentPosts.next && <div style={{ textAlign: 'right' }}><a href={`/${adjacentPosts.next.category}/${adjacentPosts.next.title}`}>다음 포스트: {adjacentPosts.next.title}</a></div>}
+        </div>
         <div><HomeButton /></div>
-        <div><ScrollBottomButton /></div>
         <div><ScrollTopButton /></div>
+        <div><ScrollBottomButton /></div>
       </div>
     </Layout>
   );
