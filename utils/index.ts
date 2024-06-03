@@ -1,6 +1,7 @@
 import fetchAllCategories from './fetchAllCategories';
 import fetchPostsForCategory from './fetchPostsForCategory';
 
+export { getAdjacentPosts } from './getAdjacentPosts';
 export { getAllPosts } from './getAllPosts';
 export { getCategories } from './getCategories';
 export { getLatestPostsByCategory } from './getLatestPostsByCategory';
