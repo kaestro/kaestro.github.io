@@ -129,8 +129,22 @@ const initializeHtmlContent = (content: string) => {
   }
 
   const renderer = new marked.Renderer();
+
+  // Override function for headers
+  renderer.heading = (text, level) => {
+    const escapedText = text.toLowerCase().replace(/[\s]+/g, '-');
+    return `
+      <h${level} id="${escapedText}">
+        <a name="${escapedText}" class="anchor" href="#${escapedText}">
+          <span class="header-link"></span>
+        </a>
+        ${text}
+      </h${level}>`;
+  };
+
+  // Override function for links
   renderer.link = (href, title, text) => {
-    return `<a target="_blank" href="${href}" title="${title}">${text}</a>`;
+    return `<a target="_self" href="${href}" title="${title}">${text}</a>`;
   };
 
   marked.setOptions({
