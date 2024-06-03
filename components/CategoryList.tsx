@@ -27,8 +27,24 @@ const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
       }
     };
 
+    const handleResize = () => {
+      if (categoryListRef.current) {
+        if (window.innerWidth <= 1600) {
+          categoryListRef.current.style.display = 'none';
+        } else {
+          categoryListRef.current.style.display = 'block';
+        }
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+    // 초기 로드 시에도 resize 이벤트를 처리
+    handleResize();
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
   return (

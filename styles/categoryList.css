@@ -3,3 +3,9 @@
   top: 300;
   left: 1.5em;
 }
+
+@media screen and (max-width: 100px) {
+  #category-list {
+    display: none;
+  }
+}
