@@ -6,6 +6,7 @@ type CategoryListProps = {
 };
 
 const CategoryList: React.FC<CategoryListProps> = ({ categories }) => {
+
   const filteredCategories = categories.filter(
     category => category !== 'Legacy' && category !== 'Pre-Renewal' && category !== 'ProtoType'
   );

@@ -4,6 +4,7 @@ import React from 'react'
 import DefaultLayout from '../layouts/DefaultLayout'
 import { getAllPosts, getCategories, getLatestPostsByCategory, PostData } from '../utils'
 
+import CategoryList from '@/components/CategoryList'
 import HomeButton from '@/components/homeButton'
 import { ScrollBottomButton, ScrollTopButton } from '@/components/scrollButtons'
 import { useRouter } from 'next/router'
@@ -39,7 +40,7 @@ const HomePage: React.FC<{ postsJson: PostData[], latestPostsByCategory: { categ
               <p onClick={() => handlePostClick(post.category, post.title)} className="text-blue-500 hover:underline cursor-pointer">{post.title}</p>
             </div>
           ))}
-          <p className="mt-4 text-blue-500 hover:underline cursor-pointer font-bold" onClick={() => router.push(`/추천글`)}>see all posts({recommendedPosts.length}) in 추천 글</p>
+          <p className="mt-4 text-blue-500 hover:underline cursor-pointer font-bold" onClick={() => router.push(`/recommended`)}>see all posts({recommendedPosts.length}) in 추천 글</p>
         </div>
 
         {sortedPosts.map(({ category, posts }) => (
@@ -55,6 +56,7 @@ const HomePage: React.FC<{ postsJson: PostData[], latestPostsByCategory: { categ
         ))}
 
       </div>
+      <div><CategoryList categories={ customOrder } /></div>
       <div><HomeButton /></div>
       <div><ScrollBottomButton /></div>
       <div><ScrollTopButton /></div>
