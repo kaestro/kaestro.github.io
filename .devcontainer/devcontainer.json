@@ -1,0 +1,6 @@
+{
+    "name": "Your Project Name",
+    "image": "node:lts",
+    "forwardPorts": [3000],
+    "postCreateCommand": "npm install"
+}
