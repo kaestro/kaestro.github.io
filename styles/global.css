@@ -350,3 +350,7 @@ ul, ol {
 li {
   margin-bottom: 5px; /* 목록 항목 간의 간격 */
 }
+
+html {
+  scroll-padding-top: 100px; /* adjust as needed */
+}
