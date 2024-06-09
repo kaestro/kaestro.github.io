@@ -6,9 +6,9 @@ github pages를 서비스를 통해 운영중인 [개인 블로그](https://kaes
 
 ## 최신 글 목록
 <!-- BLOG-POST-LIST:START -->
+- [스파 6 캐릭터 선택 가이드](https://kaestro.github.io/%EA%B2%8C%EC%9E%84%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/06/10/%EC%8A%A4%ED%8C%8C6-%EC%BA%90%EB%A6%AD%ED%84%B0-%EC%84%A0%ED%83%9D-%EA%B0%80%EC%9D%B4%EB%93%9C.html)
 - [구직을 마무리하며](https://kaestro.github.io/%EC%8B%A0%EB%B3%80%EC%9E%A1%EA%B8%B0/2024/06/06/%EA%B5%AC%EC%A7%81%EC%9D%84-%EB%A7%88%EB%AC%B4%EB%A6%AC%ED%95%98%EB%A9%B0.html)
 - [셋업 연습, 하지 마세요 - 스파로 격투게임을 입문하며](https://kaestro.github.io/%EA%B2%8C%EC%9E%84%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/05/31/%EC%85%8B%EC%97%85-%EC%97%B0%EC%8A%B5,-%ED%95%98%EC%A7%80-%EB%A7%88%EC%84%B8%EC%9A%94.html)
 - [children, hook, useEffect, useState in React](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/05/31/useEffect,-useState,-children.html)
 - [전술을 수립하고 룸매치를 통해 최종 점검하자](https://kaestro.github.io/%EA%B2%8C%EC%9E%84%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/05/30/%EC%9A%B0%EB%A7%88%EB%AC%B4%EC%8A%A4%EB%A9%94-%EA%B0%9C%EB%A1%A0-3.html)
-- [Page, Layout, Template in next.js](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%B4%EC%95%BC%EA%B8%B0/2024/05/30/page,-layout,-template.html)
 <!-- BLOG-POST-LIST:END -->
