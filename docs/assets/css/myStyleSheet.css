@@ -6,13 +6,13 @@
 #header-links-toggler {
     position: fixed;
     left: 50%;
-    top: 400px;
+    top: 600px;
     margin-left: 530px;
     background-color: #008000;
     color: white;
     border: none;
     width: 300px;
-    height: 40px; 
+    height: 40px;
     font-size: 20px;
     border-radius: 25px;
 }
@@ -34,7 +34,7 @@
   display: none;
   position: fixed;
   left: 0;
-  top: 370px;
+  top: 570px;
   bottom: 0;
   width: 200px;
   overflow: auto;
@@ -63,7 +63,7 @@
 }
 
 .main-content {
-  box-shadow: 
+  box-shadow:
     10px 0 15px -5px rgba(128, 128, 128, 0.2),  /* Right shadow */
     -10px 0 15px -5px rgba(128, 128, 128, 0.2); /* Left shadow */
 }
@@ -87,7 +87,7 @@
   display: inline-block;
   padding: 10px 20px;
   color: green; /* 더 붉은 느낌의 주황색 */
-  background: white; /* 왼쪽에서 오른쪽으로 그라데이션 */        
+  background: white; /* 왼쪽에서 오른쪽으로 그라데이션 */
   border: 1px solid white; /* 버튼 테두리 */
   border-radius: 5px; /* 버튼 모서리 둥글게 */
   text-decoration: none; /* 밑줄 제거 */
@@ -183,7 +183,7 @@ a:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(ul a):not(ol a) {
 #recent-posts {
   position: fixed;
   left: 52%;
-  top: 400px;
+  top: 650px;
   margin-left: 510px;
   width: 300px;
   font-size: 80%;
