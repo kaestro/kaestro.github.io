@@ -1,0 +1,99 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="preload" href="/_next/static/css/9d2484721dfb0fa3.css" as="style"/><link rel="stylesheet" href="/_next/static/css/9d2484721dfb0fa3.css" data-n-g=""/><link rel="preload" href="/_next/static/css/d837742cb9035689.css" as="style"/><link rel="stylesheet" href="/_next/static/css/d837742cb9035689.css" data-n-p=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js"></script><script src="/_next/static/chunks/webpack-35b92941fc8726f9.js" defer=""></script><script src="/_next/static/chunks/framework-381da54bc5986544.js" defer=""></script><script src="/_next/static/chunks/main-d08cdb1c11d062c5.js" defer=""></script><script src="/_next/static/chunks/pages/_app-e6411096b10c6b62.js" defer=""></script><script src="/_next/static/chunks/441-45d334119e93ce4f.js" defer=""></script><script src="/_next/static/chunks/pages/%5Bcategory%5D/%5Btitle%5D-54be7db8139f8b64.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_buildManifest.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div><header class="page-header"><h1 class="project-name">2월의 코드 복기</h1><h1 class="project-subtitle">알고리즘, Go 문법</h1></header><main id="content" class="main-content"><div><aside id="category-list" aria-label="Category List"><h2>Categories</h2><ul><li><a href="/ETC">ETC</a></li><li><a href="/개발이야기">개발이야기</a></li><li><a href="/개발일지">개발일지</a></li><li><a href="/디자인패턴">디자인패턴</a></li><li><a href="/Algorithm">Algorithm</a></li><li><a href="/서평">서평</a></li><li><a href="/WeeklyPosts">WeeklyPosts</a></li><li><a href="/신변잡기">신변잡기</a></li><li><a href="/게임이야기">게임이야기</a></li></ul></aside><div>
+      <h2 id="<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/886b271b3be97d6af2af270d2754ebb8127f4d88"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/886b271b3be97d6af2af270d2754ebb8127f4d88</a>">
+        <a name="<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/886b271b3be97d6af2af270d2754ebb8127f4d88"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/886b271b3be97d6af2af270d2754ebb8127f4d88</a>" class="anchor" href="#<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/886b271b3be97d6af2af270d2754ebb8127f4d88"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/886b271b3be97d6af2af270d2754ebb8127f4d88</a>">
+          <span class="header-link"></span>
+        </a>
+        <a target="_self" href="https://github.com/kaestro/algorithms_v3/commit/886b271b3be97d6af2af270d2754ebb8127f4d88" title="undefined">https://github.com/kaestro/algorithms_v3/commit/886b271b3be97d6af2af270d2754ebb8127f4d88</a>
+      </h2><p>binary search tree가 있을 때, 이를 펴는 방법</p>
+<ul>
+<li>순회하고, 붙이고, 올려보내라</li>
+</ul>
+<pre><code class="language-python">def inorder_traversal(node):
+  if node is None:
+    return
+
+  inorder_traversal(node.left)
+  self.current_node.right = node.val
+  self.current_node = self.current_node.right
+  inorder_traversal(node.right)
+</code></pre>
+<hr>
+
+      <h2 id="<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/449fc65f0fbc29330042bb3b0153b16b0049a167"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/449fc65f0fbc29330042bb3b0153b16b0049a167</a>">
+        <a name="<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/449fc65f0fbc29330042bb3b0153b16b0049a167"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/449fc65f0fbc29330042bb3b0153b16b0049a167</a>" class="anchor" href="#<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/449fc65f0fbc29330042bb3b0153b16b0049a167"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/449fc65f0fbc29330042bb3b0153b16b0049a167</a>">
+          <span class="header-link"></span>
+        </a>
+        <a target="_self" href="https://github.com/kaestro/algorithms_v3/commit/449fc65f0fbc29330042bb3b0153b16b0049a167" title="undefined">https://github.com/kaestro/algorithms_v3/commit/449fc65f0fbc29330042bb3b0153b16b0049a167</a>
+      </h2><p>string을 element로 갖는 array를 입력받았을 때, 모든 element에 공통으로 들어간 character의 리스트를 구하는 문제. 중복을 허용하여 동일 character가 정답에 2번 이상 등장할 수도 있다.</p>
+<p>직접 count하는 방법, python dictionary의 &amp; 연산자를 이용하는 방법, set을 이용해서 정의역 자체를 줄인 뒤에 갯수를 count하고 객체는 최후에 만든다.</p>
+<ul>
+<li>연산을 하기 전에 대상을 줄인다.</li>
+<li>객체를 만드는 것은 최후에, 꼭 필요한 순간에만 한다.</li>
+</ul>
+<hr>
+
+      <h2 id="<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/90c7db2c8ff37d1ddf24b0a187fbe85de7ddd380"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/90c7db2c8ff37d1ddf24b0a187fbe85de7ddd380</a>">
+        <a name="<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/90c7db2c8ff37d1ddf24b0a187fbe85de7ddd380"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/90c7db2c8ff37d1ddf24b0a187fbe85de7ddd380</a>" class="anchor" href="#<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/90c7db2c8ff37d1ddf24b0a187fbe85de7ddd380"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/90c7db2c8ff37d1ddf24b0a187fbe85de7ddd380</a>">
+          <span class="header-link"></span>
+        </a>
+        <a target="_self" href="https://github.com/kaestro/algorithms_v3/commit/90c7db2c8ff37d1ddf24b0a187fbe85de7ddd380" title="undefined">https://github.com/kaestro/algorithms_v3/commit/90c7db2c8ff37d1ddf24b0a187fbe85de7ddd380</a>
+      </h2><p>세 명의 아이에게 줄 사탕의 갯수와 한 아이에게 줄 수 있는 최대 사탕의 갯수가 주어졌을 때, 이를 나눠 줄 수 있는 경우의 수를 구하는 문제.</p>
+<ul>
+<li>최대 값에 제한이 있는 문제를 풀 때, 이를 합을 통해서 경우의 수를 만들지 않고 뺄셈을 통한 경우의 수 생성이 유리할 수 있다.</li>
+</ul>
+<hr>
+
+      <h2 id="<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/77ec890aefcc049d6cc8f0d8437909e4b6bf72db"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/77ec890aefcc049d6cc8f0d8437909e4b6bf72db</a>">
+        <a name="<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/77ec890aefcc049d6cc8f0d8437909e4b6bf72db"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/77ec890aefcc049d6cc8f0d8437909e4b6bf72db</a>" class="anchor" href="#<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/77ec890aefcc049d6cc8f0d8437909e4b6bf72db"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/77ec890aefcc049d6cc8f0d8437909e4b6bf72db</a>">
+          <span class="header-link"></span>
+        </a>
+        <a target="_self" href="https://github.com/kaestro/algorithms_v3/commit/77ec890aefcc049d6cc8f0d8437909e4b6bf72db" title="undefined">https://github.com/kaestro/algorithms_v3/commit/77ec890aefcc049d6cc8f0d8437909e4b6bf72db</a>
+      </h2><ul>
+<li>값이 존재하는지 계속해서 확인할 경우, hashtable을 사용하자.</li>
+<li>python의 set은 hashtable로 구현되어 있다.</li>
+</ul>
+<hr>
+
+      <h2 id="<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/ea23a451316766fde8bfce5213a8e9e23781da50"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/ea23a451316766fde8bfce5213a8e9e23781da50</a>">
+        <a name="<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/ea23a451316766fde8bfce5213a8e9e23781da50"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/ea23a451316766fde8bfce5213a8e9e23781da50</a>" class="anchor" href="#<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/ea23a451316766fde8bfce5213a8e9e23781da50"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/ea23a451316766fde8bfce5213a8e9e23781da50</a>">
+          <span class="header-link"></span>
+        </a>
+        <a target="_self" href="https://github.com/kaestro/algorithms_v3/commit/ea23a451316766fde8bfce5213a8e9e23781da50" title="undefined">https://github.com/kaestro/algorithms_v3/commit/ea23a451316766fde8bfce5213a8e9e23781da50</a>
+      </h2><ul>
+<li>sliding window</li>
+</ul>
+<hr>
+<p>Awesome!</p>
+
+      <h2 id="<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/471f6fb0b0c8cba6890b13ca1fbce871dd05eada"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/471f6fb0b0c8cba6890b13ca1fbce871dd05eada</a>">
+        <a name="<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/471f6fb0b0c8cba6890b13ca1fbce871dd05eada"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/471f6fb0b0c8cba6890b13ca1fbce871dd05eada</a>" class="anchor" href="#<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/471f6fb0b0c8cba6890b13ca1fbce871dd05eada"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/471f6fb0b0c8cba6890b13ca1fbce871dd05eada</a>">
+          <span class="header-link"></span>
+        </a>
+        <a target="_self" href="https://github.com/kaestro/algorithms_v3/commit/471f6fb0b0c8cba6890b13ca1fbce871dd05eada" title="undefined">https://github.com/kaestro/algorithms_v3/commit/471f6fb0b0c8cba6890b13ca1fbce871dd05eada</a>
+      </h2><p>: list의 partial sum = 0 되는 구간을 삭제한 list를 구하는 문제.</p>
+<ul>
+<li>accumulative sum이 key이고, 해당 sum이 나온 마지막 node가 value인 hashtable을 만든다.</li>
+<li>다시 accumulative sum을 순회하면서, 해당 sum이 나온 마지막 노드가 현재 노드보다 뒤에 있으면, 그 사이의 구간은 0이 된다.</li>
+<li>currentNode.next = savedNode.next 로 중간 삭제</li>
+</ul>
+<hr>
+
+      <h2 id="<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/5309222eb2af9bb8cc830a05ebe554f870f2ffb3"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/5309222eb2af9bb8cc830a05ebe554f870f2ffb3</a>">
+        <a name="<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/5309222eb2af9bb8cc830a05ebe554f870f2ffb3"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/5309222eb2af9bb8cc830a05ebe554f870f2ffb3</a>" class="anchor" href="#<a-target="_self"-href="https://github.com/kaestro/algorithms_v3/commit/5309222eb2af9bb8cc830a05ebe554f870f2ffb3"-title="undefined">https://github.com/kaestro/algorithms_v3/commit/5309222eb2af9bb8cc830a05ebe554f870f2ffb3</a>">
+          <span class="header-link"></span>
+        </a>
+        <a target="_self" href="https://github.com/kaestro/algorithms_v3/commit/5309222eb2af9bb8cc830a05ebe554f870f2ffb3" title="undefined">https://github.com/kaestro/algorithms_v3/commit/5309222eb2af9bb8cc830a05ebe554f870f2ffb3</a>
+      </h2><ul>
+<li>backtracking</li>
+</ul>
+<hr>
+
+      <h2 id="<a-target="_self"-href="https://github.com/kaestro/weekly-reviews/blob/main/february/code%20-%20week%204th.md"-title="undefined">https://github.com/kaestro/weekly-reviews/blob/main/february/code%20-%20week%204th.md</a>">
+        <a name="<a-target="_self"-href="https://github.com/kaestro/weekly-reviews/blob/main/february/code%20-%20week%204th.md"-title="undefined">https://github.com/kaestro/weekly-reviews/blob/main/february/code%20-%20week%204th.md</a>" class="anchor" href="#<a-target="_self"-href="https://github.com/kaestro/weekly-reviews/blob/main/february/code%20-%20week%204th.md"-title="undefined">https://github.com/kaestro/weekly-reviews/blob/main/february/code%20-%20week%204th.md</a>">
+          <span class="header-link"></span>
+        </a>
+        <a target="_self" href="https://github.com/kaestro/weekly-reviews/blob/main/February/Code%20-%20Week%204th.md" title="undefined">https://github.com/kaestro/weekly-reviews/blob/main/February/Code%20-%20Week%204th.md</a>
+      </h2><ul>
+<li>Go와 관련한 전반적인 문법사항</li>
+</ul>
+</div><div style="display:flex;flex-direction:column;gap:1em"><div><a href="/개발이야기/좋은 테스트에 대한 고민">이전 포스트: <!-- -->좋은 테스트에 대한 고민</a></div><div style="text-align:right"><a href="/개발이야기/시스템 설계 방법">다음 포스트: <!-- -->시스템 설계 방법</a></div></div><div><button id="go-home" class="home-button-container">Home</button></div><div><button type="button" id="go-top" class="scroll-top" aria-label="top"></button></div><div><button type="button" id="go-bottom" class="scroll-bottom" aria-label="bottom"></button></div></div><hr/></main></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"postDataJson":{"postName":"2024-03-08-February Code Review copy","fullPath":"/home/runner/work/kaestro.github.io/kaestro.github.io/_posts/개발/개발이야기/2024-03-08-February Code Review copy.md","category":"개발이야기","title":"2월의 코드 복기","subtitle":"알고리즘, Go 문법","content":"\n## \u003chttps://github.com/kaestro/algorithms_v3/commit/886b271b3be97d6af2af270d2754ebb8127f4d88\u003e\n\nbinary search tree가 있을 때, 이를 펴는 방법\n\n* 순회하고, 붙이고, 올려보내라\n\n```python\ndef inorder_traversal(node):\n  if node is None:\n    return\n\n  inorder_traversal(node.left)\n  self.current_node.right = node.val\n  self.current_node = self.current_node.right\n  inorder_traversal(node.right)\n```\n\n---\n\n## \u003chttps://github.com/kaestro/algorithms_v3/commit/449fc65f0fbc29330042bb3b0153b16b0049a167\u003e\n\nstring을 element로 갖는 array를 입력받았을 때, 모든 element에 공통으로 들어간 character의 리스트를 구하는 문제. 중복을 허용하여 동일 character가 정답에 2번 이상 등장할 수도 있다.\n\n직접 count하는 방법, python dictionary의 \u0026 연산자를 이용하는 방법, set을 이용해서 정의역 자체를 줄인 뒤에 갯수를 count하고 객체는 최후에 만든다.\n\n* 연산을 하기 전에 대상을 줄인다.\n* 객체를 만드는 것은 최후에, 꼭 필요한 순간에만 한다.\n\n---\n\n## \u003chttps://github.com/kaestro/algorithms_v3/commit/90c7db2c8ff37d1ddf24b0a187fbe85de7ddd380\u003e\n\n세 명의 아이에게 줄 사탕의 갯수와 한 아이에게 줄 수 있는 최대 사탕의 갯수가 주어졌을 때, 이를 나눠 줄 수 있는 경우의 수를 구하는 문제.\n\n* 최대 값에 제한이 있는 문제를 풀 때, 이를 합을 통해서 경우의 수를 만들지 않고 뺄셈을 통한 경우의 수 생성이 유리할 수 있다.\n\n---\n\n## \u003chttps://github.com/kaestro/algorithms_v3/commit/77ec890aefcc049d6cc8f0d8437909e4b6bf72db\u003e\n\n* 값이 존재하는지 계속해서 확인할 경우, hashtable을 사용하자.\n* python의 set은 hashtable로 구현되어 있다.\n\n---\n\n## \u003chttps://github.com/kaestro/algorithms_v3/commit/ea23a451316766fde8bfce5213a8e9e23781da50\u003e\n\n* sliding window\n\n---\n\nAwesome!\n\n## \u003chttps://github.com/kaestro/algorithms_v3/commit/471f6fb0b0c8cba6890b13ca1fbce871dd05eada\u003e\n\n: list의 partial sum = 0 되는 구간을 삭제한 list를 구하는 문제.\n\n* accumulative sum이 key이고, 해당 sum이 나온 마지막 node가 value인 hashtable을 만든다.\n* 다시 accumulative sum을 순회하면서, 해당 sum이 나온 마지막 노드가 현재 노드보다 뒤에 있으면, 그 사이의 구간은 0이 된다.\n* currentNode.next = savedNode.next 로 중간 삭제\n\n---\n\n## \u003chttps://github.com/kaestro/algorithms_v3/commit/5309222eb2af9bb8cc830a05ebe554f870f2ffb3\u003e\n\n* backtracking\n\n---\n\n## \u003chttps://github.com/kaestro/weekly-reviews/blob/main/February/Code%20-%20Week%204th.md\u003e\n\n* Go와 관련한 전반적인 문법사항\n","layout":"default","recommended":false,"data":{"layout":"default","classes":"wide","title":"2월의 코드 복기","subtitle":"알고리즘, Go 문법","date":"2024-03-08T00:00:00.000Z","categories":"개발이야기"}},"title":"2월의 코드 복기","category":"개발이야기","categories":["ETC","개발이야기","개발일지","디자인패턴","Algorithm","서평","WeeklyPosts","신변잡기","게임이야기"],"adjacentPosts":{"prev":{"title":"좋은 테스트에 대한 고민","category":"개발이야기"},"next":{"title":"시스템 설계 방법","category":"개발이야기"}}},"__N_SSG":true},"page":"/[category]/[title]","query":{"category":"개발이야기","title":"2월의 코드 복기"},"buildId":"x7KlanTMcx7BnykrAqYzT","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="preload" href="/_next/static/css/9d2484721dfb0fa3.css" as="style"/><link rel="stylesheet" href="/_next/static/css/9d2484721dfb0fa3.css" data-n-g=""/><link rel="preload" href="/_next/static/css/d837742cb9035689.css" as="style"/><link rel="stylesheet" href="/_next/static/css/d837742cb9035689.css" data-n-p=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js"></script><script src="/_next/static/chunks/webpack-35b92941fc8726f9.js" defer=""></script><script src="/_next/static/chunks/framework-381da54bc5986544.js" defer=""></script><script src="/_next/static/chunks/main-d08cdb1c11d062c5.js" defer=""></script><script src="/_next/static/chunks/pages/_app-e6411096b10c6b62.js" defer=""></script><script src="/_next/static/chunks/441-45d334119e93ce4f.js" defer=""></script><script src="/_next/static/chunks/pages/%5Bcategory%5D/%5Btitle%5D-54be7db8139f8b64.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_buildManifest.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div><header class="page-header"><h1 class="project-name">5월 1주차 알고리즘 문제</h1><h1 class="project-subtitle">두 수가 교차하는 경우의 수를 다루는 방법</h1></header><main id="content" class="main-content"><div><aside id="category-list" aria-label="Category List"><h2>Categories</h2><ul><li><a href="/ETC">ETC</a></li><li><a href="/개발이야기">개발이야기</a></li><li><a href="/개발일지">개발일지</a></li><li><a href="/디자인패턴">디자인패턴</a></li><li><a href="/Algorithm">Algorithm</a></li><li><a href="/서평">서평</a></li><li><a href="/WeeklyPosts">WeeklyPosts</a></li><li><a href="/신변잡기">신변잡기</a></li><li><a href="/게임이야기">게임이야기</a></li></ul></aside><div>
+      <h3 id="목차">
+        <a name="목차" class="anchor" href="#목차">
+          <span class="header-link"></span>
+        </a>
+        목차
+      </h3><ul>
+<li><a target="_self" href="#두-수가-교차하는-경우의-수를-다루는-방법" title="null">두 수가 교차하는 경우의 수를 다루는 방법</a></li>
+</ul>
+<hr>
+
+      <h2 id="두-수가-교차하는-경우의-수를-다루는-방법">
+        <a name="두-수가-교차하는-경우의-수를-다루는-방법" class="anchor" href="#두-수가-교차하는-경우의-수를-다루는-방법">
+          <span class="header-link"></span>
+        </a>
+        두 수가 교차하는 경우의 수를 다루는 방법
+      </h2><ul>
+<li><p><a target="_self" href="https://leetcode.com/problems/semi-ordered-permutation/description/" title="null">문제 링크</a></p>
+</li>
+<li><p><a target="_self" href="https://github.com/kaestro/algorithms_v3/commit/eb87856177f2836c0da339976e9473f63910c9dc" title="null">내 풀이</a></p>
+</li>
+<li><p>문제 요약</p>
+<ul>
+<li>Semi-Ordered Permutation이란, 처음이 가장 작은 수이고 가장 마지막이 가장 큰 수이며, 중간에는 어떤 수든 나타날 수 있는 순열이다.</li>
+<li>순열이 주어졌을때 인접한 두 수를 swap하여 Semi-Ordered Permutation을 만드는 최소 교환 횟수를 구하라.</li>
+</ul>
+</li>
+<li><p>풀이 요약</p>
+<ul>
+<li>가장 작은 수가 1에 도착하는 횟수 + 가장 큰 수가 n에 도착하는 횟수를 구하면 된다.</li>
+<li><strong>이 때 두 수가 교차하는 경우 1을 빼주면 된다.</strong></li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">def semiOrderedPermutation(self, A: List[int]) -&gt; int:
+    n = len(A)
+    i, j = A.index(1), A.index(n)
+    return i + n - 1 - j - (i &gt; j)
+</code></pre>
+</div><div style="display:flex;flex-direction:column;gap:1em"><div><a href="/Algorithm/4월 5주차 알고리즘 문제">이전 포스트: <!-- -->4월 5주차 알고리즘 문제</a></div><div style="text-align:right"><a href="/Algorithm/5월 2주차 알고리즘 문제">다음 포스트: <!-- -->5월 2주차 알고리즘 문제</a></div></div><div><button id="go-home" class="home-button-container">Home</button></div><div><button type="button" id="go-top" class="scroll-top" aria-label="top"></button></div><div><button type="button" id="go-bottom" class="scroll-bottom" aria-label="bottom"></button></div></div><hr/></main></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"postDataJson":{"postName":"2024-05-05-5월 1주차 알고리즘 문제","fullPath":"/home/runner/work/kaestro.github.io/kaestro.github.io/_posts/개발/Algorithm/Weekly Algorithms/2024-05-05-5월 1주차 알고리즘 문제.md","category":"Algorithm","title":"5월 1주차 알고리즘 문제","subtitle":"두 수가 교차하는 경우의 수를 다루는 방법","content":"\n### 목차\n\n- [두 수가 교차하는 경우의 수를 다루는 방법](#두-수가-교차하는-경우의-수를-다루는-방법)\n\n---\n\n## 두 수가 교차하는 경우의 수를 다루는 방법\n\n- [문제 링크](https://leetcode.com/problems/semi-ordered-permutation/description/)\n- [내 풀이](https://github.com/kaestro/algorithms_v3/commit/eb87856177f2836c0da339976e9473f63910c9dc)\n\n- 문제 요약\n  - Semi-Ordered Permutation이란, 처음이 가장 작은 수이고 가장 마지막이 가장 큰 수이며, 중간에는 어떤 수든 나타날 수 있는 순열이다.\n  - 순열이 주어졌을때 인접한 두 수를 swap하여 Semi-Ordered Permutation을 만드는 최소 교환 횟수를 구하라.\n- 풀이 요약\n  - 가장 작은 수가 1에 도착하는 횟수 + 가장 큰 수가 n에 도착하는 횟수를 구하면 된다.\n  - **이 때 두 수가 교차하는 경우 1을 빼주면 된다.**\n\n```python\ndef semiOrderedPermutation(self, A: List[int]) -\u003e int:\n    n = len(A)\n    i, j = A.index(1), A.index(n)\n    return i + n - 1 - j - (i \u003e j)\n```\n","layout":"mathjax","recommended":false,"data":{"layout":"mathjax","classes":"wide","title":"5월 1주차 알고리즘 문제","subtitle":"두 수가 교차하는 경우의 수를 다루는 방법","date":"2024-05-05T00:00:00.000Z","categories":"Algorithm"}},"title":"5월 1주차 알고리즘 문제","category":"Algorithm","categories":["ETC","개발이야기","개발일지","디자인패턴","Algorithm","서평","WeeklyPosts","신변잡기","게임이야기"],"adjacentPosts":{"prev":{"title":"4월 5주차 알고리즘 문제","category":"Algorithm"},"next":{"title":"5월 2주차 알고리즘 문제","category":"Algorithm"}}},"__N_SSG":true},"page":"/[category]/[title]","query":{"category":"Algorithm","title":"5월 1주차 알고리즘 문제"},"buildId":"x7KlanTMcx7BnykrAqYzT","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

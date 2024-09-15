@@ -1,0 +1,266 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="preload" href="/_next/static/css/9d2484721dfb0fa3.css" as="style"/><link rel="stylesheet" href="/_next/static/css/9d2484721dfb0fa3.css" data-n-g=""/><link rel="preload" href="/_next/static/css/d837742cb9035689.css" as="style"/><link rel="stylesheet" href="/_next/static/css/d837742cb9035689.css" data-n-p=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js"></script><script src="/_next/static/chunks/webpack-35b92941fc8726f9.js" defer=""></script><script src="/_next/static/chunks/framework-381da54bc5986544.js" defer=""></script><script src="/_next/static/chunks/main-d08cdb1c11d062c5.js" defer=""></script><script src="/_next/static/chunks/pages/_app-e6411096b10c6b62.js" defer=""></script><script src="/_next/static/chunks/441-45d334119e93ce4f.js" defer=""></script><script src="/_next/static/chunks/pages/%5Bcategory%5D/%5Btitle%5D-54be7db8139f8b64.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_buildManifest.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div><header class="page-header"><h1 class="project-name">커맨드 패턴</h1><h1 class="project-subtitle">나는 IoT를 지배할 수 있다!</h1></header><main id="content" class="main-content"><div><aside id="category-list" aria-label="Category List"><h2>Categories</h2><ul><li><a href="/ETC">ETC</a></li><li><a href="/개발이야기">개발이야기</a></li><li><a href="/개발일지">개발일지</a></li><li><a href="/디자인패턴">디자인패턴</a></li><li><a href="/Algorithm">Algorithm</a></li><li><a href="/서평">서평</a></li><li><a href="/WeeklyPosts">WeeklyPosts</a></li><li><a href="/신변잡기">신변잡기</a></li><li><a href="/게임이야기">게임이야기</a></li></ul></aside><div>
+      <h2 id="목차">
+        <a name="목차" class="anchor" href="#목차">
+          <span class="header-link"></span>
+        </a>
+        목차
+      </h2><ol>
+<li>개요</li>
+<li>요약</li>
+<li>문제상황</li>
+<li>커맨드 패턴을 통한 해결</li>
+<li>매크로 커맨드 패턴 사용하기</li>
+<li>NoCommand 패턴 사용하기</li>
+<li>복잡한 기능 추가하기</li>
+<li>결론</li>
+</ol>
+<hr>
+
+      <h2 id="개요">
+        <a name="개요" class="anchor" href="#개요">
+          <span class="header-link"></span>
+        </a>
+        개요
+      </h2><p>본 글은 <strong>head first design patterns</strong> 책을 읽고 정리한 글입니다.</p>
+<p><strong>커맨드 패턴</strong>은 <strong>메소드 호출</strong>을 객체로 <strong>캡슐화</strong>하는 패턴입니다. 코드를 호출한 객체는 호출되는 객체가 일을 어떻게 처리하는지 알 필요가 없습니다.</p>
+<p>이를 통해 호출하는 객체와 호출되는 객체를 <strong>느슨하게 결합</strong>시키고, <strong>재사용성</strong>을 높일 수 있습니다. 이제 작업을 요청하는 쪽과 작업을 수행하는 쪽을 <strong>분리</strong>할 수 있습니다.</p>
+<p>head first design은 이에 대한 예시로 <strong>IoT 리모컨</strong>을 예시로 사용합니다. IoT 리모컨은 다양한 기기를 제어할 수 있는 리모컨입니다. TV, 에어컨, 전구, 창문 등 다양한 기기를 제어할 수 있어야 합니다.</p>
+<p>다양한 기기를 제어할 때 각각의 기기를 제어하는 코드를 직접 사용하는 것은 비효율적이고, 유연성이 떨어집니다. 리모콘은 기기들에 명령만 내릴 뿐 어떻게 처리하는지 모르는 것이 좋습니다.</p>
+<p>이런 불편을 해소하기 위한 방법 중 하나가 <strong>커맨드 패턴</strong>입니다. 커맨드 패턴을 사용하면 리모컨은 기기들에 명령만 내리고, 기기들은 명령을 받아서 처리하는 방법을 알고 있습니다. 리모컨은 기기들에 명령만 내리면 되기 때문에 유연성이 높아집니다.</p>
+<hr>
+
+      <h2 id="요약">
+        <a name="요약" class="anchor" href="#요약">
+          <span class="header-link"></span>
+        </a>
+        요약
+      </h2><ol>
+<li>커맨드 패턴은 <strong>메소드 호출을 객체로 캡슐화</strong>하는 패턴입니다.</li>
+<li>코드를 호출한 객체는 호출되는 객체가 일을 어떻게 처리하는지 알 필요가 없습니다.</li>
+<li>이를 통해 호출하는 객체와 호출되는 객체를 <strong>느슨하게 결합</strong>시키고, <strong>재사용성</strong>을 높일 수 있습니다.</li>
+<li>커맨드 패턴은 <strong>커맨드 객체</strong>, <strong>리시버 객체</strong>, <strong>인보커 객체</strong>, <strong>클라이언트 객체</strong>로 구성됩니다.</li>
+<li>커맨드 객체는 <strong>실행 메소드</strong>를 가지고 있습니다. 이 메소드는 리시버 객체의 <strong>작업을 수행</strong>합니다.</li>
+<li>리시버 객체는 <strong>실제 작업을 수행</strong>하는 객체입니다.</li>
+<li>인보커 객체는 <strong>커맨드 객체를 저장</strong>하고 <strong>실행 메소드를 호출</strong>합니다.</li>
+<li>클라이언트 객체는 <strong>커맨드 객체를 생성</strong>하고, <strong>인보커 객체에 전달</strong>합니다.</li>
+<li><strong>매크로 커맨드 패턴</strong>을 통해 <strong>여러 개의 커맨드</strong>를 묶어서 실행할 수 있습니다.</li>
+<li>커맨드 객체 - 키기/끄기, 리시버 객체 - TV/에어컨/전구/창문, 인보커 객체 - 리모컨, 클라이언트 객체 - 사용자</li>
+<li><strong>큐, 로그, 스택</strong> 등과 결합해 <strong>취소, 다시 실행</strong>과 같은 복잡한 기능을 추가할 수 있습니다.</li>
+</ol>
+<hr>
+
+      <h2 id="문제상황">
+        <a name="문제상황" class="anchor" href="#문제상황">
+          <span class="header-link"></span>
+        </a>
+        문제상황
+      </h2><p>IoT 리모컨을 만들어 달라는 요청과 함께 리모컨에서 다룰 수 있어야 하는 다양한 기기들이 주어졌습니다. 이 기기들은 다음과 같습니다.</p>
+<pre><code class="language-java">public class TV {
+    public void on() {
+        System.out.println(&quot;TV를 켭니다.&quot;);
+    }
+
+    public void off() {
+        System.out.println(&quot;TV를 끕니다.&quot;);
+    }
+
+    public void setInputChannel(int channel) {
+        System.out.println(&quot;채널을 &quot; + channel + &quot;로 변경합니다.&quot;);
+    }
+
+    public void setVolume(int volume) {
+        System.out.println(&quot;볼륨을 &quot; + volume + &quot;로 변경합니다.&quot;);
+    }
+}
+
+public class AirConditioner {
+    public void on() {
+        System.out.println(&quot;에어컨을 켭니다.&quot;);
+    }
+
+    public void off() {
+        System.out.println(&quot;에어컨을 끕니다.&quot;);
+    }
+
+    public void setTemperature(int temperature) {
+        System.out.println(&quot;온도를 &quot; + temperature + &quot;로 변경합니다.&quot;);
+    }
+}
+
+public class Light {
+    public void on() {
+        System.out.println(&quot;전구를 켭니다.&quot;);
+    }
+
+    public void off() {
+        System.out.println(&quot;전구를 끕니다.&quot;);
+    }
+}
+
+public class Window {
+    public void open() {
+        System.out.println(&quot;창문을 엽니다.&quot;);
+    }
+
+    public void close() {
+        System.out.println(&quot;창문을 닫습니다.&quot;);
+    }
+}
+...
+</code></pre>
+<p>이런 다양한 클래스들이, 공통적인 인터페이스조차 존재하지 않습니다. 그런데 더 큰 문제는 앞으로도 계속해서 새로운 기기들이 추가될 것이라는 점입니다. 이런 상황에서 어떻게 리모컨을 만들 수 있을까요?</p>
+<hr>
+
+      <h2 id="커맨드-패턴을-통한-해결">
+        <a name="커맨드-패턴을-통한-해결" class="anchor" href="#커맨드-패턴을-통한-해결">
+          <span class="header-link"></span>
+        </a>
+        커맨드 패턴을 통한 해결
+      </h2><p>이를 해결하기 위해 나온 것이 <strong>커맨드 패턴</strong>입니다. 커맨드 패턴은 <strong>메소드 호출을 객체로 캡슐화</strong>하는 패턴입니다. 이를 통해 호출하는 객체와 호출되는 객체를 <strong>느슨하게 결합</strong>시키고, <strong>재사용성</strong>을 높일 수 있습니다.</p>
+<p><strong>식당에서 주문</strong>을 받는 것을 예시로 들어보겠습니다. 주문을 받는 직원은 주문을 받고, 주문을 요리하는 요리사에게 주문을 전달합니다. 이때 직원은 요리사가 어떻게 요리를 하는지 알 필요가 없습니다. 요리사는 주문을 받아서 요리를 하는 방법을 알고 있습니다.</p>
+<p>이 때 <strong>손님</strong>은 <strong>주문</strong>을 하는 <strong>직원</strong>에게 주문을 전달하고, 직원은 <strong>요리사</strong>에게 주문을 전달합니다. 이때 손님은 요리사가 어떻게 요리를 하는지 알 필요가 없습니다. 요리사는 주문을 받아서 요리를 하는 방법을 알고 있습니다.</p>
+<p>그리고 이것이 바로 커맨드 패턴이 동작하는 방식입니다. **메소드 호출(음식)**을 사용할 **클라이언트(손님)**는 이를 **객체(주문)**로 <strong>캡슐화</strong>했기 때문에 호출되는 **객체(요리사)**가 일을 어떻게 처리하는지 알 필요가 없습니다.</p>
+<p>이를 다른 표현으로는 <strong>클라이언트 객체, 리시버 객체, 커맨드 객체, 인보커 객체</strong>라고도 합니다.</p>
+<p>클라이언트 객체는 커맨드 객체를 생성하고, 인보커 객체에 전달합니다. 인보커 객체는 커맨드 객체를 저장하고, 리시버 객체의 작업을 수행하는 실행 메소드를 호출합니다. 커맨드 객체는 실행 메소드를 가지고 있습니다. 이 메소드는 리시버 객체의 작업을 수행합니다. 리시버 객체는 실제 작업을 수행하는 객체입니다.</p>
+<p>이런 커맨드 객체를 리모컨에 적용하면 다음과 같이 됩니다.</p>
+<pre><code class="language-java">public interface Command {
+    public void execute();
+}
+
+public class TVOnCommand implements Command {
+    TV tv;
+
+    public TVOnCommand(TV tv) {
+        this.tv = tv;
+    }
+
+    public void execute() {
+        tv.on();
+    }
+}
+
+public class TVOffCommand implements Command {
+    TV tv;
+
+    public TVOffCommand(TV tv) {
+        this.tv = tv;
+    }
+
+    public void execute() {
+        tv.off();
+    }
+}
+
+// 에어컨, 전구, 창문에 대한 커맨드 객체들도 같은 방식으로 만들어줍니다.
+...
+
+public class SimpleRemoteControl {
+    Command slot;
+
+    public SimpleRemoteControl() {}
+
+    public void setCommand(Command command) {
+        slot = command;
+    }
+
+    public void buttonWasPressed() {
+        slot.execute();
+    }
+}
+</code></pre>
+<p>위와 같이 커맨드 패턴을 사용하면 리모컨은 기기들에 명령만 내리고, 기기들은 명령을 받아서 처리하는 방법을 알고 있습니다. 리모컨은 기기들에 명령만 내리면 되기 때문에 유연성이 높아집니다.</p>
+<p>리모콘이 커맨드를 실행하는 방법은 다음과 같습니다.</p>
+<pre><code class="language-java">
+SimpleRemoteControl remote = new SimpleRemoteControl();
+
+TV tv = new TV();
+
+TVOnCommand tvOn = new TVOnCommand(tv);
+TVOffCommand tvOff = new TVOffCommand(tv);
+
+remote.setCommand(tvOn);
+remote.buttonWasPressed(); // TV를 켭니다.
+
+remote.setCommand(tvOff);
+remote.buttonWasPressed(); // TV를 끕니다.
+</code></pre>
+<hr>
+
+      <h2 id="매크로-커맨드-패턴-사용하기">
+        <a name="매크로-커맨드-패턴-사용하기" class="anchor" href="#매크로-커맨드-패턴-사용하기">
+          <span class="header-link"></span>
+        </a>
+        매크로 커맨드 패턴 사용하기
+      </h2><p>커맨드 패턴을 통해 여러 개의 커맨드를 <strong>묶어서 실행</strong>할 수 있습니다. 이를 <strong>매크로 커맨드 패턴</strong>이라고 합니다.</p>
+<p>예를 들어 더운 여름날 사용하기 위해 TV를 켜는 커맨드와 에어컨을 켜는 커맨드를 묶어서 하나의 커맨드로 만들 수 있습니다. 이렇게 하나의 커맨드로 묶어서 실행하면 TV를 켜는 커맨드와 에어컨을 켜는 커맨드를 따로 실행하는 것보다 편리합니다.</p>
+<p>구현은 다음과 같습니다.</p>
+<pre><code class="language-java">public class MacroCommand implements Command {
+    Command[] commands;
+
+    public MacroCommand(Command[] commands) {
+        this.commands = commands;
+    }
+
+    public void execute() {
+        for (int i = 0; i &lt; commands.length; i++) {
+            commands[i].execute();
+        }
+    }
+}
+</code></pre>
+<p>이렇게 하면 여러 개의 커맨드를 하나의 커맨드로 묶어서 실행할 수 있습니다.</p>
+<hr>
+
+      <h2 id="nocommand-패턴-사용하기">
+        <a name="nocommand-패턴-사용하기" class="anchor" href="#nocommand-패턴-사용하기">
+          <span class="header-link"></span>
+        </a>
+        NoCommand 패턴 사용하기
+      </h2><p>커맨드 패턴은 처음에 객체를 생성할 때 커맨드 객체를 저장하고, 실행 메소드를 호출합니다. 이때 객체를 생성하지 않았을 때의 처리를 위해 <strong>NoCommand 패턴</strong>을 사용할 수 있습니다. NoCommand 패턴을 사용하면 객체를 생성하지 않았을 때의 처리를 쉽게 할 수 있습니다. </p>
+<p>예를 들어 리모컨에 아무런 커맨드를 설정하지 않았을 때의 처리를 위해 다음과 같이 NoCommand 패턴을 사용할 수 있습니다.</p>
+<pre><code class="language-java">public class NoCommand implements Command {
+    public void execute() {}
+}
+
+public class RemoteControl {
+    Command[] onCommands;
+    Command[] offCommands;
+
+    public RemoteControl() {
+        onCommands = new Command[7];
+        offCommands = new Command[7];
+
+        Command noCommand = new NoCommand();
+        for (int i = 0; i &lt; 7; i++) {
+            onCommands[i] = noCommand;
+            offCommands[i] = noCommand;
+        }
+    }
+}
+</code></pre>
+<p>NoCommand 패턴을 사용하지 않았을 경우에는 if문을 사용해서 처리해야 했을 것입니다. if (onCommand != null) { ... } else { ... }와 같이 말입니다.</p>
+<p>이런 NoCommand 객체는 일종의 <strong>널 객체</strong>입니다. 이 객체는 아무런 동작을 하지 않습니다. 이런 객체를 사용하면 클라이언트 객체는 커맨드 객체가 없을 때의 처리를 신경 쓰지 않아도 됩니다.</p>
+<hr>
+
+      <h2 id="복잡한-기능-추가하기">
+        <a name="복잡한-기능-추가하기" class="anchor" href="#복잡한-기능-추가하기">
+          <span class="header-link"></span>
+        </a>
+        복잡한 기능 추가하기
+      </h2><p>커맨드 패턴을 <strong>스택, 큐, 로그</strong> 등과 결합해서 <strong>취소, 다시 실행</strong>과 같은 <strong>복잡한 기능</strong>을 추가할 수 있습니다. 대표적으로 여러 작업을 큐에 저장해서 순서대로 실행하거나, 실행한 작업을 스택에 저장해서 취소하거나, 특정 체크 포인트 이후의 모든 행동을 로그에 기록해서 복구 시스템을 구축할 수 있습니다.</p>
+<hr>
+
+      <h2 id="결론">
+        <a name="결론" class="anchor" href="#결론">
+          <span class="header-link"></span>
+        </a>
+        결론
+      </h2><p>커맨드 패턴은 <strong>메소드 호출을 객체로 캡슐화</strong>하는 디자인 패턴입니다. 이는 호출하는 객체와 호출되는 객체를 <strong>느슨하게 결합</strong>시키고, <strong>재사용성</strong>을 높일 수 있습니다.</p>
+<p><strong>리모컨</strong>을 예시로 들면 사람은 리모컨을 사용해서 TV를 켜고 끄고, 에어컨을 켜고 끄고, 전구를 켜고 끄고, 창문을 열고 닫습니다. 이때 사람은 TV, 에어컨, 전구, 창문이 어떻게 동작하는지 알 필요가 없습니다. 리모컨은 기기들에 명령만 내리면 되기 때문에 유연성이 높아집니다.</p>
+<p>커맨드 패턴은 <strong>커맨드 객체</strong>, <strong>리시버 객체</strong>, <strong>인보커 객체</strong>, <strong>클라이언트 객체</strong>로 구성됩니다.</p>
+<p>커맨드 객체는 <strong>실행 메소드</strong>를 가지고 있습니다. 리시버 객체는 실제 <strong>작업 수행</strong>을 하는 객체입니다. 인보커 객체는 <strong>커맨드 객체 저장</strong>을 하고, <strong>실행 메소드 호출</strong>을 합니다. 클라이언트 객체는 <strong>커맨드 객체 생성</strong>을 하고, <strong>인보커 객체에 전달</strong>합니다.</p>
+<p>커맨드 패턴을 통해 여러 개의 커맨드를 <strong>묶어서 실행</strong>할 수 있습니다. 이를 <strong>매크로 커맨드 패턴</strong>이라고 합니다. 매크로 커맨드 패턴을 통해 적은 노력으로 여러 개의 커맨드를 실행할 수 있습니다.</p>
+<p>인보커에서 커맨드 객체를 저장할 때 객체를 생성하지 않았을 때의 처리를 위해 <strong>NoCommand 패턴</strong>을 사용할 수 있습니다. 이런 NoCommand 객체는 일종의 <strong>널 객체</strong>입니다. 이 객체는 아무런 동작을 하지 않습니다. 이런 객체를 사용하면 클라이언트 객체는 커맨드 객체가 없을 때의 처리를 신경 쓰지 않아도 됩니다.</p>
+<p>커맨드 패턴을 <strong>스택, 큐, 로그</strong> 등과 결합해서 <strong>취소, 작업 대기 큐, 복구 시스템</strong> 등의 <strong>복잡한 기능</strong>을 추가할 수 있습니다.</p>
+<p>이처럼 커맨드 패턴을 통해 <strong>메소드 호출</strong>을 객체로 <strong>캡슐화</strong>하면 호출하는 객체와 호출되는 객체를 <strong>느슨하게 결합</strong>시키고, <strong>재사용성</strong>을 높일 수 있습니다.</p>
+</div><div style="display:flex;flex-direction:column;gap:1em"><div><a href="/디자인패턴/팩토리 패턴">이전 포스트: <!-- -->팩토리 패턴</a></div><div style="text-align:right"><a href="/디자인패턴/싱글톤 패턴">다음 포스트: <!-- -->싱글톤 패턴</a></div></div><div><button id="go-home" class="home-button-container">Home</button></div><div><button type="button" id="go-top" class="scroll-top" aria-label="top"></button></div><div><button type="button" id="go-bottom" class="scroll-bottom" aria-label="bottom"></button></div></div><hr/></main></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"postDataJson":{"postName":"2024-02-16-Command Pattern","fullPath":"/home/runner/work/kaestro.github.io/kaestro.github.io/_posts/개발/디자인 패턴/2024-02-16-Command Pattern.md","category":"디자인패턴","title":"커맨드 패턴","subtitle":"나는 IoT를 지배할 수 있다!","content":"\n## 목차\n\n1. 개요\n2. 요약\n3. 문제상황\n4. 커맨드 패턴을 통한 해결\n5. 매크로 커맨드 패턴 사용하기\n6. NoCommand 패턴 사용하기\n7. 복잡한 기능 추가하기\n8. 결론\n\n---\n\n## 개요\n\n본 글은 **head first design patterns** 책을 읽고 정리한 글입니다.\n\n**커맨드 패턴**은 **메소드 호출**을 객체로 **캡슐화**하는 패턴입니다. 코드를 호출한 객체는 호출되는 객체가 일을 어떻게 처리하는지 알 필요가 없습니다.\n\n이를 통해 호출하는 객체와 호출되는 객체를 **느슨하게 결합**시키고, **재사용성**을 높일 수 있습니다. 이제 작업을 요청하는 쪽과 작업을 수행하는 쪽을 **분리**할 수 있습니다.\n\nhead first design은 이에 대한 예시로 **IoT 리모컨**을 예시로 사용합니다. IoT 리모컨은 다양한 기기를 제어할 수 있는 리모컨입니다. TV, 에어컨, 전구, 창문 등 다양한 기기를 제어할 수 있어야 합니다.\n\n다양한 기기를 제어할 때 각각의 기기를 제어하는 코드를 직접 사용하는 것은 비효율적이고, 유연성이 떨어집니다. 리모콘은 기기들에 명령만 내릴 뿐 어떻게 처리하는지 모르는 것이 좋습니다.\n\n이런 불편을 해소하기 위한 방법 중 하나가 **커맨드 패턴**입니다. 커맨드 패턴을 사용하면 리모컨은 기기들에 명령만 내리고, 기기들은 명령을 받아서 처리하는 방법을 알고 있습니다. 리모컨은 기기들에 명령만 내리면 되기 때문에 유연성이 높아집니다.\n\n---\n\n## 요약\n\n1. 커맨드 패턴은 **메소드 호출을 객체로 캡슐화**하는 패턴입니다.\n2. 코드를 호출한 객체는 호출되는 객체가 일을 어떻게 처리하는지 알 필요가 없습니다.\n3. 이를 통해 호출하는 객체와 호출되는 객체를 **느슨하게 결합**시키고, **재사용성**을 높일 수 있습니다.\n4. 커맨드 패턴은 **커맨드 객체**, **리시버 객체**, **인보커 객체**, **클라이언트 객체**로 구성됩니다.\n5. 커맨드 객체는 **실행 메소드**를 가지고 있습니다. 이 메소드는 리시버 객체의 **작업을 수행**합니다.\n6. 리시버 객체는 **실제 작업을 수행**하는 객체입니다.\n7. 인보커 객체는 **커맨드 객체를 저장**하고 **실행 메소드를 호출**합니다.\n8. 클라이언트 객체는 **커맨드 객체를 생성**하고, **인보커 객체에 전달**합니다.\n9. **매크로 커맨드 패턴**을 통해 **여러 개의 커맨드**를 묶어서 실행할 수 있습니다.\n10. 커맨드 객체 - 키기/끄기, 리시버 객체 - TV/에어컨/전구/창문, 인보커 객체 - 리모컨, 클라이언트 객체 - 사용자\n11. **큐, 로그, 스택** 등과 결합해 **취소, 다시 실행**과 같은 복잡한 기능을 추가할 수 있습니다.\n\n---\n\n## 문제상황\n\nIoT 리모컨을 만들어 달라는 요청과 함께 리모컨에서 다룰 수 있어야 하는 다양한 기기들이 주어졌습니다. 이 기기들은 다음과 같습니다.\n\n```java\npublic class TV {\n    public void on() {\n        System.out.println(\"TV를 켭니다.\");\n    }\n\n    public void off() {\n        System.out.println(\"TV를 끕니다.\");\n    }\n\n    public void setInputChannel(int channel) {\n        System.out.println(\"채널을 \" + channel + \"로 변경합니다.\");\n    }\n\n    public void setVolume(int volume) {\n        System.out.println(\"볼륨을 \" + volume + \"로 변경합니다.\");\n    }\n}\n\npublic class AirConditioner {\n    public void on() {\n        System.out.println(\"에어컨을 켭니다.\");\n    }\n\n    public void off() {\n        System.out.println(\"에어컨을 끕니다.\");\n    }\n\n    public void setTemperature(int temperature) {\n        System.out.println(\"온도를 \" + temperature + \"로 변경합니다.\");\n    }\n}\n\npublic class Light {\n    public void on() {\n        System.out.println(\"전구를 켭니다.\");\n    }\n\n    public void off() {\n        System.out.println(\"전구를 끕니다.\");\n    }\n}\n\npublic class Window {\n    public void open() {\n        System.out.println(\"창문을 엽니다.\");\n    }\n\n    public void close() {\n        System.out.println(\"창문을 닫습니다.\");\n    }\n}\n...\n```\n\n이런 다양한 클래스들이, 공통적인 인터페이스조차 존재하지 않습니다. 그런데 더 큰 문제는 앞으로도 계속해서 새로운 기기들이 추가될 것이라는 점입니다. 이런 상황에서 어떻게 리모컨을 만들 수 있을까요?\n\n---\n\n## 커맨드 패턴을 통한 해결\n\n이를 해결하기 위해 나온 것이 **커맨드 패턴**입니다. 커맨드 패턴은 **메소드 호출을 객체로 캡슐화**하는 패턴입니다. 이를 통해 호출하는 객체와 호출되는 객체를 **느슨하게 결합**시키고, **재사용성**을 높일 수 있습니다.\n\n**식당에서 주문**을 받는 것을 예시로 들어보겠습니다. 주문을 받는 직원은 주문을 받고, 주문을 요리하는 요리사에게 주문을 전달합니다. 이때 직원은 요리사가 어떻게 요리를 하는지 알 필요가 없습니다. 요리사는 주문을 받아서 요리를 하는 방법을 알고 있습니다.\n\n이 때 **손님**은 **주문**을 하는 **직원**에게 주문을 전달하고, 직원은 **요리사**에게 주문을 전달합니다. 이때 손님은 요리사가 어떻게 요리를 하는지 알 필요가 없습니다. 요리사는 주문을 받아서 요리를 하는 방법을 알고 있습니다.\n\n그리고 이것이 바로 커맨드 패턴이 동작하는 방식입니다. **메소드 호출(음식)**을 사용할 **클라이언트(손님)**는 이를 **객체(주문)**로 **캡슐화**했기 때문에 호출되는 **객체(요리사)**가 일을 어떻게 처리하는지 알 필요가 없습니다.\n\n이를 다른 표현으로는 **클라이언트 객체, 리시버 객체, 커맨드 객체, 인보커 객체**라고도 합니다.\n\n클라이언트 객체는 커맨드 객체를 생성하고, 인보커 객체에 전달합니다. 인보커 객체는 커맨드 객체를 저장하고, 리시버 객체의 작업을 수행하는 실행 메소드를 호출합니다. 커맨드 객체는 실행 메소드를 가지고 있습니다. 이 메소드는 리시버 객체의 작업을 수행합니다. 리시버 객체는 실제 작업을 수행하는 객체입니다.\n\n이런 커맨드 객체를 리모컨에 적용하면 다음과 같이 됩니다.\n\n```java\npublic interface Command {\n    public void execute();\n}\n\npublic class TVOnCommand implements Command {\n    TV tv;\n\n    public TVOnCommand(TV tv) {\n        this.tv = tv;\n    }\n\n    public void execute() {\n        tv.on();\n    }\n}\n\npublic class TVOffCommand implements Command {\n    TV tv;\n\n    public TVOffCommand(TV tv) {\n        this.tv = tv;\n    }\n\n    public void execute() {\n        tv.off();\n    }\n}\n\n// 에어컨, 전구, 창문에 대한 커맨드 객체들도 같은 방식으로 만들어줍니다.\n...\n\npublic class SimpleRemoteControl {\n    Command slot;\n\n    public SimpleRemoteControl() {}\n\n    public void setCommand(Command command) {\n        slot = command;\n    }\n\n    public void buttonWasPressed() {\n        slot.execute();\n    }\n}\n```\n\n위와 같이 커맨드 패턴을 사용하면 리모컨은 기기들에 명령만 내리고, 기기들은 명령을 받아서 처리하는 방법을 알고 있습니다. 리모컨은 기기들에 명령만 내리면 되기 때문에 유연성이 높아집니다.\n\n리모콘이 커맨드를 실행하는 방법은 다음과 같습니다.\n\n```java\n\nSimpleRemoteControl remote = new SimpleRemoteControl();\n\nTV tv = new TV();\n\nTVOnCommand tvOn = new TVOnCommand(tv);\nTVOffCommand tvOff = new TVOffCommand(tv);\n\nremote.setCommand(tvOn);\nremote.buttonWasPressed(); // TV를 켭니다.\n\nremote.setCommand(tvOff);\nremote.buttonWasPressed(); // TV를 끕니다.\n```\n\n---\n\n## 매크로 커맨드 패턴 사용하기\n\n커맨드 패턴을 통해 여러 개의 커맨드를 **묶어서 실행**할 수 있습니다. 이를 **매크로 커맨드 패턴**이라고 합니다.\n\n예를 들어 더운 여름날 사용하기 위해 TV를 켜는 커맨드와 에어컨을 켜는 커맨드를 묶어서 하나의 커맨드로 만들 수 있습니다. 이렇게 하나의 커맨드로 묶어서 실행하면 TV를 켜는 커맨드와 에어컨을 켜는 커맨드를 따로 실행하는 것보다 편리합니다.\n\n구현은 다음과 같습니다.\n\n```java\npublic class MacroCommand implements Command {\n    Command[] commands;\n\n    public MacroCommand(Command[] commands) {\n        this.commands = commands;\n    }\n\n    public void execute() {\n        for (int i = 0; i \u003c commands.length; i++) {\n            commands[i].execute();\n        }\n    }\n}\n```\n\n이렇게 하면 여러 개의 커맨드를 하나의 커맨드로 묶어서 실행할 수 있습니다.\n\n---\n\n## NoCommand 패턴 사용하기\n\n커맨드 패턴은 처음에 객체를 생성할 때 커맨드 객체를 저장하고, 실행 메소드를 호출합니다. 이때 객체를 생성하지 않았을 때의 처리를 위해 **NoCommand 패턴**을 사용할 수 있습니다. NoCommand 패턴을 사용하면 객체를 생성하지 않았을 때의 처리를 쉽게 할 수 있습니다. \n\n예를 들어 리모컨에 아무런 커맨드를 설정하지 않았을 때의 처리를 위해 다음과 같이 NoCommand 패턴을 사용할 수 있습니다.\n\n```java\npublic class NoCommand implements Command {\n    public void execute() {}\n}\n\npublic class RemoteControl {\n    Command[] onCommands;\n    Command[] offCommands;\n\n    public RemoteControl() {\n        onCommands = new Command[7];\n        offCommands = new Command[7];\n\n        Command noCommand = new NoCommand();\n        for (int i = 0; i \u003c 7; i++) {\n            onCommands[i] = noCommand;\n            offCommands[i] = noCommand;\n        }\n    }\n}\n```\n\nNoCommand 패턴을 사용하지 않았을 경우에는 if문을 사용해서 처리해야 했을 것입니다. if (onCommand != null) { ... } else { ... }와 같이 말입니다.\n\n이런 NoCommand 객체는 일종의 **널 객체**입니다. 이 객체는 아무런 동작을 하지 않습니다. 이런 객체를 사용하면 클라이언트 객체는 커맨드 객체가 없을 때의 처리를 신경 쓰지 않아도 됩니다.\n\n---\n\n## 복잡한 기능 추가하기\n\n커맨드 패턴을 **스택, 큐, 로그** 등과 결합해서 **취소, 다시 실행**과 같은 **복잡한 기능**을 추가할 수 있습니다. 대표적으로 여러 작업을 큐에 저장해서 순서대로 실행하거나, 실행한 작업을 스택에 저장해서 취소하거나, 특정 체크 포인트 이후의 모든 행동을 로그에 기록해서 복구 시스템을 구축할 수 있습니다.\n\n---\n\n## 결론\n\n커맨드 패턴은 **메소드 호출을 객체로 캡슐화**하는 디자인 패턴입니다. 이는 호출하는 객체와 호출되는 객체를 **느슨하게 결합**시키고, **재사용성**을 높일 수 있습니다.\n\n**리모컨**을 예시로 들면 사람은 리모컨을 사용해서 TV를 켜고 끄고, 에어컨을 켜고 끄고, 전구를 켜고 끄고, 창문을 열고 닫습니다. 이때 사람은 TV, 에어컨, 전구, 창문이 어떻게 동작하는지 알 필요가 없습니다. 리모컨은 기기들에 명령만 내리면 되기 때문에 유연성이 높아집니다.\n\n커맨드 패턴은 **커맨드 객체**, **리시버 객체**, **인보커 객체**, **클라이언트 객체**로 구성됩니다.\n\n커맨드 객체는 **실행 메소드**를 가지고 있습니다. 리시버 객체는 실제 **작업 수행**을 하는 객체입니다. 인보커 객체는 **커맨드 객체 저장**을 하고, **실행 메소드 호출**을 합니다. 클라이언트 객체는 **커맨드 객체 생성**을 하고, **인보커 객체에 전달**합니다.\n\n커맨드 패턴을 통해 여러 개의 커맨드를 **묶어서 실행**할 수 있습니다. 이를 **매크로 커맨드 패턴**이라고 합니다. 매크로 커맨드 패턴을 통해 적은 노력으로 여러 개의 커맨드를 실행할 수 있습니다.\n\n인보커에서 커맨드 객체를 저장할 때 객체를 생성하지 않았을 때의 처리를 위해 **NoCommand 패턴**을 사용할 수 있습니다. 이런 NoCommand 객체는 일종의 **널 객체**입니다. 이 객체는 아무런 동작을 하지 않습니다. 이런 객체를 사용하면 클라이언트 객체는 커맨드 객체가 없을 때의 처리를 신경 쓰지 않아도 됩니다.\n\n커맨드 패턴을 **스택, 큐, 로그** 등과 결합해서 **취소, 작업 대기 큐, 복구 시스템** 등의 **복잡한 기능**을 추가할 수 있습니다.\n\n이처럼 커맨드 패턴을 통해 **메소드 호출**을 객체로 **캡슐화**하면 호출하는 객체와 호출되는 객체를 **느슨하게 결합**시키고, **재사용성**을 높일 수 있습니다.\n","layout":"default","recommended":false,"data":{"layout":"default","classes":"wide","title":"커맨드 패턴","subtitle":"나는 IoT를 지배할 수 있다!","date":"2024-02-16T00:00:00.000Z","categories":"디자인패턴"}},"title":"커맨드 패턴","category":"디자인패턴","categories":["ETC","개발이야기","개발일지","디자인패턴","Algorithm","서평","WeeklyPosts","신변잡기","게임이야기"],"adjacentPosts":{"prev":{"title":"팩토리 패턴","category":"디자인패턴"},"next":{"title":"싱글톤 패턴","category":"디자인패턴"}}},"__N_SSG":true},"page":"/[category]/[title]","query":{"category":"디자인패턴","title":"커맨드 패턴"},"buildId":"x7KlanTMcx7BnykrAqYzT","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

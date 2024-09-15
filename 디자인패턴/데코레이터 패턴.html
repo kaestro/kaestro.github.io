@@ -1,0 +1,170 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="preload" href="/_next/static/css/9d2484721dfb0fa3.css" as="style"/><link rel="stylesheet" href="/_next/static/css/9d2484721dfb0fa3.css" data-n-g=""/><link rel="preload" href="/_next/static/css/d837742cb9035689.css" as="style"/><link rel="stylesheet" href="/_next/static/css/d837742cb9035689.css" data-n-p=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js"></script><script src="/_next/static/chunks/webpack-35b92941fc8726f9.js" defer=""></script><script src="/_next/static/chunks/framework-381da54bc5986544.js" defer=""></script><script src="/_next/static/chunks/main-d08cdb1c11d062c5.js" defer=""></script><script src="/_next/static/chunks/pages/_app-e6411096b10c6b62.js" defer=""></script><script src="/_next/static/chunks/441-45d334119e93ce4f.js" defer=""></script><script src="/_next/static/chunks/pages/%5Bcategory%5D/%5Btitle%5D-54be7db8139f8b64.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_buildManifest.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div><header class="page-header"><h1 class="project-name">데코레이터 패턴</h1><h1 class="project-subtitle">싸구려 커피를 마시기 전에 우유를 넣으세요</h1></header><main id="content" class="main-content"><div><aside id="category-list" aria-label="Category List"><h2>Categories</h2><ul><li><a href="/ETC">ETC</a></li><li><a href="/개발이야기">개발이야기</a></li><li><a href="/개발일지">개발일지</a></li><li><a href="/디자인패턴">디자인패턴</a></li><li><a href="/Algorithm">Algorithm</a></li><li><a href="/서평">서평</a></li><li><a href="/WeeklyPosts">WeeklyPosts</a></li><li><a href="/신변잡기">신변잡기</a></li><li><a href="/게임이야기">게임이야기</a></li></ul></aside><div>
+      <h2 id="목차">
+        <a name="목차" class="anchor" href="#목차">
+          <span class="header-link"></span>
+        </a>
+        목차
+      </h2><ol>
+<li>개요</li>
+<li>요약</li>
+<li>문제상황</li>
+<li>데코레이터 패턴을 통한 해결</li>
+<li>OCP(Open-Closed Principle)</li>
+<li>결론</li>
+</ol>
+<hr>
+
+      <h2 id="개요">
+        <a name="개요" class="anchor" href="#개요">
+          <span class="header-link"></span>
+        </a>
+        개요
+      </h2><p>본 글은 <strong>head first design patterns</strong> 책을 읽고 정리한 글입니다.</p>
+<p>데코레이터 패턴은 <strong>객체의 행동</strong>을 <strong>동적</strong>으로 <strong>확장</strong>할 수 있게 해주는 디자인 패턴입니다. 이를 통해 상속을 통한 확장의 문제점을 해결할 수 있습니다.</p>
+<p>head first design은 이에 대한 예시로 커피의 구현 기획이 변화하는 과정을 제시해서 설명합니다. 커피숍에서 판매하는 커피의 <strong>종류</strong>와 <strong>첨가물</strong>을 추가하는 것이 요구될 수 있습니다. 이런 다양한 요구사항을 상속을 통해 구현하는 것은 모든 서브 클래스를 만들어야 하는 등의 이유 때문에 불편하고, 비효율적입니다. 이런 불편을 해소하기 위한 방법 중 하나가 <strong>데코레이터 패턴</strong>입니다.</p>
+<hr>
+
+      <h2 id="요약">
+        <a name="요약" class="anchor" href="#요약">
+          <span class="header-link"></span>
+        </a>
+        요약
+      </h2><ul>
+<li>데코레이터 패턴은 객체의 <strong>행동</strong>을 <strong>동적</strong>으로 <strong>확장</strong>할 수 있게 해주는 디자인 패턴입니다.</li>
+<li>음료에 들어가는 <strong>첨가물</strong>들을 <strong>데코레이터</strong>로 구현합니다.</li>
+<li><strong>서브 클래스</strong>를 만드는 대신, <strong>데코레이터</strong>를 사용하면 런타임에 행동을 확장할 수 있습니다.</li>
+</ul>
+<hr>
+
+      <h2 id="문제상황">
+        <a name="문제상황" class="anchor" href="#문제상황">
+          <span class="header-link"></span>
+        </a>
+        문제상황
+      </h2><p>커피 샵 시스템을 만들고 있다고 가정해겠습니다. 기존에 커피 숍의 주문 시스템에서 사용하던 음료 클래스는 다음과 같습니다.</p>
+<pre><code class="language-java">public abstract class Beverage {
+    String description = &quot;제목 없음&quot;;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public abstract double cost();
+}
+
+public class Espresso extends Beverage {
+    public Espresso() {
+        description = &quot;에스프레소&quot;;
+    }
+
+    public double cost() {
+        return 1.99;
+    }
+}
+
+public class HouseBlend extends Beverage {
+    public HouseBlend() {
+        description = &quot;하우스 블렌드 커피&quot;;
+    }
+
+    public double cost() {
+        return .89;
+    }
+}
+
+...
+</code></pre>
+<p>이런 구현 방식은 새로운 <strong>첨가물</strong>을 <strong>추가</strong>하는 것이 어렵다는 문제가 있습니다. 첨가물이란 모카나 우유와 같이 음료에 추가해서 맛을 바꾸는 것들을 말합니다. 예를 들어 모카라는 첨가물을 제공하려면 어떻게 해야할까요? 우리는 다음과 같은 class를 추가해야할 것입니다.</p>
+<pre><code class="language-java">public class EspressoWithMocha extends Beverage {
+    ...
+}
+</code></pre>
+<p>만약 음료의 종류가 10가지였다면 모카를 첨가하게 될 음료에 대해 최대 10가지의 서브 클래스를 만들어야 합니다. 이는 매우 비효율적입니다.</p>
+<p>그런데 여기에 더해 모카가 아닌 새로운 첨가물이 추가된다면 어떻게 해야할까요? 심지어 모카와 함께 들어갈 수 있는 우유와 같은 첨가물이라면요? 이런 경우에는 <strong>조합의 수</strong>가 무수히 많아질 수 있습니다.</p>
+<pre><code class="language-java">
+public class EspressoWithMilk extends Beverage {
+    ...
+}
+
+public class EspressoWithMochaAndMilk extends Beverage {
+    ...
+}
+
+public class HouseBlendWithMochaAndMilk extends Beverage {
+    ...
+}
+
+...
+</code></pre>
+<p>이런 식으로 <strong>서브 클래스</strong>를 만드는 것은 매우 비효율적입니다. 이를 해결하기 위해 등장한 것이 바로 <strong>데코레이터 패턴</strong>입니다.</p>
+<hr>
+
+      <h2 id="데코레이터-패턴을-통한-해결">
+        <a name="데코레이터-패턴을-통한-해결" class="anchor" href="#데코레이터-패턴을-통한-해결">
+          <span class="header-link"></span>
+        </a>
+        데코레이터 패턴을 통한 해결
+      </h2><p>데코레이터 패턴은 커피에 다양한 첨가물을 추가할 수 있는 상황처럼, 객체에 <strong>다양한 추가 요소</strong>를 <strong>동적으로 추가</strong>할 필요가 있을 때 사용할 수 있는 패턴입니다.</p>
+<p>데코레이터 패턴은 일종의 <strong>투명한 래퍼</strong>를 만드는 것과 같습니다. 이 래퍼는 자신이 감싸고 있는 객체와 같은 인터페이스를 구현합니다.</p>
+<p>데코레이터 패턴을 통해 위의 커피 숍 문제를 다음과 같이 해결할 수 있습니다.</p>
+<pre><code class="language-java">public abstract class Beverage {
+    String description = &quot;제목 없음&quot;;
+
+    public String getDescription() {
+        return description;
+    }
+
+    public abstract double cost();
+}
+
+public abstract class CondimentDecorator extends Beverage {
+    Beverage beverage;
+    public abstract String getDescription();
+}
+</code></pre>
+<p>위의 데코레이터 패턴이 존재하는 상태에서 다음과 같은 서브 클래스들이 구현돼있다 가정해보겠습니다.</p>
+<ol>
+<li><p><strong>Beverage</strong></p>
+<ul>
+<li>Espresso</li>
+<li>HouseBlend</li>
+<li>DarkRoast</li>
+</ul>
+</li>
+<li><p><strong>CondimentDecorator</strong></p>
+<ul>
+<li>Mocha</li>
+<li>Soy</li>
+<li>Whip</li>
+<li>Milk</li>
+</ul>
+</li>
+</ol>
+<p>이제 우리는 Espresso에 Mocha와 Milk를 추가하는 것을 다음과 같이 구현할 수 있습니다.</p>
+<pre><code class="language-java">Beverage beverage = new Espresso();
+beverage = new Mocha(beverage);
+beverage = new Milk(beverage);
+
+System.out.println(beverage.getDescription() + &quot; $&quot; + beverage.cost());
+</code></pre>
+<p>위의 방식은 기존에 서브 클래스를 만드는 방식과는 다르게 수많은 조합을 일일이 구현할 필요가 없습니다. 또한, 런타임에 행동을 확장할 수 있게 되었습니다.</p>
+<hr>
+
+      <h2 id="ocp(open-closed-principle)">
+        <a name="ocp(open-closed-principle)" class="anchor" href="#ocp(open-closed-principle)">
+          <span class="header-link"></span>
+        </a>
+        OCP(Open-Closed Principle)
+      </h2><p>이처럼 우리는 데코레이터 패턴을 통해 음료에 다양한 첨가물을 추가하더라도 새로운 행동을 추가하는 서브 클래스를 만들 필요가 없어졌습니다. 또한, 다양한 객체들을 조합할 수 있게 되었습니다.</p>
+<p>이런 식으로 객체의 행동을 <strong>확장할 수 있으면서, 변화에는 닫혀있는 특징</strong>을 우리는 **OCP(Open-Closed Principle)**라고 합니다.</p>
+<hr>
+
+      <h2 id="결론">
+        <a name="결론" class="anchor" href="#결론">
+          <span class="header-link"></span>
+        </a>
+        결론
+      </h2><p>데코레이터 패턴은 <strong>객체의 행동을 동적으로 확장</strong>할 수 있게 해주는 디자인 패턴입니다. 기존처럼 상속을 통해 확장을 하려할 경우에는 변화하는 부분에 대한 <strong>캡슐화</strong>가 어렵고, 불필요한 서브 클래스의 생성이 발생할 수 있습니다.</p>
+<p>데코레이터 패턴은 기존의 **객체를 장식(decorate)**하는 방식으로 객체의 행동을 확장합니다. 이를 통해 객체의 행동을 동적으로 확장할 수 있으면서, <strong>OCP</strong>를 준수할 수 있게 됩니다.</p>
+<p>대신 데코레이터 패턴을 사용하기 위해 다양한 객체를 조합하는 것은 관리하기 어려울 수 있습니다. 이를 해결하기 위해 <strong>팩토리 패턴</strong>과 같은 디자인 패턴을 함께 사용할 수 있습니다.</p>
+</div><div style="display:flex;flex-direction:column;gap:1em"><div><a href="/디자인패턴/전략 패턴">이전 포스트: <!-- -->전략 패턴</a></div><div style="text-align:right"><a href="/디자인패턴/옵저버 패턴">다음 포스트: <!-- -->옵저버 패턴</a></div></div><div><button id="go-home" class="home-button-container">Home</button></div><div><button type="button" id="go-top" class="scroll-top" aria-label="top"></button></div><div><button type="button" id="go-bottom" class="scroll-bottom" aria-label="bottom"></button></div></div><hr/></main></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"postDataJson":{"postName":"2024-02-14-Decorator Pattern","fullPath":"/home/runner/work/kaestro.github.io/kaestro.github.io/_posts/개발/디자인 패턴/2024-02-14-Decorator Pattern.md","category":"디자인패턴","title":"데코레이터 패턴","subtitle":"싸구려 커피를 마시기 전에 우유를 넣으세요","content":"\n## 목차\n\n1. 개요\n2. 요약\n3. 문제상황\n4. 데코레이터 패턴을 통한 해결\n5. OCP(Open-Closed Principle)\n6. 결론\n\n---\n\n## 개요\n\n본 글은 **head first design patterns** 책을 읽고 정리한 글입니다.\n\n데코레이터 패턴은 **객체의 행동**을 **동적**으로 **확장**할 수 있게 해주는 디자인 패턴입니다. 이를 통해 상속을 통한 확장의 문제점을 해결할 수 있습니다.\n\nhead first design은 이에 대한 예시로 커피의 구현 기획이 변화하는 과정을 제시해서 설명합니다. 커피숍에서 판매하는 커피의 **종류**와 **첨가물**을 추가하는 것이 요구될 수 있습니다. 이런 다양한 요구사항을 상속을 통해 구현하는 것은 모든 서브 클래스를 만들어야 하는 등의 이유 때문에 불편하고, 비효율적입니다. 이런 불편을 해소하기 위한 방법 중 하나가 **데코레이터 패턴**입니다.\n\n---\n\n## 요약\n\n* 데코레이터 패턴은 객체의 **행동**을 **동적**으로 **확장**할 수 있게 해주는 디자인 패턴입니다.\n* 음료에 들어가는 **첨가물**들을 **데코레이터**로 구현합니다.\n* **서브 클래스**를 만드는 대신, **데코레이터**를 사용하면 런타임에 행동을 확장할 수 있습니다.\n\n---\n\n## 문제상황\n\n커피 샵 시스템을 만들고 있다고 가정해겠습니다. 기존에 커피 숍의 주문 시스템에서 사용하던 음료 클래스는 다음과 같습니다.\n\n```java\npublic abstract class Beverage {\n    String description = \"제목 없음\";\n\n    public String getDescription() {\n        return description;\n    }\n\n    public abstract double cost();\n}\n\npublic class Espresso extends Beverage {\n    public Espresso() {\n        description = \"에스프레소\";\n    }\n\n    public double cost() {\n        return 1.99;\n    }\n}\n\npublic class HouseBlend extends Beverage {\n    public HouseBlend() {\n        description = \"하우스 블렌드 커피\";\n    }\n\n    public double cost() {\n        return .89;\n    }\n}\n\n...\n```\n\n이런 구현 방식은 새로운 **첨가물**을 **추가**하는 것이 어렵다는 문제가 있습니다. 첨가물이란 모카나 우유와 같이 음료에 추가해서 맛을 바꾸는 것들을 말합니다. 예를 들어 모카라는 첨가물을 제공하려면 어떻게 해야할까요? 우리는 다음과 같은 class를 추가해야할 것입니다.\n\n```java\npublic class EspressoWithMocha extends Beverage {\n    ...\n}\n```\n\n만약 음료의 종류가 10가지였다면 모카를 첨가하게 될 음료에 대해 최대 10가지의 서브 클래스를 만들어야 합니다. 이는 매우 비효율적입니다.\n\n그런데 여기에 더해 모카가 아닌 새로운 첨가물이 추가된다면 어떻게 해야할까요? 심지어 모카와 함께 들어갈 수 있는 우유와 같은 첨가물이라면요? 이런 경우에는 **조합의 수**가 무수히 많아질 수 있습니다.\n\n```java\n\npublic class EspressoWithMilk extends Beverage {\n    ...\n}\n\npublic class EspressoWithMochaAndMilk extends Beverage {\n    ...\n}\n\npublic class HouseBlendWithMochaAndMilk extends Beverage {\n    ...\n}\n\n...\n\n```\n\n이런 식으로 **서브 클래스**를 만드는 것은 매우 비효율적입니다. 이를 해결하기 위해 등장한 것이 바로 **데코레이터 패턴**입니다.\n\n---\n\n## 데코레이터 패턴을 통한 해결\n\n데코레이터 패턴은 커피에 다양한 첨가물을 추가할 수 있는 상황처럼, 객체에 **다양한 추가 요소**를 **동적으로 추가**할 필요가 있을 때 사용할 수 있는 패턴입니다.\n\n데코레이터 패턴은 일종의 **투명한 래퍼**를 만드는 것과 같습니다. 이 래퍼는 자신이 감싸고 있는 객체와 같은 인터페이스를 구현합니다.\n\n데코레이터 패턴을 통해 위의 커피 숍 문제를 다음과 같이 해결할 수 있습니다.\n\n```java\npublic abstract class Beverage {\n    String description = \"제목 없음\";\n\n    public String getDescription() {\n        return description;\n    }\n\n    public abstract double cost();\n}\n\npublic abstract class CondimentDecorator extends Beverage {\n    Beverage beverage;\n    public abstract String getDescription();\n}\n```\n\n위의 데코레이터 패턴이 존재하는 상태에서 다음과 같은 서브 클래스들이 구현돼있다 가정해보겠습니다.\n\n1. **Beverage**\n    * Espresso\n    * HouseBlend\n    * DarkRoast\n\n2. **CondimentDecorator**\n    * Mocha\n    * Soy\n    * Whip\n    * Milk\n\n이제 우리는 Espresso에 Mocha와 Milk를 추가하는 것을 다음과 같이 구현할 수 있습니다.\n\n```java\nBeverage beverage = new Espresso();\nbeverage = new Mocha(beverage);\nbeverage = new Milk(beverage);\n\nSystem.out.println(beverage.getDescription() + \" $\" + beverage.cost());\n```\n\n위의 방식은 기존에 서브 클래스를 만드는 방식과는 다르게 수많은 조합을 일일이 구현할 필요가 없습니다. 또한, 런타임에 행동을 확장할 수 있게 되었습니다.\n\n---\n\n## OCP(Open-Closed Principle)\n\n이처럼 우리는 데코레이터 패턴을 통해 음료에 다양한 첨가물을 추가하더라도 새로운 행동을 추가하는 서브 클래스를 만들 필요가 없어졌습니다. 또한, 다양한 객체들을 조합할 수 있게 되었습니다.\n\n이런 식으로 객체의 행동을 **확장할 수 있으면서, 변화에는 닫혀있는 특징**을 우리는 **OCP(Open-Closed Principle)**라고 합니다.\n\n---\n\n## 결론\n\n데코레이터 패턴은 **객체의 행동을 동적으로 확장**할 수 있게 해주는 디자인 패턴입니다. 기존처럼 상속을 통해 확장을 하려할 경우에는 변화하는 부분에 대한 **캡슐화**가 어렵고, 불필요한 서브 클래스의 생성이 발생할 수 있습니다.\n\n데코레이터 패턴은 기존의 **객체를 장식(decorate)**하는 방식으로 객체의 행동을 확장합니다. 이를 통해 객체의 행동을 동적으로 확장할 수 있으면서, **OCP**를 준수할 수 있게 됩니다.\n\n대신 데코레이터 패턴을 사용하기 위해 다양한 객체를 조합하는 것은 관리하기 어려울 수 있습니다. 이를 해결하기 위해 **팩토리 패턴**과 같은 디자인 패턴을 함께 사용할 수 있습니다.\n","layout":"default","recommended":false,"data":{"layout":"default","classes":"wide","title":"데코레이터 패턴","subtitle":"싸구려 커피를 마시기 전에 우유를 넣으세요","date":"2024-02-14T00:00:00.000Z","categories":"디자인패턴"}},"title":"데코레이터 패턴","category":"디자인패턴","categories":["ETC","개발이야기","개발일지","디자인패턴","Algorithm","서평","WeeklyPosts","신변잡기","게임이야기"],"adjacentPosts":{"prev":{"title":"전략 패턴","category":"디자인패턴"},"next":{"title":"옵저버 패턴","category":"디자인패턴"}}},"__N_SSG":true},"page":"/[category]/[title]","query":{"category":"디자인패턴","title":"데코레이터 패턴"},"buildId":"x7KlanTMcx7BnykrAqYzT","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

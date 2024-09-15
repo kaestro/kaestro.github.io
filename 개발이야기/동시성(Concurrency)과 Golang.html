@@ -1,0 +1,171 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="preload" href="/_next/static/css/9d2484721dfb0fa3.css" as="style"/><link rel="stylesheet" href="/_next/static/css/9d2484721dfb0fa3.css" data-n-g=""/><link rel="preload" href="/_next/static/css/d837742cb9035689.css" as="style"/><link rel="stylesheet" href="/_next/static/css/d837742cb9035689.css" data-n-p=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js"></script><script src="/_next/static/chunks/webpack-35b92941fc8726f9.js" defer=""></script><script src="/_next/static/chunks/framework-381da54bc5986544.js" defer=""></script><script src="/_next/static/chunks/main-d08cdb1c11d062c5.js" defer=""></script><script src="/_next/static/chunks/pages/_app-e6411096b10c6b62.js" defer=""></script><script src="/_next/static/chunks/441-45d334119e93ce4f.js" defer=""></script><script src="/_next/static/chunks/pages/%5Bcategory%5D/%5Btitle%5D-54be7db8139f8b64.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_buildManifest.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div><header class="page-header"><h1 class="project-name">동시성(Concurrency)과 Golang</h1><h1 class="project-subtitle">Golang은 진정 동시성을 처리하는 데 유리한가?</h1></header><main id="content" class="main-content"><div><aside id="category-list" aria-label="Category List"><h2>Categories</h2><ul><li><a href="/ETC">ETC</a></li><li><a href="/개발이야기">개발이야기</a></li><li><a href="/개발일지">개발일지</a></li><li><a href="/디자인패턴">디자인패턴</a></li><li><a href="/Algorithm">Algorithm</a></li><li><a href="/서평">서평</a></li><li><a href="/WeeklyPosts">WeeklyPosts</a></li><li><a href="/신변잡기">신변잡기</a></li><li><a href="/게임이야기">게임이야기</a></li></ul></aside><div>
+      <h2 id="개요">
+        <a name="개요" class="anchor" href="#개요">
+          <span class="header-link"></span>
+        </a>
+        개요
+      </h2><p>컴퓨터에서 <strong>여러 프로그램을 한꺼번에 처리</strong>하는 방법 중에 <strong>동시성</strong>과 <strong>병렬성</strong>이 있다. <strong>Golang</strong>은 <strong>동시성</strong>을 처리하기에 용이하도록 설계한 언어로, 이를 위해 <strong>Goroutine</strong>, <strong>Channel</strong> 등의 기능을 제공한다. 해당 기능들 덕분에 Golang은 다른 언어에 비해 <strong>동시성을 처리하는 데 유리하다</strong>고 할 수 있다.</p>
+<hr>
+
+      <h2 id="목차">
+        <a name="목차" class="anchor" href="#목차">
+          <span class="header-link"></span>
+        </a>
+        목차
+      </h2><ol>
+<li><strong>동시성</strong>이란: 병렬성 vs 동시성</li>
+<li><strong>기존</strong>의 동시성 <strong>처리 방법</strong>: 멀티 태스킹, 스레드, context switching</li>
+<li><strong>Goroutine</strong>: Go에서 스레드를 다루는 방법</li>
+<li><strong>Channel</strong>: Goroutine 간의 통신</li>
+<li><strong>결론</strong>: GoLang은 동시성 처리가 용이하게 설계됐고, <strong>다른 언어에 없는 기능</strong>을 통해 이를 실천하고 있다.</li>
+<li><strong>의문점</strong>: 다른 언어들은 어떻게 동시성을 처리하는가?</li>
+<li>참고자료</li>
+</ol>
+<hr>
+
+      <h2 id="동시성이란">
+        <a name="동시성이란" class="anchor" href="#동시성이란">
+          <span class="header-link"></span>
+        </a>
+        동시성이란
+      </h2>
+      <h3 id="병렬성-vs-동시성">
+        <a name="병렬성-vs-동시성" class="anchor" href="#병렬성-vs-동시성">
+          <span class="header-link"></span>
+        </a>
+        병렬성 vs 동시성
+      </h3><p>컴퓨터에서 <strong>여러 작업</strong>을 <strong>동시</strong>에 처리하는 방법에는 <strong>병렬성</strong>과 <strong>동시성</strong>이 있다. 이 때 병렬성과 동시성은 다음과 같이 정리할 수 있다.</p>
+<ul>
+<li>병렬성(Parallelism): 여러 일을 <strong>한꺼번에 실행하는 방법</strong>에 관한 것이다.</li>
+<li>동시성(Concurrency): 여러 일을 <strong>한꺼번에 다루는 문제</strong>에 관한 것이다.</li>
+</ul>
+<p>이 때 <strong>병렬성</strong>은 <strong>여러 프로세서</strong>가 <strong>동시에</strong> 여러 작업을 처리하는 것을 의미하고, <strong>동시성</strong>은 <strong>하나의 프로세서</strong>가 여러 작업을 <strong>번갈아</strong>가며 처리하는 것을 의미한다.[^1]</p>
+
+      <h4 id="즉,-go가-동시성을-처리하는-데-유리하다면-작업-간에-<strong>전환이-빠르다</strong>는-것을-의미한다.-그리고-go는-동시성을-처리하는-데-유리하게-<strong>설계</strong>된-언어이다[^3]">
+        <a name="즉,-go가-동시성을-처리하는-데-유리하다면-작업-간에-<strong>전환이-빠르다</strong>는-것을-의미한다.-그리고-go는-동시성을-처리하는-데-유리하게-<strong>설계</strong>된-언어이다[^3]" class="anchor" href="#즉,-go가-동시성을-처리하는-데-유리하다면-작업-간에-<strong>전환이-빠르다</strong>는-것을-의미한다.-그리고-go는-동시성을-처리하는-데-유리하게-<strong>설계</strong>된-언어이다[^3]">
+          <span class="header-link"></span>
+        </a>
+        즉, Go가 동시성을 처리하는 데 유리하다면 작업 간에 <strong>전환이 빠르다</strong>는 것을 의미한다. 그리고 Go는 동시성을 처리하는 데 유리하게 <strong>설계</strong>된 언어이다[^3]
+      </h4><hr>
+
+      <h2 id="기존의-동시성-처리-방법">
+        <a name="기존의-동시성-처리-방법" class="anchor" href="#기존의-동시성-처리-방법">
+          <span class="header-link"></span>
+        </a>
+        기존의 동시성 처리 방법
+      </h2><ul>
+<li><strong>멀티 태스킹</strong><ul>
+<li>여러 작업들을 <strong>번갈아가며 처리</strong>하는 것</li>
+<li><strong>시분할 시스템</strong>을 통해 <strong>CPU를 공유</strong>하여 여러 작업을 처리한다.</li>
+</ul>
+</li>
+<li><strong>스레드</strong>를 이용한 동시성 처리<ul>
+<li>스레드는 프로세스 내에서 <strong>코드 실행</strong>을 담당하는 <strong>최소의 단위</strong>이다.</li>
+</ul>
+</li>
+<li><strong>context switching</strong><ul>
+<li><strong>스레드</strong> 간에 <strong>전환</strong>을 하는 것</li>
+<li><strong>system call</strong>을 통해 <strong>커널</strong>에 요청을 하여 스레드를 전환한다.</li>
+<li>system call은 <strong>비용</strong>이 많이 든다.</li>
+</ul>
+</li>
+</ul>
+<hr>
+
+      <h2 id="goroutine:-go에서-스레드를-다루는-방법">
+        <a name="goroutine:-go에서-스레드를-다루는-방법" class="anchor" href="#goroutine:-go에서-스레드를-다루는-방법">
+          <span class="header-link"></span>
+        </a>
+        Goroutine: Go에서 스레드를 다루는 방법
+      </h2><ul>
+<li><strong>goroutine</strong>은 스레드가 아니라, <strong>runtime scheduler</strong>를 통해 관리된다.</li>
+<li><strong>runtime scheduler</strong>를 통해 <strong>system call</strong>을 더 <strong>적게</strong> 사용하고 동시성을 구현할 수 있다.</li>
+<li><strong>system call 필요한 연산</strong>이 생길 경우 발생하는 <strong>blocking</strong>은 runtime scheduler가 <strong>다른 goroutine</strong>으로 <strong>context switching</strong>해서 해결한다.[^2]</li>
+</ul>
+<hr>
+
+      <h2 id="channel:-goroutine-간의-통신">
+        <a name="channel:-goroutine-간의-통신" class="anchor" href="#channel:-goroutine-간의-통신">
+          <span class="header-link"></span>
+        </a>
+        Channel: Goroutine 간의 통신
+      </h2><ul>
+<li><strong>channel</strong>은 <strong>goroutine</strong> 간에 <strong>데이터를 주고 받는</strong> 방법이다.</li>
+<li><a target="_self" href="https://go.dev/doc/effective_go#chan_of_chan" title="null">할당하고 전달할 수 있는 1급 객체 값(first-class value)이다.</a><ul>
+<li><a target="_self" href="https://medium.com/@lazysoul/functional-programming-%EC%97%90%EC%84%9C-1%EA%B8%89-%EA%B0%9D%EC%B2%B4%EB%9E%80-ba1aeb048059" title="null">1급 객체란?</a><ul>
+<li><strong>변수/데이터</strong>에 할당할 수 있다.</li>
+<li>객체의 **인자(parameter)**로 사용할 수 있다.</li>
+<li>객체의 **반환값(return value)**으로 사용할 수 있다.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>장점<ul>
+<li><strong>동기화</strong>를 위해 <strong>mutex</strong>를 사용하지 않아도 된다.</li>
+<li><em>공유</em>가 아닌 <strong>소유권 이전</strong>이므로 <strong>데이터 레이스</strong>가 발생하지 않는다.</li>
+<li><strong>비동기</strong>로 데이터를 주고 받을 수 있다.</li>
+</ul>
+</li>
+<li>단점<ul>
+<li><strong>데이터를 주고 받는 비용</strong>이 발생한다.</li>
+<li><strong>성능</strong>이 mutex에 비해 <strong>떨어질 수 있다</strong></li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Channel</th>
+<th>Mutex</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>데이터의 소유권을 이전한다</td>
+<td>캐시</td>
+</tr>
+<tr>
+<td>일의 단위를 나누어서 처리한다</td>
+<td>상태</td>
+</tr>
+<tr>
+<td>비동기 결과를 소통한다</td>
+<td>데이터를 공유한다</td>
+</tr>
+</tbody></table>
+<hr>
+
+      <h2 id="결론">
+        <a name="결론" class="anchor" href="#결론">
+          <span class="header-link"></span>
+        </a>
+        결론
+      </h2><p><strong>GoLang</strong>은 태생적으로 <strong>동시성</strong>을 처리하기에 효율적인 방법을 고안하여 만들어진 언어이다. 이를 위해 <strong>Goroutine</strong>과 <strong>Channel</strong>과 같은 기능을 제공하고 있다. 이 때문에 Golang이 <strong>동시성을 처리하는 데 유리</strong>하다고 할 수 있다.</p>
+<hr>
+
+      <h2 id="의문점">
+        <a name="의문점" class="anchor" href="#의문점">
+          <span class="header-link"></span>
+        </a>
+        의문점
+      </h2><ul>
+<li><strong>다른 언어</strong>들은 어떻게 동시성을 처리하는가?</li>
+<li>어떤 점에서 이들은 Golang에 비해 동시성을 처리하는 것이 <strong>불편</strong>한가?</li>
+</ul>
+<hr>
+
+      <h2 id="참고자료">
+        <a name="참고자료" class="anchor" href="#참고자료">
+          <span class="header-link"></span>
+        </a>
+        참고자료
+      </h2><ul>
+<li><a target="_self" href="https://go.dev/doc/effective_go#concurrency" title="null">effective go - concurrency</a></li>
+<li><a target="_self" href="https://go.dev/wiki/MutexOrChannel" title="null">Mutex or Channel</a></li>
+<li><a target="_self" href="https://deview.kr/data/deview/session/attach/1_Inside%20React%20(%E1%84%83%E1%85%A9%E1%86%BC%E1%84%89%E1%85%B5%E1%84%89%E1%85%A5%E1%86%BC%E1%84%8B%E1%85%B3%E1%86%AF%20%E1%84%80%E1%85%AE%E1%84%92%E1%85%A7%E1%86%AB%E1%84%92%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB%20%E1%84%80%E1%85%B5%E1%84%89%E1%85%AE%E1%86%AF).pdf" title="null">동시성을 구현하는 기술</a></li>
+<li><a target="_self" href="https://seung.tistory.com/entry/GoLang-Go%EC%97%90%EC%84%9C-%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9D%B4%EB%9E%80" title="null">Go에서 동시성이란</a></li>
+<li><a target="_self" href="https://medium.com/@lazysoul/functional-programming-%EC%97%90%EC%84%9C-1%EA%B8%89-%EA%B0%9D%EC%B2%B4%EB%9E%80-ba1aeb048059" title="null">1급 객체란?</a></li>
+</ul>
+<p>[^1]: <a target="_self" href="https://velog.io/@kwontae1313/%EB%8F%99%EC%8B%9C%EC%84%B1%EA%B3%BC-%EB%B3%91%EB%A0%AC%EC%84%B1%EC%9D%98-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%B0%A8%EC%9D%B4" title="null">동시성과 병렬성의 개념 차이</a>
+[^2]: <a target="_self" href="https://velog.io/@hyeok3011/Goroutine" title="null">Golang은 왜 동시성에 좋다고 할까</a>
+[^3]: <a target="_self" href="https://go.dev/blog/waza-talk" title="null">Concurrency is not parallelism</a></p>
+</div><div style="display:flex;flex-direction:column;gap:1em"><div><a href="/개발이야기/Docker를 이용한 유용한 빌드 방법">이전 포스트: <!-- -->Docker를 이용한 유용한 빌드 방법</a></div><div style="text-align:right"><a href="/개발이야기/Locust vs k6 - 부하 테스트 도구 선택">다음 포스트: <!-- -->Locust vs k6 - 부하 테스트 도구 선택</a></div></div><div><button id="go-home" class="home-button-container">Home</button></div><div><button type="button" id="go-top" class="scroll-top" aria-label="top"></button></div><div><button type="button" id="go-bottom" class="scroll-bottom" aria-label="bottom"></button></div></div><hr/></main></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"postDataJson":{"postName":"2024-03-19-Golang은 동시성이 어떤 점에서 유리한가","fullPath":"/home/runner/work/kaestro.github.io/kaestro.github.io/_posts/개발/개발이야기/2024-03-19-Golang은 동시성이 어떤 점에서 유리한가.md","category":"개발이야기","title":"동시성(Concurrency)과 Golang","subtitle":"Golang은 진정 동시성을 처리하는 데 유리한가?","content":"\n## 개요\n\n컴퓨터에서 **여러 프로그램을 한꺼번에 처리**하는 방법 중에 **동시성**과 **병렬성**이 있다. **Golang**은 **동시성**을 처리하기에 용이하도록 설계한 언어로, 이를 위해 **Goroutine**, **Channel** 등의 기능을 제공한다. 해당 기능들 덕분에 Golang은 다른 언어에 비해 **동시성을 처리하는 데 유리하다**고 할 수 있다.\n\n---\n\n## 목차\n\n1. **동시성**이란: 병렬성 vs 동시성\n2. **기존**의 동시성 **처리 방법**: 멀티 태스킹, 스레드, context switching\n3. **Goroutine**: Go에서 스레드를 다루는 방법\n4. **Channel**: Goroutine 간의 통신\n5. **결론**: GoLang은 동시성 처리가 용이하게 설계됐고, **다른 언어에 없는 기능**을 통해 이를 실천하고 있다.\n6. **의문점**: 다른 언어들은 어떻게 동시성을 처리하는가?\n7. 참고자료\n\n---\n\n## 동시성이란\n\n### 병렬성 vs 동시성\n\n컴퓨터에서 **여러 작업**을 **동시**에 처리하는 방법에는 **병렬성**과 **동시성**이 있다. 이 때 병렬성과 동시성은 다음과 같이 정리할 수 있다.\n\n* 병렬성(Parallelism): 여러 일을 **한꺼번에 실행하는 방법**에 관한 것이다.\n* 동시성(Concurrency): 여러 일을 **한꺼번에 다루는 문제**에 관한 것이다.\n\n이 때 **병렬성**은 **여러 프로세서**가 **동시에** 여러 작업을 처리하는 것을 의미하고, **동시성**은 **하나의 프로세서**가 여러 작업을 **번갈아**가며 처리하는 것을 의미한다.[^1]\n\n#### 즉, Go가 동시성을 처리하는 데 유리하다면 작업 간에 **전환이 빠르다**는 것을 의미한다. 그리고 Go는 동시성을 처리하는 데 유리하게 **설계**된 언어이다[^3]\n\n---\n\n## 기존의 동시성 처리 방법\n\n* **멀티 태스킹**\n  * 여러 작업들을 **번갈아가며 처리**하는 것\n  * **시분할 시스템**을 통해 **CPU를 공유**하여 여러 작업을 처리한다.\n* **스레드**를 이용한 동시성 처리\n  * 스레드는 프로세스 내에서 **코드 실행**을 담당하는 **최소의 단위**이다.\n* **context switching**\n  * **스레드** 간에 **전환**을 하는 것\n  * **system call**을 통해 **커널**에 요청을 하여 스레드를 전환한다.\n  * system call은 **비용**이 많이 든다.\n\n---\n\n## Goroutine: Go에서 스레드를 다루는 방법\n\n* **goroutine**은 스레드가 아니라, **runtime scheduler**를 통해 관리된다.\n* **runtime scheduler**를 통해 **system call**을 더 **적게** 사용하고 동시성을 구현할 수 있다.\n* **system call 필요한 연산**이 생길 경우 발생하는 **blocking**은 runtime scheduler가 **다른 goroutine**으로 **context switching**해서 해결한다.[^2]\n\n---\n\n## Channel: Goroutine 간의 통신\n\n* **channel**은 **goroutine** 간에 **데이터를 주고 받는** 방법이다.\n* [할당하고 전달할 수 있는 1급 객체 값(first-class value)이다.](https://go.dev/doc/effective_go#chan_of_chan)\n  * [1급 객체란?](https://medium.com/@lazysoul/functional-programming-%EC%97%90%EC%84%9C-1%EA%B8%89-%EA%B0%9D%EC%B2%B4%EB%9E%80-ba1aeb048059)\n    * **변수/데이터**에 할당할 수 있다.\n    * 객체의 **인자(parameter)**로 사용할 수 있다.\n    * 객체의 **반환값(return value)**으로 사용할 수 있다.\n* 장점\n  * **동기화**를 위해 **mutex**를 사용하지 않아도 된다.\n  * *공유*가 아닌 **소유권 이전**이므로 **데이터 레이스**가 발생하지 않는다.\n  * **비동기**로 데이터를 주고 받을 수 있다.\n* 단점\n  * **데이터를 주고 받는 비용**이 발생한다.\n  * **성능**이 mutex에 비해 **떨어질 수 있다**\n\n| Channel | Mutex |\n| ------- | ----- |\n| 데이터의 소유권을 이전한다 | 캐시 |\n| 일의 단위를 나누어서 처리한다 | 상태 |\n| 비동기 결과를 소통한다 | 데이터를 공유한다 |\n\n---\n\n## 결론\n\n**GoLang**은 태생적으로 **동시성**을 처리하기에 효율적인 방법을 고안하여 만들어진 언어이다. 이를 위해 **Goroutine**과 **Channel**과 같은 기능을 제공하고 있다. 이 때문에 Golang이 **동시성을 처리하는 데 유리**하다고 할 수 있다.\n\n---\n\n## 의문점\n\n* **다른 언어**들은 어떻게 동시성을 처리하는가?\n* 어떤 점에서 이들은 Golang에 비해 동시성을 처리하는 것이 **불편**한가?\n\n---\n\n## 참고자료\n\n* [effective go - concurrency](https://go.dev/doc/effective_go#concurrency)\n* [Mutex or Channel](https://go.dev/wiki/MutexOrChannel)\n* [동시성을 구현하는 기술](https://deview.kr/data/deview/session/attach/1_Inside%20React%20(%E1%84%83%E1%85%A9%E1%86%BC%E1%84%89%E1%85%B5%E1%84%89%E1%85%A5%E1%86%BC%E1%84%8B%E1%85%B3%E1%86%AF%20%E1%84%80%E1%85%AE%E1%84%92%E1%85%A7%E1%86%AB%E1%84%92%E1%85%A1%E1%84%82%E1%85%B3%E1%86%AB%20%E1%84%80%E1%85%B5%E1%84%89%E1%85%AE%E1%86%AF).pdf)\n* [Go에서 동시성이란](https://seung.tistory.com/entry/GoLang-Go%EC%97%90%EC%84%9C-%EB%8F%99%EC%8B%9C%EC%84%B1%EC%9D%B4%EB%9E%80)\n* [1급 객체란?](https://medium.com/@lazysoul/functional-programming-%EC%97%90%EC%84%9C-1%EA%B8%89-%EA%B0%9D%EC%B2%B4%EB%9E%80-ba1aeb048059)\n\n[^1]: [동시성과 병렬성의 개념 차이](https://velog.io/@kwontae1313/%EB%8F%99%EC%8B%9C%EC%84%B1%EA%B3%BC-%EB%B3%91%EB%A0%AC%EC%84%B1%EC%9D%98-%EA%B0%9C%EB%85%90%EA%B3%BC-%EC%B0%A8%EC%9D%B4)\n[^2]: [Golang은 왜 동시성에 좋다고 할까](https://velog.io/@hyeok3011/Goroutine)\n[^3]: [Concurrency is not parallelism](https://go.dev/blog/waza-talk)\n","layout":"default","recommended":false,"data":{"layout":"default","classes":"wide","subtitle":"Golang은 진정 동시성을 처리하는 데 유리한가?","title":"동시성(Concurrency)과 Golang","date":"2024-03-19T00:00:00.000Z","categories":"개발이야기"}},"title":"동시성(Concurrency)과 Golang","category":"개발이야기","categories":["ETC","개발이야기","개발일지","디자인패턴","Algorithm","서평","WeeklyPosts","신변잡기","게임이야기"],"adjacentPosts":{"prev":{"title":"Docker를 이용한 유용한 빌드 방법","category":"개발이야기"},"next":{"title":"Locust vs k6 - 부하 테스트 도구 선택","category":"개발이야기"}}},"__N_SSG":true},"page":"/[category]/[title]","query":{"category":"개발이야기","title":"동시성(Concurrency)과 Golang"},"buildId":"x7KlanTMcx7BnykrAqYzT","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

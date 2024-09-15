@@ -1,0 +1,292 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="preload" href="/_next/static/css/9d2484721dfb0fa3.css" as="style"/><link rel="stylesheet" href="/_next/static/css/9d2484721dfb0fa3.css" data-n-g=""/><link rel="preload" href="/_next/static/css/d837742cb9035689.css" as="style"/><link rel="stylesheet" href="/_next/static/css/d837742cb9035689.css" data-n-p=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js"></script><script src="/_next/static/chunks/webpack-35b92941fc8726f9.js" defer=""></script><script src="/_next/static/chunks/framework-381da54bc5986544.js" defer=""></script><script src="/_next/static/chunks/main-d08cdb1c11d062c5.js" defer=""></script><script src="/_next/static/chunks/pages/_app-e6411096b10c6b62.js" defer=""></script><script src="/_next/static/chunks/441-45d334119e93ce4f.js" defer=""></script><script src="/_next/static/chunks/pages/%5Bcategory%5D/%5Btitle%5D-54be7db8139f8b64.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_buildManifest.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div><header class="page-header"><h1 class="project-name">API Server For ChatApplication</h1><h1 class="project-subtitle"></h1></header><main id="content" class="main-content"><div><aside id="category-list" aria-label="Category List"><h2>Categories</h2><ul><li><a href="/ETC">ETC</a></li><li><a href="/개발이야기">개발이야기</a></li><li><a href="/개발일지">개발일지</a></li><li><a href="/디자인패턴">디자인패턴</a></li><li><a href="/Algorithm">Algorithm</a></li><li><a href="/서평">서평</a></li><li><a href="/WeeklyPosts">WeeklyPosts</a></li><li><a href="/신변잡기">신변잡기</a></li><li><a href="/게임이야기">게임이야기</a></li></ul></aside><div>
+      <h2 id="개요">
+        <a name="개요" class="anchor" href="#개요">
+          <span class="header-link"></span>
+        </a>
+        개요
+      </h2><p>백엔드 개발에서 요구되는 능력들 중 <strong>실시간 통신, 데이터베이스 및 API 서버 구축, 인증 및 보안</strong> 등의 능력 향상을 목적으로 한 **<a target="_self" href="https://github.com/kaestro/chatapplication" title="null">채팅 어플리케이션 API 서버</a>**입니다.</p>
+<p>기초적인 채팅 메시지 전송 및 수신, 사용자 인증, 사용자 정보 관리에서 시작해, 최종적으로는 대규모 인원의 동시 접속 및 트래픽을 처리할 수 있는 서버를 구축하는 것을 목표로 하고 있습니다.</p>
+<p>최신의 테스트가 끝난 형태의 코드는 <strong>main branch</strong>에서, 테스트 진행중인 코드는 <strong>develop branch</strong>, 개발중인 기능은 <strong>feature branch</strong>에서 확인하실 수 있습니다.</p>
+<hr>
+
+      <h2 id="목차">
+        <a name="목차" class="anchor" href="#목차">
+          <span class="header-link"></span>
+        </a>
+        목차
+      </h2><ul>
+<li><a target="_self" href="#개요" title="null">개요</a></li>
+<li><a target="_self" href="#목차" title="null">목차</a></li>
+<li><a target="_self" href="#mvpmininum-viable-product" title="null">MVP(Mininum Viable Product)</a></li>
+<li><a target="_self" href="#기술-스택" title="null">기술 스택</a></li>
+<li><a target="_self" href="#구조" title="null">구조</a><ul>
+<li><a target="_self" href="#chat" title="null">chat</a></li>
+<li><a target="_self" href="#api" title="null">api</a></li>
+<li><a target="_self" href="#dbsession" title="null">db/session</a></li>
+</ul>
+</li>
+<li><a target="_self" href="#프로젝트-규칙" title="null">프로젝트 규칙</a><ul>
+<li><a target="_self" href="#코드-컨벤션" title="null">코드 컨벤션</a></li>
+<li><a target="_self" href="#git-branch-전략" title="null">git branch 전략</a></li>
+<li><a target="_self" href="#test" title="null">test</a></li>
+<li><a target="_self" href="#github-actions" title="null">github actions</a></li>
+</ul>
+</li>
+<li><a target="_self" href="#확장-계획" title="null">확장 계획</a><ul>
+<li><a target="_self" href="#1차-목표" title="null">1차 목표</a></li>
+<li><a target="_self" href="#2차-목표" title="null">2차 목표</a></li>
+</ul>
+</li>
+<li><a target="_self" href="#인프라-현상황-및-차후-구상" title="null">인프라 현상황 및 차후 구상</a></li>
+</ul>
+<hr>
+
+      <h2 id="mvp(mininum-viable-product)">
+        <a name="mvp(mininum-viable-product)" class="anchor" href="#mvp(mininum-viable-product)">
+          <span class="header-link"></span>
+        </a>
+        MVP(Mininum Viable Product)
+      </h2><p>현재 목표로 하는 채팅 프로그램의 가장 <strong>기본적인 기능</strong>은 다음과 같습니다.</p>
+<pre><code class="language-md">1. 로그인 및 회원가입
+2. 채팅방 생성 및 입장
+3. 채팅 메시지 전송 및 수신
+</code></pre>
+<hr>
+
+      <h2 id="기술-스택">
+        <a name="기술-스택" class="anchor" href="#기술-스택">
+          <span class="header-link"></span>
+        </a>
+        기술 스택
+      </h2><p>현재 진행 중인 프로젝트의 기술 스택은 다음과 같습니다.</p>
+<ul>
+<li>웹서버<ul>
+<li>goLang</li>
+<li>gin framework</li>
+</ul>
+</li>
+<li>데이터베이스<ul>
+<li>postgresql</li>
+</ul>
+</li>
+<li>세션 관리<ul>
+<li>redis</li>
+</ul>
+</li>
+<li>CI<ul>
+<li>github actions</li>
+<li>docker</li>
+</ul>
+</li>
+<li>형상관리<ul>
+<li>git</li>
+</ul>
+</li>
+</ul>
+<p>다중 접속자 간의 실시간 통신은 동시에 여러 사용자가 상호작용하는 웹서버를 구축해야하기 때문에, 이를 위해 동시성 처리에 유리한 goLang을 선택했습니다. gin framework는 goLang의 웹 프레임워크 중 사용이 간편하고 속도가 빠르다는 평가가 있어 선택했으며, 그 밖의 기술들은 기존에 제가 사용해 본 적이 있는 것들이거나 배우는 데에 많은 부하가 걸리지 않는 것들 위주로 선택했습니다.</p>
+<p>이들을 선택한 자세한 이유는 **<a target="_self" href="https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80/2024/03/19/Chat-Application-5%EC%A3%BC%EC%B0%A8-review.html" title="null">다음 포스트</a>**에서 확인하실 수 있습니다.</p>
+<hr>
+
+      <h2 id="구조">
+        <a name="구조" class="anchor" href="#구조">
+          <span class="header-link"></span>
+        </a>
+        구조
+      </h2><p>진행 중인 프로젝트의 구조는 크게 api, db/session, chat 3가지로 나누어져 있습니다.</p>
+<pre><code class="language-md">myapp
+├── api
+│   ├── handler
+│   ├── model
+│   └── service
+├── internal
+│   ├── db
+│   ├── chat
+│   └── session
+├── main.go
+└── go.mod
+</code></pre>
+
+      <h3 id="chat">
+        <a name="chat" class="anchor" href="#chat">
+          <span class="header-link"></span>
+        </a>
+        chat
+      </h3><p>chat 모듈은 사용자의 실시간 통신을 위한 내부 로직을 처리하는 중추적인 역할을 합니다. 사용자의 메시지 전송 및 수신, 채팅방의 생성 및 입장 등의 기능을 처리합니다. 구조는 다음과 같습니다.</p>
+<pre><code class="language-md">chat
+├── chatManager.go
+├── roomManager.go
+├── clientManager.go
+├── room.go
+├── roomClientHandler.go
+├── client.go
+└── clientSession.go
+</code></pre>
+<p><a target="_self" href="https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/chatManager.go" title="null">chatManager</a>는 chat 모듈 외부에서 chat 모듈을 사용하기 위한 인터페이스를 제공합니다.</p>
+<p><a target="_self" href="https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/roomManager.go" title="null">roomManager</a>/<a target="_self" href="https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/clientManager.go" title="null">clientManager</a>는 room/client의 생성 및 삭제와 같은 기능을 처리합니다.</p>
+<p><a target="_self" href="https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/room.go" title="null">room</a>은 채팅방을 나타내는 구조체로, 채팅방의 정보와 채팅방에 속한 클라이언트들을 관리합니다. 이 때 roomClientHandler를 통해 클라이언트에게 메시지를 전송하는 등의 상호작용을 처리합니다.</p>
+<p><a target="_self" href="https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/client.go" title="null">client</a>는 사용자를 나타내는 구조체로, 사용자의 정보와 사용자의 세션을 관리합니다. 이 때 clientSession을 통해 room에 메시지를 전송하는 등의 상호작용을 처리합니다.</p>
+
+      <h3 id="api">
+        <a name="api" class="anchor" href="#api">
+          <span class="header-link"></span>
+        </a>
+        api
+      </h3><pre><code class="language-plaintext">api
+│
+├───handlers
+│   ├───userHandler
+│   └───chatHandler
+│
+├───service
+│   ├───userService
+│   └───chatService
+│
+└───models
+</code></pre>
+<p>api는 사용자의 http request를 받아 처리하는 역할을 합니다. 사용자의 요청을 받아 처리하는 handler, 데이터베이스와 통신하는 model, 비즈니스 로직을 처리하는 service로 나누어져 있습니다.</p>
+<p>작성한 될 api의 종류에는 user의 인증, 채팅방의 생성 및 입장, 채팅 메시지의 전송 및 수신 등이 있습니다.</p>
+<p>주로 사용하는 기술 스택은 goLang과 gin framework입니다.</p>
+
+      <h3 id="db/session">
+        <a name="db/session" class="anchor" href="#db/session">
+          <span class="header-link"></span>
+        </a>
+        db/session
+      </h3><p><img src="/images/chatapplication%20%EC%86%8C%EA%B0%9C/db.png" alt="db">
+<img src="/images/chatapplication%20%EC%86%8C%EA%B0%9C/session.png" alt="session"></p>
+<p>db와 session은 데이터베이스와 세션을 관리하는 역할을 합니다. 데이터베이스는 사용자의 정보, 채팅방의 정보, 채팅 메시지 등을 저장하고, 세션은 사용자의 로그인 상태를 관리합니다.</p>
+<p>데이터베이스는 postgresql을 사용하고, 세션은 redis를 사용합니다. interface로 추상화돼 있어 추후 다른 데이터베이스나 세션 관리 시스템을 사용할 수 있도록 설계했고, factory 패턴을 사용해 데이터베이스와 세션을 생성합니다. 각각의 객체는 싱글톤 패턴을 사용해 객체를 생성하고 관리합니다.</p>
+<hr>
+
+      <h2 id="프로젝트-규칙">
+        <a name="프로젝트-규칙" class="anchor" href="#프로젝트-규칙">
+          <span class="header-link"></span>
+        </a>
+        프로젝트 규칙
+      </h2><p>프로젝트를 진행하면서 지키고자 하는 규칙은 다음과 같습니다.</p>
+
+      <h3 id="코드-컨벤션">
+        <a name="코드-컨벤션" class="anchor" href="#코드-컨벤션">
+          <span class="header-link"></span>
+        </a>
+        코드 컨벤션
+      </h3><ul>
+<li>goLang의 gofmt 규칙을 따른다</li>
+<li>single responsibility principle을 따른다</li>
+<li>변수명이 하는 역할을 명확하게 반영하도록 한다</li>
+</ul>
+
+      <h3 id="git-branch-전략">
+        <a name="git-branch-전략" class="anchor" href="#git-branch-전략">
+          <span class="header-link"></span>
+        </a>
+        git branch 전략
+      </h3><ul>
+<li>main branch는 통합 테스트가 완료된 안정적인 상태를 유지한다</li>
+<li>develop branch는 feature를 병합해서 테스트 중인 최신 상태를 유지한다.</li>
+<li>feature branch는 기능별로 나누어 작성한다</li>
+</ul>
+
+      <h3 id="test">
+        <a name="test" class="anchor" href="#test">
+          <span class="header-link"></span>
+        </a>
+        test
+      </h3><ul>
+<li>모든 코드는 unit test를 작성한다</li>
+<li>소스 코드의 test코드는 _test.go로 작성한다<ul>
+<li>ex) chat.go -&gt; chat_test.go</li>
+</ul>
+</li>
+<li>모든 코드는 테스트 통과 후 pull request를 진행한다</li>
+<li>테스트는 가능한 자동화한다</li>
+</ul>
+
+      <h3 id="github-actions">
+        <a name="github-actions" class="anchor" href="#github-actions">
+          <span class="header-link"></span>
+        </a>
+        github actions
+      </h3><ul>
+<li>develop/main branch에 대해 pull request가 올라오면 자동으로 <a target="_self" href="https://github.com/kaestro/ChatApplication/blob/main/.github/workflows/ci.yml" title="null">다음의 테스트</a>를 진행한다<ul>
+<li>docker 빌드</li>
+<li>웹서버 테스트</li>
+</ul>
+</li>
+</ul>
+<hr>
+
+      <h2 id="확장-계획">
+        <a name="확장-계획" class="anchor" href="#확장-계획">
+          <span class="header-link"></span>
+        </a>
+        확장 계획
+      </h2>
+      <h3 id="1차-목표">
+        <a name="1차-목표" class="anchor" href="#1차-목표">
+          <span class="header-link"></span>
+        </a>
+        1차 목표
+      </h3><p>최소한의 채팅 기능이 구현된 이후에는 채팅 기능은 아니지만, 부가적인 기능들과 최소 기능을 구현하는 과정에서 생긴 의문점과 TODO로 작성하고 넘어간 부분들을 해소하는 것을 목표로 하고 있습니다.</p>
+<ul>
+<li><p>부가적인 기능의 예시</p>
+<ul>
+<li>내부 로직 처리의 로그 기능 추가</li>
+<li>로그 기능의 debugging, running mode 추가</li>
+<li>미들웨어를 통한 반복적인 검증 로직 추가</li>
+<li><strong><a target="_self" href="https://github.com/kaestro/ChatApplication/issues" title="null">github issues</a></strong></li>
+</ul>
+</li>
+<li><p><strong><a target="_self" href="https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/Questions.md" title="null">의문점 예시</a></strong></p>
+<ul>
+<li>clientManager/roomManager는 얼마나 오랫동안, 얼마나 많은 client/room를 관리할 수 있는가?</li>
+<li>garbage collection을 통해 client/room을 어떻게 관리할 것인가?</li>
+<li>key의 충돌 등이 일어나는 예외 사항에 대한 처리는 어떻게 할 것인가?</li>
+</ul>
+</li>
+<li><p><strong><a target="_self" href="https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/TODO.md" title="null">TODO</a></strong></p>
+</li>
+</ul>
+
+      <h3 id="2차-목표">
+        <a name="2차-목표" class="anchor" href="#2차-목표">
+          <span class="header-link"></span>
+        </a>
+        2차 목표
+      </h3><p>1차 목표를 달성한 이후에는 <strong>대규모 인원과 트래픽을 처리</strong>할 수 있는 서버를 구축하는 것을 목표로 하고 있습니다.</p>
+<p><strong>목표</strong>로하고 있는 대규모 인원과 트래픽은 다음과 같이 <strong>정의</strong>했습니다.</p>
+<pre><code class="language-md">1. 15000명 이상의 동시 접속자 - steam 기준 인기 순위 100위의 동접자
+2. 분당 7000건 이상의 메시지 전송 - 아프리카 TV 기준 채팅방이 감당할 수 없었던 트래픽
+</code></pre>
+<p>이는 <strong>분당 1억건</strong> 이상의 메시지 전송을 처리할 수 있는 서버를 구축해야 한다는 것을 의미합니다. 이를 위해 추가적으로 <strong>도입할 계획이 있는 기술</strong>들은 다음과 같습니다.</p>
+<pre><code class="language-md">1. message queue
+2. load balancer
+3. nosql
+4. 부하 테스트
+</code></pre>
+<p>이 외에 유틸적인 측면 등에서 추가할 예정인 기능들은 다음 <a target="_self" href="https://github.com/kaestro/ChatApplication/wiki/%EC%B6%94%ED%9B%84-%EC%B6%94%EA%B0%80-%EA%B0%80%EB%8A%A5%ED%95%9C-%EB%B6%80%EB%B6%84%EB%93%A4" title="null">문서</a>를 참고해 주세요.</p>
+<hr>
+
+      <h2 id="인프라-현상황-및-차후-구상">
+        <a name="인프라-현상황-및-차후-구상" class="anchor" href="#인프라-현상황-및-차후-구상">
+          <span class="header-link"></span>
+        </a>
+        인프라 현상황 및 차후 구상
+      </h2><p>현재 진행 중인 프로젝트의 인프라 구성 및 <a target="_self" href="https://github.com/kaestro/ChatApplication/wiki/%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EB%8F%84" title="null">설계도</a>는 다음과 같습니다.</p>
+<p><img src="https://camo.githubusercontent.com/b0ca2b60dbacab06d3aa600efaec77524fd96b74f9b7059b74288cac6c9ab486/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f6578706f72743d646f776e6c6f61642669643d3176483557387a384d6333764a6262384e566b75384f704f687049686e6259477a" alt="image"></p>
+<pre><code class="language-md">1. github actions
+2. docker
+3. go web server
+4. postgresql
+5. redis
+</code></pre>
+<p>차후 구상중인 인프라 구성 및 설계도는 다음과 같습니다.</p>
+<p><img src="https://github.com/kaestro/ChatApplication/assets/32026095/5d97f107-028d-476d-803e-e64a1f86e078" alt="image"></p>
+<pre><code class="language-md">1. load balancer
+2. message queue
+3. nosql
+4. 부하 테스트
+5. cloud server
+</code></pre>
+<hr>
+</div><div style="display:flex;flex-direction:column;gap:1em"><div><a href="/개발일지/ChatApplication Review(8)">이전 포스트: <!-- -->ChatApplication Review(8)</a></div><div style="text-align:right"><a href="/개발일지/ChatApplication Review(9)">다음 포스트: <!-- -->ChatApplication Review(9)</a></div></div><div><button id="go-home" class="home-button-container">Home</button></div><div><button type="button" id="go-top" class="scroll-top" aria-label="top"></button></div><div><button type="button" id="go-bottom" class="scroll-bottom" aria-label="bottom"></button></div></div><hr/></main></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"postDataJson":{"postName":"2024-04-12-Chat Application Readme","fullPath":"/home/runner/work/kaestro.github.io/kaestro.github.io/_posts/개발/개발일지/Chat Application 개발일지/2024-04-12-Chat Application Readme.md","category":"개발일지","title":"API Server For ChatApplication","subtitle":"","content":"\n## 개요\n\n백엔드 개발에서 요구되는 능력들 중 **실시간 통신, 데이터베이스 및 API 서버 구축, 인증 및 보안** 등의 능력 향상을 목적으로 한 **[채팅 어플리케이션 API 서버](https://github.com/kaestro/chatapplication)**입니다.\n\n기초적인 채팅 메시지 전송 및 수신, 사용자 인증, 사용자 정보 관리에서 시작해, 최종적으로는 대규모 인원의 동시 접속 및 트래픽을 처리할 수 있는 서버를 구축하는 것을 목표로 하고 있습니다.\n\n최신의 테스트가 끝난 형태의 코드는 **main branch**에서, 테스트 진행중인 코드는 **develop branch**, 개발중인 기능은 **feature branch**에서 확인하실 수 있습니다.\n\n---\n\n## 목차\n\n- [개요](#개요)\n- [목차](#목차)\n- [MVP(Mininum Viable Product)](#mvpmininum-viable-product)\n- [기술 스택](#기술-스택)\n- [구조](#구조)\n  - [chat](#chat)\n  - [api](#api)\n  - [db/session](#dbsession)\n- [프로젝트 규칙](#프로젝트-규칙)\n  - [코드 컨벤션](#코드-컨벤션)\n  - [git branch 전략](#git-branch-전략)\n  - [test](#test)\n  - [github actions](#github-actions)\n- [확장 계획](#확장-계획)\n  - [1차 목표](#1차-목표)\n  - [2차 목표](#2차-목표)\n- [인프라 현상황 및 차후 구상](#인프라-현상황-및-차후-구상)\n\n---\n\n## MVP(Mininum Viable Product)\n\n현재 목표로 하는 채팅 프로그램의 가장 **기본적인 기능**은 다음과 같습니다.\n\n```md\n1. 로그인 및 회원가입\n2. 채팅방 생성 및 입장\n3. 채팅 메시지 전송 및 수신\n```\n\n---\n\n## 기술 스택\n\n현재 진행 중인 프로젝트의 기술 스택은 다음과 같습니다.\n\n- 웹서버\n  - goLang\n  - gin framework\n- 데이터베이스\n  - postgresql\n- 세션 관리\n  - redis\n- CI\n  - github actions\n  - docker\n- 형상관리\n  - git\n\n다중 접속자 간의 실시간 통신은 동시에 여러 사용자가 상호작용하는 웹서버를 구축해야하기 때문에, 이를 위해 동시성 처리에 유리한 goLang을 선택했습니다. gin framework는 goLang의 웹 프레임워크 중 사용이 간편하고 속도가 빠르다는 평가가 있어 선택했으며, 그 밖의 기술들은 기존에 제가 사용해 본 적이 있는 것들이거나 배우는 데에 많은 부하가 걸리지 않는 것들 위주로 선택했습니다.\n\n이들을 선택한 자세한 이유는 **[다음 포스트](https://kaestro.github.io/%EA%B0%9C%EB%B0%9C%EC%9D%BC%EC%A7%80/2024/03/19/Chat-Application-5%EC%A3%BC%EC%B0%A8-review.html)**에서 확인하실 수 있습니다.\n\n---\n\n## 구조\n\n진행 중인 프로젝트의 구조는 크게 api, db/session, chat 3가지로 나누어져 있습니다.\n\n```md\nmyapp\n├── api\n│   ├── handler\n│   ├── model\n│   └── service\n├── internal\n│   ├── db\n│   ├── chat\n│   └── session\n├── main.go\n└── go.mod\n```\n\n### chat\n\nchat 모듈은 사용자의 실시간 통신을 위한 내부 로직을 처리하는 중추적인 역할을 합니다. 사용자의 메시지 전송 및 수신, 채팅방의 생성 및 입장 등의 기능을 처리합니다. 구조는 다음과 같습니다.\n\n```md\nchat\n├── chatManager.go\n├── roomManager.go\n├── clientManager.go\n├── room.go\n├── roomClientHandler.go\n├── client.go\n└── clientSession.go\n```\n\n[chatManager](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/chatManager.go)는 chat 모듈 외부에서 chat 모듈을 사용하기 위한 인터페이스를 제공합니다.\n\n[roomManager](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/roomManager.go)/[clientManager](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/clientManager.go)는 room/client의 생성 및 삭제와 같은 기능을 처리합니다.\n\n[room](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/room.go)은 채팅방을 나타내는 구조체로, 채팅방의 정보와 채팅방에 속한 클라이언트들을 관리합니다. 이 때 roomClientHandler를 통해 클라이언트에게 메시지를 전송하는 등의 상호작용을 처리합니다.\n\n[client](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/chat/client.go)는 사용자를 나타내는 구조체로, 사용자의 정보와 사용자의 세션을 관리합니다. 이 때 clientSession을 통해 room에 메시지를 전송하는 등의 상호작용을 처리합니다.\n\n### api\n\n```plaintext\napi\n│\n├───handlers\n│   ├───userHandler\n│   └───chatHandler\n│\n├───service\n│   ├───userService\n│   └───chatService\n│\n└───models\n```\n\napi는 사용자의 http request를 받아 처리하는 역할을 합니다. 사용자의 요청을 받아 처리하는 handler, 데이터베이스와 통신하는 model, 비즈니스 로직을 처리하는 service로 나누어져 있습니다.\n\n작성한 될 api의 종류에는 user의 인증, 채팅방의 생성 및 입장, 채팅 메시지의 전송 및 수신 등이 있습니다.\n\n주로 사용하는 기술 스택은 goLang과 gin framework입니다.\n\n### db/session\n\n![db](/images/chatapplication%20소개/db.png)\n![session](/images/chatapplication%20소개/session.png)\n\ndb와 session은 데이터베이스와 세션을 관리하는 역할을 합니다. 데이터베이스는 사용자의 정보, 채팅방의 정보, 채팅 메시지 등을 저장하고, 세션은 사용자의 로그인 상태를 관리합니다.\n\n데이터베이스는 postgresql을 사용하고, 세션은 redis를 사용합니다. interface로 추상화돼 있어 추후 다른 데이터베이스나 세션 관리 시스템을 사용할 수 있도록 설계했고, factory 패턴을 사용해 데이터베이스와 세션을 생성합니다. 각각의 객체는 싱글톤 패턴을 사용해 객체를 생성하고 관리합니다.\n\n---\n\n## 프로젝트 규칙\n\n프로젝트를 진행하면서 지키고자 하는 규칙은 다음과 같습니다.\n\n### 코드 컨벤션\n\n- goLang의 gofmt 규칙을 따른다\n- single responsibility principle을 따른다\n- 변수명이 하는 역할을 명확하게 반영하도록 한다\n\n### git branch 전략\n\n- main branch는 통합 테스트가 완료된 안정적인 상태를 유지한다\n- develop branch는 feature를 병합해서 테스트 중인 최신 상태를 유지한다.\n- feature branch는 기능별로 나누어 작성한다\n\n### test\n\n- 모든 코드는 unit test를 작성한다\n- 소스 코드의 test코드는 _test.go로 작성한다\n  - ex) chat.go -\u003e chat_test.go\n- 모든 코드는 테스트 통과 후 pull request를 진행한다\n- 테스트는 가능한 자동화한다\n\n### github actions\n\n- develop/main branch에 대해 pull request가 올라오면 자동으로 [다음의 테스트](https://github.com/kaestro/ChatApplication/blob/main/.github/workflows/ci.yml)를 진행한다\n  - docker 빌드\n  - 웹서버 테스트\n\n---\n\n## 확장 계획\n\n### 1차 목표\n\n최소한의 채팅 기능이 구현된 이후에는 채팅 기능은 아니지만, 부가적인 기능들과 최소 기능을 구현하는 과정에서 생긴 의문점과 TODO로 작성하고 넘어간 부분들을 해소하는 것을 목표로 하고 있습니다.\n\n- 부가적인 기능의 예시\n  - 내부 로직 처리의 로그 기능 추가\n  - 로그 기능의 debugging, running mode 추가\n  - 미들웨어를 통한 반복적인 검증 로직 추가\n  - **[github issues](https://github.com/kaestro/ChatApplication/issues)**\n\n- **[의문점 예시](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/Questions.md)**\n  - clientManager/roomManager는 얼마나 오랫동안, 얼마나 많은 client/room를 관리할 수 있는가?\n  - garbage collection을 통해 client/room을 어떻게 관리할 것인가?\n  - key의 충돌 등이 일어나는 예외 사항에 대한 처리는 어떻게 할 것인가?\n\n- **[TODO](https://github.com/kaestro/ChatApplication/blob/main/myapp/internal/TODO.md)**\n\n### 2차 목표\n\n1차 목표를 달성한 이후에는 **대규모 인원과 트래픽을 처리**할 수 있는 서버를 구축하는 것을 목표로 하고 있습니다.\n\n**목표**로하고 있는 대규모 인원과 트래픽은 다음과 같이 **정의**했습니다.\n\n```md\n1. 15000명 이상의 동시 접속자 - steam 기준 인기 순위 100위의 동접자\n2. 분당 7000건 이상의 메시지 전송 - 아프리카 TV 기준 채팅방이 감당할 수 없었던 트래픽\n```\n\n이는 **분당 1억건** 이상의 메시지 전송을 처리할 수 있는 서버를 구축해야 한다는 것을 의미합니다. 이를 위해 추가적으로 **도입할 계획이 있는 기술**들은 다음과 같습니다.\n\n```md\n1. message queue\n2. load balancer\n3. nosql\n4. 부하 테스트\n```\n\n이 외에 유틸적인 측면 등에서 추가할 예정인 기능들은 다음 [문서](https://github.com/kaestro/ChatApplication/wiki/%EC%B6%94%ED%9B%84-%EC%B6%94%EA%B0%80-%EA%B0%80%EB%8A%A5%ED%95%9C-%EB%B6%80%EB%B6%84%EB%93%A4)를 참고해 주세요.\n\n---\n\n## 인프라 현상황 및 차후 구상\n\n현재 진행 중인 프로젝트의 인프라 구성 및 [설계도](https://github.com/kaestro/ChatApplication/wiki/%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%84%A4%EA%B3%84%EB%8F%84)는 다음과 같습니다.\n\n![image](https://camo.githubusercontent.com/b0ca2b60dbacab06d3aa600efaec77524fd96b74f9b7059b74288cac6c9ab486/68747470733a2f2f64726976652e676f6f676c652e636f6d2f75633f6578706f72743d646f776e6c6f61642669643d3176483557387a384d6333764a6262384e566b75384f704f687049686e6259477a)\n\n```md\n1. github actions\n2. docker\n3. go web server\n4. postgresql\n5. redis\n```\n\n차후 구상중인 인프라 구성 및 설계도는 다음과 같습니다.\n\n![image](https://github.com/kaestro/ChatApplication/assets/32026095/5d97f107-028d-476d-803e-e64a1f86e078)\n\n```md\n1. load balancer\n2. message queue\n3. nosql\n4. 부하 테스트\n5. cloud server\n```\n\n---\n","layout":"default","recommended":true,"data":{"layout":"default","classes":"wide","title":"API Server For ChatApplication","date":"2024-04-12T00:00:00.000Z","categories":"개발일지","recommended":true,"subtitle":""}},"title":"API Server For ChatApplication","category":"개발일지","categories":["ETC","개발이야기","개발일지","디자인패턴","Algorithm","서평","WeeklyPosts","신변잡기","게임이야기"],"adjacentPosts":{"prev":{"title":"ChatApplication Review(8)","category":"개발일지"},"next":{"title":"ChatApplication Review(9)","category":"개발일지"}}},"__N_SSG":true},"page":"/[category]/[title]","query":{"category":"개발일지","title":"API Server For ChatApplication"},"buildId":"x7KlanTMcx7BnykrAqYzT","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

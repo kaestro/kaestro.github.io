@@ -1,0 +1,94 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="preload" href="/_next/static/css/9d2484721dfb0fa3.css" as="style"/><link rel="stylesheet" href="/_next/static/css/9d2484721dfb0fa3.css" data-n-g=""/><link rel="preload" href="/_next/static/css/d837742cb9035689.css" as="style"/><link rel="stylesheet" href="/_next/static/css/d837742cb9035689.css" data-n-p=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js"></script><script src="/_next/static/chunks/webpack-35b92941fc8726f9.js" defer=""></script><script src="/_next/static/chunks/framework-381da54bc5986544.js" defer=""></script><script src="/_next/static/chunks/main-d08cdb1c11d062c5.js" defer=""></script><script src="/_next/static/chunks/pages/_app-e6411096b10c6b62.js" defer=""></script><script src="/_next/static/chunks/441-45d334119e93ce4f.js" defer=""></script><script src="/_next/static/chunks/pages/%5Bcategory%5D/%5Btitle%5D-54be7db8139f8b64.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_buildManifest.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div><header class="page-header"><h1 class="project-name">4월 4주차 알고리즘 문제</h1><h1 class="project-subtitle">gap 채우기, sum of all odd length subarrays</h1></header><main id="content" class="main-content"><div><aside id="category-list" aria-label="Category List"><h2>Categories</h2><ul><li><a href="/ETC">ETC</a></li><li><a href="/개발이야기">개발이야기</a></li><li><a href="/개발일지">개발일지</a></li><li><a href="/디자인패턴">디자인패턴</a></li><li><a href="/Algorithm">Algorithm</a></li><li><a href="/서평">서평</a></li><li><a href="/WeeklyPosts">WeeklyPosts</a></li><li><a href="/신변잡기">신변잡기</a></li><li><a href="/게임이야기">게임이야기</a></li></ul></aside><div>
+      <h3 id="목차">
+        <a name="목차" class="anchor" href="#목차">
+          <span class="header-link"></span>
+        </a>
+        목차
+      </h3><ul>
+<li><a target="_self" href="#정렬된-수-사이에-gap을-채우기" title="null">정렬된 수 사이에 gap을 채우기</a></li>
+<li><a target="_self" href="#sum-of-all-odd-length-subarrays" title="null">sum of all odd length subarrays</a></li>
+</ul>
+<hr>
+
+      <h2 id="정렬된-수-사이에-gap을-채우기">
+        <a name="정렬된-수-사이에-gap을-채우기" class="anchor" href="#정렬된-수-사이에-gap을-채우기">
+          <span class="header-link"></span>
+        </a>
+        정렬된 수 사이에 gap을 채우기
+      </h2><ul>
+<li><p><a target="_self" href="https://leetcode.com/problems/maximum-element-after-decreasing-and-rearranging/description/" title="null">문제 링크</a></p>
+</li>
+<li><p><a target="_self" href="https://github.com/kaestro/algorithms_v3/commit/4d05a526eabd8241f08d206d321e807fa5017fb8" title="null">내 풀이</a></p>
+</li>
+<li><p>문제 요약</p>
+<ul>
+<li>주어진 integer array에서 각 요소를 재배열하거나 작아지게 하는 연산을 통해 각 element 간의 차이가 1 이하가 되도록 만들 때, 마지막 요소의 최대값을 구하라.</li>
+</ul>
+</li>
+<li><p>풀이 요약</p>
+<ul>
+<li>기존 풀이<ul>
+<li>각 수를 set으로 만들어 정렬한다</li>
+<li>수 사이의 gap을 찾는다.</li>
+<li>gap이 1 이상인 경우, gap을 채운다.</li>
+</ul>
+</li>
+<li>개선 풀이<ul>
+<li>수를 정렬한다.</li>
+<li>이전 수와 현재 수의 차이가 1 이상인 경우, 현재 수를 이전 수 + 1로 만든다.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">def maximumElementAfterDecrementingAndRearranging(arr: List[int]) -&gt; int:
+  arr sort()
+  prev = 0
+  for i in range(1, len(arr)):
+      if arr[i] - arr[prev] &gt; 1:
+          arr[i] = arr[prev] + 1
+      prev = i
+
+  return arr[-1]
+</code></pre>
+<hr>
+
+      <h2 id="sum-of-all-odd-length-subarrays">
+        <a name="sum-of-all-odd-length-subarrays" class="anchor" href="#sum-of-all-odd-length-subarrays">
+          <span class="header-link"></span>
+        </a>
+        sum of all odd length subarrays
+      </h2><ul>
+<li><p><a target="_self" href="https://leetcode.com/problems/sum-of-all-odd-length-subarrays/" title="null">문제 링크</a></p>
+</li>
+<li><p><a target="_self" href="https://github.com/kaestro/algorithms_v3/commit/cd8f5cd113d3a4f802efe154e84989e8746f9ab9" title="null">내 풀이</a></p>
+</li>
+<li><p>문제 요약</p>
+<ul>
+<li>주어진 integer array에서 odd length subarray의 합을 구하라.</li>
+</ul>
+</li>
+<li><p>기존 풀이</p>
+<ul>
+<li>prefix sum을 구한다.</li>
+<li>이를 이용해 odd length subarray의 합을 구한다.</li>
+<li>Time complexity: $$O(n^2)$$</li>
+</ul>
+</li>
+<li><p><a target="_self" href="https://leetcode.com/problems/sum-of-all-odd-length-subarrays/solutions/854184/java-c-python-o-n-time-o-1-space/?source=submission-ac" title="null">개선 풀이</a></p>
+<ul>
+<li>arr[k]가 포함된 subarray의 개수는 $$(k+1) * (n-k)$$이다.</li>
+<li>따라서, arr[k]가 포함된 subarray의 합은 $$arr[k] * (k+1) * (n-k)$$이다.</li>
+<li>이 중 홀수 길이의 subarray의 갯수는 전체 길이가 홀수인 경우 짝수보다 1개 더 많다.</li>
+<li>Time complexity: $$O(n)$$</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">def sumOddLengthSubarrays(arr: List[int]) -&gt; int:
+  n = len(arr)
+  ans = 0
+  for i in range(n):
+      ans += ((i + 1) * (n - i) + 1) // 2 * arr[i]
+  return ans
+</code></pre>
+</div><div style="display:flex;flex-direction:column;gap:1em"><div><a href="/Algorithm/4월 3주차 알고리즘 문제">이전 포스트: <!-- -->4월 3주차 알고리즘 문제</a></div><div style="text-align:right"><a href="/Algorithm/4월 5주차 알고리즘 문제">다음 포스트: <!-- -->4월 5주차 알고리즘 문제</a></div></div><div><button id="go-home" class="home-button-container">Home</button></div><div><button type="button" id="go-top" class="scroll-top" aria-label="top"></button></div><div><button type="button" id="go-bottom" class="scroll-bottom" aria-label="bottom"></button></div></div><hr/></main></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"postDataJson":{"postName":"2024-04-21-4월 4주차 알고리즘 문제","fullPath":"/home/runner/work/kaestro.github.io/kaestro.github.io/_posts/개발/Algorithm/Weekly Algorithms/2024-04-21-4월 4주차 알고리즘 문제.md","category":"Algorithm","title":"4월 4주차 알고리즘 문제","subtitle":"gap 채우기, sum of all odd length subarrays","content":"\n### 목차\n\n- [정렬된 수 사이에 gap을 채우기](#정렬된-수-사이에-gap을-채우기)\n- [sum of all odd length subarrays](#sum-of-all-odd-length-subarrays)\n\n---\n\n## 정렬된 수 사이에 gap을 채우기\n\n- [문제 링크](https://leetcode.com/problems/maximum-element-after-decreasing-and-rearranging/description/)\n- [내 풀이](https://github.com/kaestro/algorithms_v3/commit/4d05a526eabd8241f08d206d321e807fa5017fb8)\n\n- 문제 요약\n  - 주어진 integer array에서 각 요소를 재배열하거나 작아지게 하는 연산을 통해 각 element 간의 차이가 1 이하가 되도록 만들 때, 마지막 요소의 최대값을 구하라.\n- 풀이 요약\n  - 기존 풀이\n    - 각 수를 set으로 만들어 정렬한다\n    - 수 사이의 gap을 찾는다.\n    - gap이 1 이상인 경우, gap을 채운다.\n  - 개선 풀이\n    - 수를 정렬한다.\n    - 이전 수와 현재 수의 차이가 1 이상인 경우, 현재 수를 이전 수 + 1로 만든다.\n\n```python\ndef maximumElementAfterDecrementingAndRearranging(arr: List[int]) -\u003e int:\n  arr sort()\n  prev = 0\n  for i in range(1, len(arr)):\n      if arr[i] - arr[prev] \u003e 1:\n          arr[i] = arr[prev] + 1\n      prev = i\n\n  return arr[-1]\n```\n\n---\n\n## sum of all odd length subarrays\n\n- [문제 링크](https://leetcode.com/problems/sum-of-all-odd-length-subarrays/)\n- [내 풀이](https://github.com/kaestro/algorithms_v3/commit/cd8f5cd113d3a4f802efe154e84989e8746f9ab9)\n\n- 문제 요약\n  - 주어진 integer array에서 odd length subarray의 합을 구하라.\n- 기존 풀이\n  - prefix sum을 구한다.\n  - 이를 이용해 odd length subarray의 합을 구한다.\n  - Time complexity: $$O(n^2)$$\n- [개선 풀이](https://leetcode.com/problems/sum-of-all-odd-length-subarrays/solutions/854184/java-c-python-o-n-time-o-1-space/?source=submission-ac)\n  - arr[k]가 포함된 subarray의 개수는 $$(k+1) * (n-k)$$이다.\n  - 따라서, arr[k]가 포함된 subarray의 합은 $$arr[k] * (k+1) * (n-k)$$이다.\n  - 이 중 홀수 길이의 subarray의 갯수는 전체 길이가 홀수인 경우 짝수보다 1개 더 많다.\n  - Time complexity: $$O(n)$$\n\n```python\ndef sumOddLengthSubarrays(arr: List[int]) -\u003e int:\n  n = len(arr)\n  ans = 0\n  for i in range(n):\n      ans += ((i + 1) * (n - i) + 1) // 2 * arr[i]\n  return ans\n```\n","layout":"mathjax","recommended":false,"data":{"layout":"mathjax","classes":"wide","title":"4월 4주차 알고리즘 문제","subtitle":"gap 채우기, sum of all odd length subarrays","date":"2024-04-21T00:00:00.000Z","categories":"Algorithm"}},"title":"4월 4주차 알고리즘 문제","category":"Algorithm","categories":["ETC","개발이야기","개발일지","디자인패턴","Algorithm","서평","WeeklyPosts","신변잡기","게임이야기"],"adjacentPosts":{"prev":{"title":"4월 3주차 알고리즘 문제","category":"Algorithm"},"next":{"title":"4월 5주차 알고리즘 문제","category":"Algorithm"}}},"__N_SSG":true},"page":"/[category]/[title]","query":{"category":"Algorithm","title":"4월 4주차 알고리즘 문제"},"buildId":"x7KlanTMcx7BnykrAqYzT","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="preload" href="/_next/static/css/9d2484721dfb0fa3.css" as="style"/><link rel="stylesheet" href="/_next/static/css/9d2484721dfb0fa3.css" data-n-g=""/><link rel="preload" href="/_next/static/css/d837742cb9035689.css" as="style"/><link rel="stylesheet" href="/_next/static/css/d837742cb9035689.css" data-n-p=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-78c92fac7aa8fdd8.js"></script><script src="/_next/static/chunks/webpack-35b92941fc8726f9.js" defer=""></script><script src="/_next/static/chunks/framework-381da54bc5986544.js" defer=""></script><script src="/_next/static/chunks/main-d08cdb1c11d062c5.js" defer=""></script><script src="/_next/static/chunks/pages/_app-e6411096b10c6b62.js" defer=""></script><script src="/_next/static/chunks/441-45d334119e93ce4f.js" defer=""></script><script src="/_next/static/chunks/pages/%5Bcategory%5D/%5Btitle%5D-54be7db8139f8b64.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_buildManifest.js" defer=""></script><script src="/_next/static/x7KlanTMcx7BnykrAqYzT/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div><header class="page-header"><h1 class="project-name">5월 2주차 포스트</h1><h1 class="project-subtitle">rate limit, retry 전략, 자기연민</h1></header><div class="flex justify-between"><main id="content" class="main-content" style="text-indent:0.7em"><div><aside id="category-list" aria-label="Category List"><h2>Categories</h2><ul><li><a href="/ETC">ETC</a></li><li><a href="/개발이야기">개발이야기</a></li><li><a href="/개발일지">개발일지</a></li><li><a href="/디자인패턴">디자인패턴</a></li><li><a href="/Algorithm">Algorithm</a></li><li><a href="/서평">서평</a></li><li><a href="/WeeklyPosts">WeeklyPosts</a></li><li><a href="/신변잡기">신변잡기</a></li><li><a href="/게임이야기">게임이야기</a></li></ul></aside><div>
+      <h3 id="목차">
+        <a name="목차" class="anchor" href="#목차">
+          <span class="header-link"></span>
+        </a>
+        목차
+      </h3><ul>
+<li><a target="_self" href="#rate-limit이란" title="null">Rate Limit이란</a></li>
+<li><a target="_self" href="#retry-전략-exponential-backoff-jitter" title="null">Retry 전략: Exponential Backoff, jitter</a></li>
+<li><a target="_self" href="#self-compassion-is-the-motivator-youre-missing" title="null">Self-compassion is the motivator you’re missing</a></li>
+</ul>
+<hr>
+
+      <h2 id="rate-limit이란">
+        <a name="rate-limit이란" class="anchor" href="#rate-limit이란">
+          <span class="header-link"></span>
+        </a>
+        Rate Limit이란
+      </h2><p><a target="_self" href="https://etloveguitar.tistory.com/126" title="null">포스트 링크</a></p>
+<p>rate limit은 서비스가 트래픽을 제어하기 위해 사용하는 방법 중 하나로, 서비스에 대한 요청을 제한하는 것이다.
+ 예를 들어 서비스의 트래픽이 10초당 100개로 제한되어 있다면, 10초에 100개 이상의 요청을 보내면 서비스는 요청을
+ 거부할 것이다.</p>
+<p>rate limit이 필요한 이유는 서비스의 안정성과 성능을 보장하고, 과도한 트래픽으로부터 서비스를 보호하는 등의
+ 서비스의 안정성을 보장하기 위함이다. rate limit은 서비스의 트래픽을 제어하기 위해 throttling 방법이라 할 수
+ 있으며 방법에는 다음과 같은 것들이 있다.</p>
+<ol>
+<li>Hard throttling: 트래픽이 제한을 초과하면 요청을 거부한다.</li>
+<li>Soft throttling: 트래픽이 제한을 특정 비율 이상 초과하면 요청을 거부한다.</li>
+<li>Dynamic throttling: 트래픽이 제한을 초과해도 서버 상태에 따라 요청을 처리할 수 있다.</li>
+</ol>
+<hr>
+
+      <h2 id="retry-전략:-exponential-backoff,-jitter">
+        <a name="retry-전략:-exponential-backoff,-jitter" class="anchor" href="#retry-전략:-exponential-backoff,-jitter">
+          <span class="header-link"></span>
+        </a>
+        Retry 전략: Exponential Backoff, jitter
+      </h2><p><a target="_self" href="https://jungseob86.tistory.com/12" title="null">포스트 링크</a></p>
+<p>retry 전략은 서비스의 안정성을 보장하기 위해 사용하는 방법 중 하나로, 서비스에 대한 요청이 실패했을 때
+ 다시 시도하는 방법이다. 예를 들어 통신 상태 장애로 인해 요청 혹은 응답이 실패했을 때, 일정 시간 후에
+ 클라이언트/서버가 다시 같은 요청/응답을 시도하는 것이다.</p>
+<p>retry 전략에는 여러 가지가 있는데 그 중에서 exponential backoff과 jitter가 있다. exponential backoff은
+ 재시도 간격을 지수적으로 증가시키는 방법이다. 예를 들어 1초, 2초, 4초, 8초, ... 와 같이 시간 간격을
+ 늘려가며 재시도하는 것이다. 이 방법은 서버의 부하를 줄이고, 서비스의 안정성을 보장하기 위해 사용된다.</p>
+<p>jitter는 재시도 간격을 랜덤하게 설정하는 방법이다. exponential backoff은 재시도 간격이 일정하게 증가하는
+ 반면, jitter는 재시도 간격을 랜덤하게 설정하여 서버의 부하를 분산시키고, 서비스의 안정성을 보장하기 위해
+ 사용된다.</p>
+<hr>
+
+      <h2 id="self-compassion-is-the-motivator-you’re-missing">
+        <a name="self-compassion-is-the-motivator-you’re-missing" class="anchor" href="#self-compassion-is-the-motivator-you’re-missing">
+          <span class="header-link"></span>
+        </a>
+        Self-compassion is the motivator you’re missing
+      </h2><p><a target="_self" href="https://medium.com/behavior-design/studies-show-self-compassion-is-the-motivator-youre-missing-affbceaf5ee3" title="null">포스트 링크</a></p>
+<p>자기에 대해 비판적인 태도를 가지고 징계하거나, 자신을 비난하거나, 자신을 비굴하게 만드는 것은 자신의 성장과
+발전을 방해할 수 있으며, 오히려 자기에 대한 자비로운 태도를 가지는 것은 자신의 성장과 발전을 도울 수 있다는
+내용의 포스트이다.</p>
+<p>만약 본인이 아니라 친구가 실패하고 힘든 경험을 했을 때에 그 친구에게 꾸짖는 말을 하지 않을 것이라면, 그것은
+자신에게도 적용되어야 한다. 자기에게 자비롭게 대하고, 비판을 하기 전에 한번 숨을 돌리고 만약 친구에게라면
+어떻게 대할 지 한 번 생각해보는 것으로 자신에게도 자비롭게 대할 수 있다.</p>
+</div><div style="display:flex;flex-direction:column;gap:1em"><div><a href="/WeeklyPosts/5월 1주차 포스트">이전 포스트: <!-- -->5월 1주차 포스트</a></div></div><div><button id="go-home" class="home-button-container">Home</button></div><div><button type="button" id="go-top" class="scroll-top" aria-label="top"></button></div><div><button type="button" id="go-bottom" class="scroll-bottom" aria-label="bottom"></button></div></div><hr/></main></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"postDataJson":{"postName":"2024-05-12-Post reviews","fullPath":"/home/runner/work/kaestro.github.io/kaestro.github.io/_posts/글 후기/Weekly Posts/2024-quarter-2nd/2024-05-12-Post reviews.md","category":"WeeklyPosts","title":"5월 2주차 포스트","subtitle":"rate limit, retry 전략, 자기연민","content":"\n### 목차\n\n- [Rate Limit이란](#rate-limit이란)\n- [Retry 전략: Exponential Backoff, jitter](#retry-전략-exponential-backoff-jitter)\n- [Self-compassion is the motivator you’re missing](#self-compassion-is-the-motivator-youre-missing)\n\n---\n\n## Rate Limit이란\n\n[포스트 링크](https://etloveguitar.tistory.com/126)\n\nrate limit은 서비스가 트래픽을 제어하기 위해 사용하는 방법 중 하나로, 서비스에 대한 요청을 제한하는 것이다.\n 예를 들어 서비스의 트래픽이 10초당 100개로 제한되어 있다면, 10초에 100개 이상의 요청을 보내면 서비스는 요청을\n 거부할 것이다.\n\nrate limit이 필요한 이유는 서비스의 안정성과 성능을 보장하고, 과도한 트래픽으로부터 서비스를 보호하는 등의\n 서비스의 안정성을 보장하기 위함이다. rate limit은 서비스의 트래픽을 제어하기 위해 throttling 방법이라 할 수\n 있으며 방법에는 다음과 같은 것들이 있다.\n\n 1. Hard throttling: 트래픽이 제한을 초과하면 요청을 거부한다.\n 2. Soft throttling: 트래픽이 제한을 특정 비율 이상 초과하면 요청을 거부한다.\n 3. Dynamic throttling: 트래픽이 제한을 초과해도 서버 상태에 따라 요청을 처리할 수 있다.\n\n---\n\n## Retry 전략: Exponential Backoff, jitter\n\n[포스트 링크](https://jungseob86.tistory.com/12)\n\nretry 전략은 서비스의 안정성을 보장하기 위해 사용하는 방법 중 하나로, 서비스에 대한 요청이 실패했을 때\n 다시 시도하는 방법이다. 예를 들어 통신 상태 장애로 인해 요청 혹은 응답이 실패했을 때, 일정 시간 후에\n 클라이언트/서버가 다시 같은 요청/응답을 시도하는 것이다.\n\nretry 전략에는 여러 가지가 있는데 그 중에서 exponential backoff과 jitter가 있다. exponential backoff은\n 재시도 간격을 지수적으로 증가시키는 방법이다. 예를 들어 1초, 2초, 4초, 8초, ... 와 같이 시간 간격을\n 늘려가며 재시도하는 것이다. 이 방법은 서버의 부하를 줄이고, 서비스의 안정성을 보장하기 위해 사용된다.\n\njitter는 재시도 간격을 랜덤하게 설정하는 방법이다. exponential backoff은 재시도 간격이 일정하게 증가하는\n 반면, jitter는 재시도 간격을 랜덤하게 설정하여 서버의 부하를 분산시키고, 서비스의 안정성을 보장하기 위해\n 사용된다.\n\n---\n\n## Self-compassion is the motivator you’re missing\n\n[포스트 링크](https://medium.com/behavior-design/studies-show-self-compassion-is-the-motivator-youre-missing-affbceaf5ee3)\n\n자기에 대해 비판적인 태도를 가지고 징계하거나, 자신을 비난하거나, 자신을 비굴하게 만드는 것은 자신의 성장과\n발전을 방해할 수 있으며, 오히려 자기에 대한 자비로운 태도를 가지는 것은 자신의 성장과 발전을 도울 수 있다는\n내용의 포스트이다.\n\n만약 본인이 아니라 친구가 실패하고 힘든 경험을 했을 때에 그 친구에게 꾸짖는 말을 하지 않을 것이라면, 그것은\n자신에게도 적용되어야 한다. 자기에게 자비롭게 대하고, 비판을 하기 전에 한번 숨을 돌리고 만약 친구에게라면\n어떻게 대할 지 한 번 생각해보는 것으로 자신에게도 자비롭게 대할 수 있다.\n","layout":"산문","recommended":false,"data":{"layout":"산문","classes":"wide","title":"5월 2주차 포스트","subtitle":"rate limit, retry 전략, 자기연민","date":"2024-05-12T00:00:00.000Z","categories":"WeeklyPosts"}},"title":"5월 2주차 포스트","category":"WeeklyPosts","categories":["ETC","개발이야기","개발일지","디자인패턴","Algorithm","서평","WeeklyPosts","신변잡기","게임이야기"],"adjacentPosts":{"prev":{"title":"5월 1주차 포스트","category":"WeeklyPosts"},"next":null}},"__N_SSG":true},"page":"/[category]/[title]","query":{"category":"WeeklyPosts","title":"5월 2주차 포스트"},"buildId":"x7KlanTMcx7BnykrAqYzT","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>
