@@ -1,9 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  i18n: {
-    locales: ['ko'],
-    defaultLocale: 'ko',
-  },
   webpack: (config, { dev, isServer }) => {
     if (dev && !isServer) {
       // 파일 시스템 감시 문제 해결을 위한 설정
