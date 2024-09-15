@@ -14,6 +14,7 @@ const nextConfig = {
     }
     return config;
   },
+  output: 'export',  // 정적 사이트 생성을 위한 설정 추가
 };
 
 export default nextConfig;
