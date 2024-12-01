@@ -280,6 +280,7 @@ DEPENDENCIES
   csv
   github-pages
   jekyll-feed
+  jekyll-redirect-from
   jekyll-sitemap (~> 1.4)
   jekyll-spaceship
   jekyll-theme-cayman
