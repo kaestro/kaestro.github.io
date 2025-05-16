@@ -1,4 +1,4 @@
 ---
 layout: front
-title: Kaestro's 대장간
+title: Kaestro's агитпункт
 ---
