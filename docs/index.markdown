@@ -1,4 +1,4 @@
 ---
 layout: front
-title: Kaestro's агитпункт
+title: Kaestro's Shire
 ---
