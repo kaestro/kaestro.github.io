@@ -6,7 +6,6 @@ subtitle: ""
 date: 2025-05-19
 categories: "개발일지"
 published: true
-recommended: true
 series: "Game Server Development"
 seriesIndex: 1
 ---
