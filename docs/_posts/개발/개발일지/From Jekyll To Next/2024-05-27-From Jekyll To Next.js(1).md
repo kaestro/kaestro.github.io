@@ -6,7 +6,6 @@ subtitle: "포스트 읽고 게시하기"
 date: 2024-05-27
 categories: "개발일지"
 published: true
-recommended: true
 series: "From Jekyll To Next"
 seriesIndex: 1
 ---
