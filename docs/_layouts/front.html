@@ -111,26 +111,48 @@
                 {% if series_name %}
                   {% assign series_posts = category_posts | where: "series", series_name %}
                   {% assign series_posts = series_posts | sort: "date" | reverse %}
-                  {% assign recent_posts = recent_posts | push: series_posts.first %}
+                  {% for series_post in series_posts %}
+                    {% unless series_post.subtitle contains '작성중' %}
+                      {% assign recent_posts = recent_posts | push: series_post %}
+                      {% break %}
+                    {% endunless %}
+                  {% endfor %}
                 {% endif %}
               {% endfor %}
 
               {% assign non_series_posts = category_posts | where_exp: "post", "post.series == nil" %}
               {% assign non_series_posts = non_series_posts | sort: "date" | reverse %}
-              {% assign recent_posts = recent_posts | concat: non_series_posts %}
+              {% assign filtered_non_series = "" | split: "" %}
+              {% for post in non_series_posts %}
+                {% unless post.subtitle contains '작성중' %}
+                  {% assign filtered_non_series = filtered_non_series | push: post %}
+                {% endunless %}
+              {% endfor %}
+              {% assign recent_posts = recent_posts | concat: filtered_non_series %}
               {% assign recent_posts = recent_posts | sort: "date" | reverse %}
 
               {% for post in recent_posts limit: 5 %}
-                {% if post.series %}
-                  {% assign series_posts = category_posts | where: "series", post.series %}
-                  {% assign min_index = series_posts | map: "seriesIndex" | sort | first %}
-                  {% assign max_index = series_posts | map: "seriesIndex" | sort | last %}
-                  {% assign first_post_in_series = series_posts | where_exp: "post", "post.seriesIndex == min_index" | first %}
-                  <li><a href="{{ first_post_in_series.url }}">{{ post.series }} ({{ min_index }} ~ {{ max_index }})</a></li>
-                {% else %}
-                  <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-                {% endif %}
-                {% assign count = count | plus: 1 %}
+                {% unless post.subtitle contains '작성중' %}
+                  {% if post.series %}
+                    {% assign series_posts = category_posts | where: "series", post.series %}
+                    {% assign filtered_series_posts = "" | split: "" %}
+                    {% for series_post in series_posts %}
+                      {% unless series_post.subtitle contains '작성중' %}
+                        {% assign filtered_series_posts = filtered_series_posts | push: series_post %}
+                      {% endunless %}
+                    {% endfor %}
+                    {% if filtered_series_posts.size > 0 %}
+                      {% assign min_index = filtered_series_posts | map: "seriesIndex" | sort | first %}
+                      {% assign max_index = filtered_series_posts | map: "seriesIndex" | sort | last %}
+                      {% assign first_post_in_series = filtered_series_posts | where_exp: "post", "post.seriesIndex == min_index" | first %}
+                      <li><a href="{{ first_post_in_series.url }}">{{ post.series }} ({{ min_index }} ~ {{ max_index }})</a></li>
+                      {% assign count = count | plus: 1 %}
+                    {% endif %}
+                  {% else %}
+                    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+                    {% assign count = count | plus: 1 %}
+                  {% endif %}
+                {% endunless %}
               {% endfor %}
             </ul>
             <a href="/categories/{{ category_name }}">See all posts({{ site.categories[category_name] | size }}) in {{ category_name }}</a>
