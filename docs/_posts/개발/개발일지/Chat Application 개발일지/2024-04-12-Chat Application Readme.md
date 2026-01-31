@@ -4,7 +4,6 @@ classes: wide
 title: "API Server For ChatApplication"
 date: 2024-04-12
 categories: 개발일지
-recommended: true
 ---
 
 ## 개요
