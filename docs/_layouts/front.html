@@ -42,16 +42,7 @@
       {% endif %}
     </header>
 
-    <aside id="category-list" aria-label="Category List">
-      <h2>Categories</h2>
-      <ul>
-        {% for category in site.categories %}
-          {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' or category[0] == 'WeeklyPosts' or category[0] == 'ETC' or category[0] == 'Algorithm' or category[0] == '디자인패턴' %}
-            <li><a href="/categories/{{ category[0] }}">{{ category[0] }}</a></li>
-          {% endunless %}
-        {% endfor %}
-      </ul>
-    </aside>
+    {% include category-sidebar.html %}
 
     <aside id="recent-posts" aria-label="recent-posts">
       <h2>최신 글</h2>
@@ -59,7 +50,7 @@
       {% assign count = 0 %}
       {% for post in recent_posts %}
         {% unless post.categories[0] contains '작성중' or post.subtitle contains '작성중' %}
-          <a href="{{ post.url }}">{{ post.title }}</a><br>
+          <a href="{{ post.url }}">{{ post.title }}</a>
           {% assign count = count | plus: 1 %}
           {% if count >= 10 %}
             {% break %}
@@ -72,6 +63,7 @@
     <script src="/javascripts/homeButton.js" defer></script>
     <script src="/javascripts/recentPostsScroller.js" defer></script>
     <script src="/javascripts/categoryScroller.js" defer></script>
+    <script src="/javascripts/headerLinkScroller.js" defer></script>
 
     <main id="content" class="main-content">
 
@@ -203,7 +195,7 @@
     </div>
 
     <button type="button" id="go-top" class="scroll-top" aria-label="top"></button>
-    <button type="button" id="go-home" class="home-button" aria-label="home">홈으로</button>
+    <button type="button" id="go-home" class="home-button" aria-label="home"></button>
     <button type="button" id="go-bottom" class="scroll-bottom" aria-label="bottom"></button>
 
     </main>

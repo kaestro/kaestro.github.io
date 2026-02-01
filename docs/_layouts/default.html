@@ -36,16 +36,7 @@
       {% endif %}
     </header>
 
-    <aside id="category-list" aria-label="Category List">
-      <h2>Categories</h2>
-      <ul>
-        {% for category in site.categories %}
-          {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' %}
-            <li><a href="/categories/{{ category[0] }}">{{ category[0] }}</a></li>
-          {% endunless %}
-        {% endfor %}
-      </ul>
-    </aside>
+    {% include category-sidebar.html %}
 
     <button type="button" id="header-links-toggler">목차 열기</button>
 
@@ -60,52 +51,56 @@
           {{ page.date | date: "%Y-%m-%d" }}
         </div>
 
-        <!-- 관련 포스트 섹션 -->
-        <section class="related-posts">
-          <h3>관련 글</h3>
-          <ul>
-            {% if page.series %}
-              {% assign related = site.posts | where: "series", page.series | where_exp: "post", "post.url != page.url" %}
-            {% else %}
-              {% assign related = site.posts | where: "categories", page.categories[0] | where_exp: "post", "post.url != page.url" %}
-            {% endif %}
-            {% for post in related limit: 3 %}
-              {% unless post.subtitle contains '작성중' %}
-                <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-              {% endunless %}
+        <!-- 포스트 하단 네비게이션 영역 -->
+        <div class="post-footer-nav">
+          <!-- 관련 포스트 섹션 -->
+          <section class="related-posts">
+            <h3>관련 글</h3>
+            <ul>
+              {% if page.series %}
+                {% assign related = site.posts | where: "series", page.series | where_exp: "post", "post.url != page.url" %}
+              {% else %}
+                {% assign related = site.posts | where: "categories", page.categories[0] | where_exp: "post", "post.url != page.url" %}
+              {% endif %}
+              {% for post in related limit: 3 %}
+                {% unless post.subtitle contains '작성중' %}
+                  <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+                {% endunless %}
+              {% endfor %}
+            </ul>
+          </section>
+
+          <!-- 이전/다음 글 네비게이션 -->
+          <nav class="post-navigation">
+            {% assign next = nil %}
+            {% for post in site.posts reversed limit:1000 %}
+              {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date > page.date %}
+                {% unless post.subtitle contains '작성중' or post.series != nil and post.seriesIndex != 1 %}
+                  {% assign next = post %}
+                  {% break %}
+                {% endunless %}
+              {% endif %}
             {% endfor %}
-          </ul>
-        </section>
 
-        <div class="post-navigation">
-          {% assign next = nil %}
-          {% for post in site.posts reversed limit:1000 %}
-            {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date > page.date %}
-              {% unless post.subtitle contains '작성중' or post.series != nil and post.seriesIndex != 1 %}
-                {% assign next = post %}
-                {% break %}
-              {% endunless %}
+            {% assign prev = nil %}
+            {% for post in site.posts limit:1000 %}
+              {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date < page.date%}
+                {% unless post.subtitle contains '작성중' or post.series != nil and post.seriesIndex != 1%}
+                  {% assign prev = post %}
+                  {% break %}
+                {% endunless %}
+              {% endif %}
+            {% endfor %}
+
+            {% if prev %}
+              <a href="{{ site.baseurl }}{{ prev.url }}" class="prev-post">이전 글: {{ prev.title }}</a>
             {% endif %}
-          {% endfor %}
 
-          {% assign prev = nil %}
-          {% for post in site.posts limit:1000 %}
-            {% if post.categories[0] == page.categories[0] and post.title != page.title and post.date < page.date%}
-              {% unless post.subtitle contains '작성중' or post.series != nil and post.seriesIndex != 1%}
-                {% assign prev = post %}
-                {% break %}
-              {% endunless %}
+            {% if next %}
+              <a href="{{ site.baseurl }}{{ next.url }}" class="next-post">다음 글: {{ next.title }}</a>
             {% endif %}
-          {% endfor %}
-
-          {% if prev %}
-            <a href="{{ site.baseurl }}{{ prev.url }}" class="prev">←이전 글: {{ prev.title }} </a>
-          {% endif %}
-
-          {% if next %}
-            <a href="{{ site.baseurl }}{{ next.url }}" class="right-align">다음 글: {{ next.title }} →</a>
-          {% endif %}
-          <a href="{{ site.baseurl }}/categories/{{ page.categories[0] }}" class="back-to-category">카테고리로 돌아가기 ↩</a>
+            <a href="{{ site.baseurl }}/categories/{{ page.categories[0] }}" class="back-to-category">↩ 카테고리로 돌아가기</a>
+          </nav>
         </div>
 
         {% if site.disqus.shortname %}
@@ -132,7 +127,7 @@
 
 
     <button type="button" id="go-top" class="scroll-top" aria-label="top"></button>
-    <button type="button" id="go-home" class="home-button" aria-label="home">홈으로</button>
+    <button type="button" id="go-home" class="home-button" aria-label="home"></button>
     <button type="button" id="go-bottom" class="scroll-bottom" aria-label="bottom"></button>
 
   </body>

@@ -29,20 +29,12 @@
       {% endif %}
     </header>
 
-    <aside id="category-list">
-      <h2>Categories</h2>
-      <ul>
-        {% for category in site.categories %}
-          {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' %}
-            <li><a href="/categories/{{ category[0] }}">{{ category[0] }}</a></li>
-          {% endunless %}
-        {% endfor %}
-      </ul>
-    </aside>
+    {% include category-sidebar.html %}
 
     <script src="/javascripts/scrollButtons.js" defer></script>
     <script src="/javascripts/homeButton.js" defer></script>
     <script src="/javascripts/categoryScroller.js" defer></script>
+    <script src="/javascripts/headerLinkScroller.js" defer></script>
 
     <main id="content" class="main-content">
         {{ content }}
@@ -63,7 +55,7 @@
     </main>
 
     <button type="button" id="go-top" class="scroll-top" aria-label="top"></button>
-    <button type="button" id="go-home" class="home-button" aria-label="home">홈으로</button>
+    <button type="button" id="go-home" class="home-button" aria-label="home"></button>
     <button type="button" id="go-bottom" class="scroll-bottom" aria-label="bottom"></button>
 
   </body>

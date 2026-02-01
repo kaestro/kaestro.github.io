@@ -1,0 +1,23 @@
+<!-- _includes/category-sidebar.html -->
+<aside id="category-list" aria-label="Category List">
+  <h2>Categories</h2>
+  <ul>
+    {% for category in site.categories %}
+      {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' or category[0] == 'WeeklyPosts' or category[0] == 'ETC' or category[0] == 'Algorithm' or category[0] == '디자인패턴' %}
+        <li><a href="/categories/{{ category[0] }}">{{ category[0] }}</a></li>
+      {% endunless %}
+    {% endfor %}
+  </ul>
+
+  <!-- 서랍: 추가 카테고리 -->
+  <details class="sidebar-drawer">
+    <summary>더 보기</summary>
+    <ul>
+      {% for category in site.categories %}
+        {% if category[0] == 'WeeklyPosts' or category[0] == 'ETC' or category[0] == 'Algorithm' or category[0] == '디자인패턴' %}
+          <li><a href="/categories/{{ category[0] }}">{{ category[0] }}</a></li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </details>
+</aside>
