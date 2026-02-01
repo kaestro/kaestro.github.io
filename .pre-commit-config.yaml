@@ -14,7 +14,7 @@ repos:
     hooks:
       - id: prettier
         types: [markdown]
-        files: ^docs/_posts/리더십여정/.*\.md$
+        files: ^docs/_posts/.*\.md$
         args: ['--prose-wrap', 'always', '--print-width', '80']
 
 ci:
