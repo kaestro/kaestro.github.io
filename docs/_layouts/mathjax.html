@@ -15,11 +15,11 @@
     <link rel="stylesheet" href="{{ '/assets/css/myStyleSheet.css' | relative_url }}">
     {% include head-custom.html %}
 
-    <script src="/javascripts/scrollButtons.js"></script>
-    <script src="/javascripts/homeButton.js"></script>
-    <script src="/javascripts/tocGenerator.js"></script>
-    <script src="/javascripts/categoryScroller.js"></script>
-    <script src="/javascripts/headerLinkScroller.js"></script>
+    <script src="/javascripts/scrollButtons.js" defer></script>
+    <script src="/javascripts/homeButton.js" defer></script>
+    <script src="/javascripts/tocGenerator.js" defer></script>
+    <script src="/javascripts/categoryScroller.js" defer></script>
+    <script src="/javascripts/headerLinkScroller.js" defer></script>
     <script type="text/x-mathjax-config"> MathJax.Hub.Config({ tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} }); </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML" async></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8092870876042010" crossorigin="anonymous"></script>
@@ -67,6 +67,23 @@
         <div class="date-right-align">
           {{ page.date | date: "%Y-%m-%d" }}
         </div>
+
+        <!-- 관련 포스트 섹션 -->
+        <section class="related-posts">
+          <h3>관련 글</h3>
+          <ul>
+            {% if page.series %}
+              {% assign related = site.posts | where: "series", page.series | where_exp: "post", "post.url != page.url" %}
+            {% else %}
+              {% assign related = site.posts | where: "categories", page.categories[0] | where_exp: "post", "post.url != page.url" %}
+            {% endif %}
+            {% for post in related limit: 3 %}
+              {% unless post.subtitle contains '작성중' %}
+                <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+              {% endunless %}
+            {% endfor %}
+          </ul>
+        </section>
 
         <div class="post-navigation">
           {% assign next = nil %}

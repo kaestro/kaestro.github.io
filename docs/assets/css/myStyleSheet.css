@@ -248,6 +248,47 @@ a:not(h1):not(h2):not(h3):not(h4):not(h5):not(h6):not(ul a):not(ol a) {
   text-align: right;
 }
 
+/* 관련 포스트 섹션 스타일 */
+.related-posts {
+  margin-top: 3em;
+  padding: 1.5em;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #157878;
+}
+
+.related-posts h3 {
+  margin-top: 0;
+  margin-bottom: 1em;
+  color: #157878;
+  font-size: 1.1em;
+}
+
+.related-posts ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.related-posts ul li {
+  padding: 0.5em 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.related-posts ul li:last-child {
+  border-bottom: none;
+}
+
+.related-posts ul li a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.related-posts ul li a:hover {
+  color: #157878;
+}
+
 @media screen {
   p {
     margin-bottom: 3vh !important;

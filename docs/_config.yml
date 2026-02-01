@@ -8,12 +8,33 @@ github_username:  kaestro
 title: Kaestro's 대장간
 description: 프로그래밍을 단련하고, 기록하는 공간
 
+# SEO 강화 설정
+lang: ko-KR
+locale: ko_KR
+
+# 소셜 미디어 메타데이터
+twitter:
+  card: summary_large_image
+
+author:
+  name: Kaestro
+  url: https://kaestro.github.io/about
+
+# 포스트 기본값 설정
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      author: Kaestro
+      image: /images/default-og-image.png
+
 # Build settings
 theme: jekyll-theme-cayman
 plugins:
-  # - jekyll-feed
+  - jekyll-feed
   - jekyll-sitemap
-  # - jekyll-spaceship
+  - jekyll-seo-tag
   - jekyll-redirect-from
 
 google_site_verification: "swFW3uc8I4itY8f-nuRC4KyC8OevDsMkTn_SnB_sOGE"

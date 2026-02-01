@@ -1,0 +1,105 @@
+<!-- head-custom.html: SEO 및 성능 최적화 -->
+
+<!-- Canonical URL -->
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+
+<!-- JSON-LD 구조화 데이터: WebSite (홈페이지) -->
+{% if page.layout == 'front' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ site.title }}",
+  "url": "{{ site.url }}",
+  "description": "{{ site.description }}",
+  "author": {
+    "@type": "Person",
+    "name": "Kaestro"
+  }
+}
+</script>
+{% endif %}
+
+<!-- JSON-LD 구조화 데이터: BlogPosting (포스트) -->
+{% if page.layout == 'default' or page.layout == 'series' or page.layout == 'mathjax' or page.layout == 'mermaid' or page.layout == '산문' or page.layout == 'series_mathjax' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ page.title | escape }}",
+  "description": "{{ page.excerpt | default: page.content | strip_html | truncate: 160 | escape }}",
+  "datePublished": "{{ page.date | date_to_xmlschema }}",
+  "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+  "author": {
+    "@type": "Person",
+    "name": "Kaestro",
+    "url": "{{ site.url }}/about"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.title }}",
+    "url": "{{ site.url }}"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.url | absolute_url }}"
+  }
+  {% if page.image %}
+  ,"image": {
+    "@type": "ImageObject",
+    "url": "{{ page.image | absolute_url }}"
+  }
+  {% endif %}
+}
+</script>
+
+<!-- BreadcrumbList 구조화 데이터 -->
+{% if page.categories %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "홈",
+      "item": "{{ site.url }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ page.categories[0] }}",
+      "item": "{{ site.url }}/categories/{{ page.categories[0] }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "{{ page.title | escape }}"
+    }
+  ]
+}
+</script>
+{% endif %}
+{% endif %}
+
+<!-- Open Graph 보완 태그 -->
+<meta property="og:locale" content="ko_KR">
+{% if page.image %}
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ page.title | escape }}">
+{% endif %}
+
+<!-- 추가 메타 태그 -->
+<meta name="author" content="Kaestro">
+<meta name="robots" content="index, follow">
+
+<!-- 이미지 Lazy Loading 자동 적용 -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('img:not([loading])').forEach(function(img) {
+    img.setAttribute('loading', 'lazy');
+  });
+});
+</script>
