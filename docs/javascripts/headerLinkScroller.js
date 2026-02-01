@@ -2,6 +2,14 @@
 // 사이드바(목차, 카테고리)를 본문 영역 기준으로 동적 배치
 
 (function() {
+    // === 레이아웃 상수 정의 ===
+    var SIDEBAR_WIDTH = 180;           // 카테고리 사이드바 CSS 너비
+    var SIDEBAR_PADDING = 32;          // padding: 1em * 2
+    var SIDEBAR_BORDER = 2;            // border: 1px * 2
+    var SIDEBAR_TOTAL_WIDTH = SIDEBAR_WIDTH + SIDEBAR_PADDING + SIDEBAR_BORDER; // 214px
+    var MIN_GAP = 20;                  // 본문과 사이드바 최소 간격
+    var MIN_LEFT_MARGIN = 10;          // 화면 왼쪽 끝 최소 간격
+
     var headerLinks = document.getElementById('header-links');
     var headerLinksToggler = document.getElementById('header-links-toggler');
     var categoryList = document.getElementById('category-list');
@@ -49,12 +57,19 @@
 
         // 카테고리 사이드바 - 본문 왼쪽에 배치
         if (categoryList) {
-            var leftPosition = rect.left - 200;
-            // 화면 왼쪽 끝을 넘지 않도록
-            if (leftPosition < 10) {
+            // 사이드바가 필요로 하는 최소 공간 계산
+            var requiredSpace = SIDEBAR_TOTAL_WIDTH + MIN_GAP + MIN_LEFT_MARGIN;
+
+            // 공간 부족 시 숨김 처리
+            if (rect.left < requiredSpace) {
                 categoryList.style.visibility = 'hidden';
+                categoryList.style.pointerEvents = 'none';
             } else {
+                // 사이드바 오른쪽 끝이 본문에서 MIN_GAP만큼 떨어지도록 배치
+                var leftPosition = rect.left - MIN_GAP - SIDEBAR_TOTAL_WIDTH;
+
                 categoryList.style.visibility = '';
+                categoryList.style.pointerEvents = '';
                 categoryList.style.left = leftPosition + 'px';
                 categoryList.style.top = topValue + 'px';
             }
