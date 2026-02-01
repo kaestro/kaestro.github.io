@@ -3,20 +3,26 @@
     "allow": [
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(timeout 10 tail:*)",
-      "Bash(curl:*)",
-      "Bash(ls -la \"c:\\\\Users\\\\didme\\\\Documents\\\\repositories\\\\kaestro.github.io\\\\docs\\\\_site\\\\개발일지\\\\2026\\\\01\\\\12\"\" 2>&1 || echo \"디렉토리 없음 \")",
-      "Bash(ls:*)",
-      "Bash(grep:*)",
-      "Bash(find:*)",
-      "Bash(timeout 12 tail:*)",
-      "Bash(timeout 15 tail:*)",
-      "Bash(bundle exec jekyll build:*)",
-      "Bash(python3:*)",
       "Bash(git push:*)",
       "Bash(git mv:*)",
       "Bash(git config:*)",
-      "Bash(pre-commit:*)"
+      "Bash(git diff-tree:*)",
+      "Bash(ls:*)",
+      "Bash(grep:*)",
+      "Bash(find:*)",
+      "Bash(curl:*)",
+      "Bash(timeout:*)",
+      "Bash(bundle exec jekyll build:*)",
+      "Bash(python3:*)",
+      "Bash(pre-commit:*)",
+      "Bash(npm install:*)",
+      "Bash(claude:*)",
+      "Bash(bash scripts/check_recommended.sh:*)",
+      "Bash(bash:*)",
+      "Bash(ruby:*)",
+      "Bash(perl:*)",
+      "Bash(chmod:*)",
+      "Bash(git rm:*)"
     ]
   }
 }
