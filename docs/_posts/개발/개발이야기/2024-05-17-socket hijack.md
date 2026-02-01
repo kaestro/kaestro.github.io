@@ -3,6 +3,7 @@ layout: 산문
 classes: wide
 title: "hijack - 웹소켓 도둑놈, 아니 도둑님 잡아라"
 subtitle: "웹 소켓을 위한 통신 프로토콜"
+description: "웹소켓 연결 과정과 hijack 개념. HTTP에서 WebSocket으로 프로토콜 전환"
 date: 2024-05-17
 categories: 개발이야기
 ---

@@ -3,6 +3,7 @@ layout: 산문
 classes: wide
 title: "CallBack, Promise, Async, Await"
 subtitle: "javascript에서 비동기 처리를 다루는 방법"
+description: "JavaScript 비동기 처리의 진화. 콜백에서 async/await까지"
 date: 2024-05-24
 categories: 개발이야기
 ---

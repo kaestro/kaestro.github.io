@@ -3,6 +3,7 @@ layout: series_mathjax
 classes: wide
 title: "Dijkstra algorithm"
 subtitle: "single-source shortest path algorithm(3)"
+description: "Dijkstra 알고리즘. Priority Queue를 사용한 효율적인 최단 경로"
 date: 2024-05-07
 categories: Algorithm
 series: "single-source shortest path algorithm"

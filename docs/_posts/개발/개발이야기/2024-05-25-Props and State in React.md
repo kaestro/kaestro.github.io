@@ -3,6 +3,7 @@ layout: 산문
 classes: wide
 title: "Props and State in React"
 subtitle: "react에서 데이터를 다루는 방법"
+description: "React의 Props와 State 개념. 데이터 흐름과 상태 관리"
 date: 2024-05-25
 categories: 개발이야기
 ---

@@ -3,6 +3,7 @@ layout: default
 classes: wide
 title: "옵저버 패턴"
 subtitle: "어느새 빗물이 내 발목에 고이기 전에 알려줬어야지!"
+description: "옵저버 패턴. 상태 변화를 관찰하고 통보하는 발행-구독 모델"
 date: 2024-02-14
 categories: 디자인패턴
 ---

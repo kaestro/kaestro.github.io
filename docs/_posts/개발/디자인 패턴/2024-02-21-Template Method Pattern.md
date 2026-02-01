@@ -3,6 +3,7 @@ layout: default
 classes: wide
 title: "템플릿 메소드 패턴"
 subtitle: "커피에 홍차를 섞어드셔보세요"
+description: "템플릿 메소드 패턴. 알고리즘 골격을 정의하고 세부 구현은 서브클래스에 위임"
 date: 2024-02-21
 categories: 디자인패턴
 ---

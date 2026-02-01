@@ -3,6 +3,7 @@ layout: series
 classes: wide
 title: "인체공학을 염두에 둔 내 pc용 책상 세팅(2)"
 subtitle: "아프지 않고 오래 컴퓨터를 사용하기 위한 책상 세팅에 대한 이야기"
+description: "인체공학 키보드, 트랙볼, 모니터 암 등 PC 책상 세팅 2편"
 date: 2024-05-12
 categories: 개발이야기
 series: '인체공학을 염두에 둔 내 pc용 책상 세팅'

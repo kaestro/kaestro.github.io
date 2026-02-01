@@ -3,6 +3,7 @@ layout: 산문
 classes: wide
 title: "next vs vue vs react - 블로그 마이그레이션을 위한 선택"
 subtitle: "깜깜이로 운영하는 블로그를 벗어나 나만의 블로그를 만들기 위한 선택"
+description: "Next.js vs Vue vs React 비교. 블로그 마이그레이션을 위한 프레임워크 선택"
 date: 2024-05-19
 categories: 개발이야기
 ---

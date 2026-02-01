@@ -3,6 +3,7 @@ layout: mathjax
 classes: wide
 title: "BFS and DFS"
 subtitle: "그래프를 탐색하는 두 가지 단순한 방법"
+description: "너비 우선 탐색과 깊이 우선 탐색. 위상정렬과 강한 연결 요소"
 date: 2024-04-25
 categories: Algorithm
 ---

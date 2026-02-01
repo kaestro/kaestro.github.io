@@ -3,6 +3,7 @@ layout: default
 classes: wide
 title: "팩토리 패턴"
 subtitle: "공장에서 만든 피자는 피자가 아니라고 생각한거야?"
+description: "팩토리 패턴. Simple, Method, Abstract 세 가지 변형 비교"
 date: 2024-02-15
 categories: 디자인패턴
 ---

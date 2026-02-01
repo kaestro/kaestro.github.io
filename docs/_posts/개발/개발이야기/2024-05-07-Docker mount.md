@@ -3,6 +3,7 @@ layout: 산문
 classes: wide
 title: "docker mount: volume vs bind"
 subtitle: "도커 마운트란"
+description: "Docker 볼륨과 바인드 마운트의 차이점. 언제 무엇을 사용할지"
 date: 2024-05-07
 categories: 개발이야기
 ---

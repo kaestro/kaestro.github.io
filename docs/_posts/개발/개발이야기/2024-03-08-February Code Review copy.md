@@ -3,6 +3,7 @@ layout: default
 classes: wide
 title: "2월의 코드 복기"
 subtitle: "알고리즘, Go 문법"
+description: "이진 탐색 트리 회전, 공통 문자 찾기, 슬라이딩 윈도우 등 2월의 코드 복기"
 date: 2024-03-08
 categories: 개발이야기
 ---

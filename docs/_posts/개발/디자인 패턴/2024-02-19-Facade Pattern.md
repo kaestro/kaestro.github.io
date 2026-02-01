@@ -3,6 +3,7 @@ layout: default
 classes: wide
 title: "파사드 패턴"
 subtitle: "이겨야 한다 '딸깍'"
+description: "파사드 패턴. 복잡한 서브시스템을 단순한 인터페이스로 제공"
 date: 2024-02-19
 categories: 디자인패턴
 ---

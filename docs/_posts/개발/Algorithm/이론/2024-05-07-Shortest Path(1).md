@@ -3,6 +3,7 @@ layout: series_mathjax
 classes: wide
 title: "Introduction to Shortest Path algorithm"
 subtitle: "single-source shortest path algorithm(1)"
+description: "최단 경로 알고리즘 입문. Optimal Substructure와 Relaxation 개념"
 date: 2024-05-07
 categories: Algorithm
 series: "single-source shortest path algorithm"

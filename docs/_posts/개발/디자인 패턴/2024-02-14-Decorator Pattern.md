@@ -3,6 +3,7 @@ layout: default
 classes: wide
 title: "데코레이터 패턴"
 subtitle: "싸구려 커피를 마시기 전에 우유를 넣으세요"
+description: "데코레이터 패턴. 객체의 행동을 동적으로 확장하는 방법"
 date: 2024-02-14
 categories: 디자인패턴
 ---

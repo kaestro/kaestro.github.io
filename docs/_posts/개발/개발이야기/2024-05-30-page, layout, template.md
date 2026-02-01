@@ -3,6 +3,7 @@ layout: 산문
 classes: wide
 title: "Page, Layout, Template in next.js"
 subtitle: "next.js에서 route에 따라 ui를 다르게 구성하는 방법"
+description: "Next.js의 페이지, 레이아웃, 템플릿 구조. 라우팅에 따른 UI 구성"
 date: 2024-05-30
 categories: 개발이야기
 ---

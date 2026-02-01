@@ -3,6 +3,7 @@ layout: series_mathjax
 classes: wide
 title: "Bellman-ford algorithm"
 subtitle: "single-source shortest path algorithm(2)"
+description: "Bellman-Ford 알고리즘. 음수 가중치 그래프에서의 최단 경로"
 date: 2024-05-07
 categories: Algorithm
 series: "single-source shortest path algorithm"

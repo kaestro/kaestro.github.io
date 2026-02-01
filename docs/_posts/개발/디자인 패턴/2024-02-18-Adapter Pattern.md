@@ -3,6 +3,7 @@ layout: default
 classes: wide
 title: "어댑터 패턴"
 subtitle: "오리가 되겠다던 칠면조"
+description: "어댑터 패턴. 호환되지 않는 인터페이스를 연결하는 방법"
 date: 2024-02-18
 categories: 디자인패턴
 ---

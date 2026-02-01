@@ -3,6 +3,7 @@ layout: default
 classes: wide
 title: "커맨드 패턴"
 subtitle: "나는 IoT를 지배할 수 있다!"
+description: "커맨드 패턴. 메소드 호출을 객체로 캡슐화하여 실행 취소 가능하게"
 date: 2024-02-16
 categories: 디자인패턴
 ---

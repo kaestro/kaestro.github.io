@@ -3,6 +3,7 @@ layout: default
 classes: wide
 title: "전략 패턴"
 subtitle: "고무 오리는 날 수 없다, 엄마에게 혼났죠"
+description: "전략 패턴. 알고리즘을 독립적인 객체로 캡슐화하여 교체 가능하게"
 date: 2024-02-13
 categories: 디자인패턴
 ---

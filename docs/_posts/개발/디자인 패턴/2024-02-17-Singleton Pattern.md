@@ -3,6 +3,7 @@ layout: default
 classes: wide
 title: "싱글톤 패턴"
 subtitle: "찰리네 초콜릿 보일러는 세계 유일!"
+description: "싱글톤 패턴. 객체 인스턴스가 하나만 생성되도록 보장"
 date: 2024-02-17
 categories: 디자인패턴
 ---
