@@ -5,31 +5,73 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+
 jobs:
   count:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-              ruby-version: 2.7
+          ruby-version: 3.1
 
-      - name: Count recommended posts and update file
+      - name: Count and update recommended posts
         run: |
           ruby -e "
           require 'yaml'
-          recommended_count = Dir.glob('docs/_posts/**/*.md').count { |f| File.read(f).include?('recommended: true') }
-          File.write('docs/_data/recommended_count.yml', { 'count' => recommended_count }.to_yaml)
-          puts \"Counted #{recommended_count} recommended posts\""
+          require 'date'
+          require 'uri'
+
+          # 추천 글 찾기
+          recommended_posts = Dir.glob('docs/_posts/**/*.md').select { |f|
+            File.read(f).include?('recommended: true')
+          }.map { |f|
+            content = File.read(f)
+
+            # YAML front matter 파싱
+            if content =~ /\A---\s*\n(.*?)\n---/m
+              front_matter = YAML.safe_load(\$1)
+              title = front_matter['title'] || 'Untitled'
+              date = front_matter['date'] || File.basename(f)[0..9]
+              categories = front_matter['categories'] || []
+              category = categories.is_a?(Array) ? categories.first : categories.to_s.split.first
+
+              # URL 생성
+              date_str = date.is_a?(Date) || date.is_a?(Time) ? date.strftime('%Y/%m/%d') : date.to_s[0..9].gsub('-', '/')
+              slug = File.basename(f, '.md').gsub(/^\d{4}-\d{2}-\d{2}-/, '')
+              url = \"https://kaestro.github.io/#{URI.encode_www_form_component(category.to_s)}/#{date_str}/#{URI.encode_www_form_component(slug)}.html\"
+
+              { title: title, url: url, date: date.to_s }
+            end
+          }.compact.sort_by { |p| p[:date] }.reverse.take(5)
+
+          # recommended_count.yml 업데이트
+          File.write('docs/_data/recommended_count.yml', { 'count' => recommended_posts.length }.to_yaml)
+          puts \"Counted #{recommended_posts.length} recommended posts\"
+
+          # README 업데이트
+          readme = File.read('README.md')
+          post_list = recommended_posts.map { |p| \"- [#{p[:title]}](#{p[:url]})\" }.join(\"\n\")
+
+          new_readme = readme.gsub(
+            /<!-- RECOMMENDED-POST-LIST:START -->.*?<!-- RECOMMENDED-POST-LIST:END -->/m,
+            \"<!-- RECOMMENDED-POST-LIST:START -->\n#{post_list}\n<!-- RECOMMENDED-POST-LIST:END -->\"
+          )
+
+          File.write('README.md', new_readme)
+          puts 'Updated README with recommended posts'
+          "
 
       - name: Commit changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
-          git add docs/_data/recommended_count.yml
-          git commit -m "Update recommended count" || echo "No changes to commit"
+          git add docs/_data/recommended_count.yml README.md
+          git commit -m "Update recommended posts" || echo "No changes to commit"
           git push
