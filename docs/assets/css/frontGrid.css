@@ -32,3 +32,85 @@
 .grid-item ul li:first-child::before {
     content: ""; /* Remove the pipe from the first list item */
 }
+
+/* 서랍 (토글) 스타일 */
+.drawer {
+    grid-column: 1 / -1; /* 전체 너비 사용 */
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.drawer summary {
+    padding: 15px 20px;
+    cursor: pointer;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: #666;
+    list-style: none;
+    user-select: none;
+}
+
+.drawer summary::-webkit-details-marker {
+    display: none;
+}
+
+.drawer summary::before {
+    content: "▶ ";
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.drawer[open] summary::before {
+    transform: rotate(90deg);
+}
+
+.drawer summary:hover {
+    background-color: #f0f0f0;
+    border-radius: 8px 8px 0 0;
+}
+
+.drawer-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+}
+
+@media screen and (max-width: 730px) {
+    .drawer-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+.drawer-section {
+    text-align: left;
+}
+
+.drawer-section h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #888;
+    font-size: 1em;
+}
+
+.drawer-section ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.drawer-section ul li {
+    margin-bottom: 5px;
+}
+
+.drawer-section a {
+    color: #1e6bb8;
+    text-decoration: none;
+}
+
+.drawer-section a:hover {
+    text-decoration: underline;
+}

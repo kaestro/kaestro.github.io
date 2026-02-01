@@ -46,7 +46,7 @@
       <h2>Categories</h2>
       <ul>
         {% for category in site.categories %}
-          {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' %}
+          {% unless category[0] == 'Legacy' or category[0] == 'Pre-Renewal' or category[0] == 'ProtoType' or category[0] == 'WeeklyPosts' or category[0] == 'ETC' or category[0] == 'Algorithm' or category[0] == '디자인패턴' %}
             <li><a href="/categories/{{ category[0] }}">{{ category[0] }}</a></li>
           {% endunless %}
         {% endfor %}
@@ -75,7 +75,8 @@
 
     <main id="content" class="main-content">
 
-      {% assign ordered_categories = "신변잡기,리더십여정,개발이야기,개발일지,서평,게임이야기,영상과이야기,디자인패턴,Algorithm,WeeklyPosts,CodeReviews,ETC," | split: "," %}
+      {% assign ordered_categories = "신변잡기,리더십여정,개발이야기,개발일지,서평,게임이야기,영상과이야기,CodeReviews," | split: "," %}
+      {% assign drawer_categories = "WeeklyPosts,ETC,Algorithm,디자인패턴,Legacy,Pre-Renewal,ProtoType," | split: "," %}
 
       <div class="grid-container">
           <div class="grid-item recommended">
@@ -160,18 +161,39 @@
         {% endif %}
       {% endfor %}
 
-      <!-- '작성중'인 포스트를 모아놓는 새로운 그리드 -->
-      <div class="grid-item in-progress">
-          <h2>작성중</h2>
-          <hr>
-          <ul>
+      <!-- 서랍: 작성중/관리 안되는 포스트들 -->
+      <details class="drawer">
+        <summary>📦 서랍</summary>
+
+        <div class="drawer-content">
+          <!-- 작성중 포스트 -->
+          <div class="drawer-section">
+            <h3>✏️ 작성중</h3>
+            <ul>
               {% for post in site.posts %}
-                  {% if post.subtitle contains '작성중' %}
-                      <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-                  {% endif %}
+                {% if post.subtitle contains '작성중' %}
+                  <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+                {% endif %}
               {% endfor %}
-          </ul>
-      </div>
+            </ul>
+          </div>
+
+          <!-- 서랍 카테고리들 -->
+          {% for category_name in drawer_categories %}
+            {% if site.categories[category_name] %}
+              <div class="drawer-section">
+                <h3>📁 {{ category_name }}</h3>
+                <ul>
+                  {% for post in site.categories[category_name] limit: 5 %}
+                    <li><a href="{{ post.url }}">{{ post.title }}</a></li>
+                  {% endfor %}
+                </ul>
+                <a href="/categories/{{ category_name }}">See all posts({{ site.categories[category_name] | size }}) in {{ category_name }}</a>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </details>
 
           {{ content }}
 

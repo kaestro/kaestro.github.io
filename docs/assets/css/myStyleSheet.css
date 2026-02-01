@@ -46,6 +46,46 @@
   padding-left: 16px;
 }
 
+/* 사이드바 서랍 스타일 */
+.sidebar-drawer {
+  margin-top: 15px;
+  padding-left: 16px;
+}
+
+.sidebar-drawer summary {
+  cursor: pointer;
+  color: #888;
+  font-size: 0.9em;
+  list-style: none;
+  user-select: none;
+}
+
+.sidebar-drawer summary::-webkit-details-marker {
+  display: none;
+}
+
+.sidebar-drawer summary::before {
+  content: "▶ ";
+  display: inline-block;
+  font-size: 0.8em;
+  transition: transform 0.2s;
+}
+
+.sidebar-drawer[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.sidebar-drawer ul {
+  list-style: none;
+  padding-left: 10px;
+  margin-top: 5px;
+}
+
+.sidebar-drawer ul li a {
+  color: #999;
+  font-size: 0.9em;
+}
+
 /* When the screen is 64em or larger, show both elements */
 @media (min-width: 90em) {
   #category-list, #header-links {
