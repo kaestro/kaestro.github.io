@@ -12,7 +12,8 @@
       "Bash(timeout 12 tail:*)",
       "Bash(timeout 15 tail:*)",
       "Bash(bundle exec jekyll build:*)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(git push:*)"
     ]
   }
 }
