@@ -27,7 +27,7 @@ perl -i -pe "s/\{\{NEW_POST_CONTENT\}\}/$(echo "$NEW_POST_CONTENT" | sed 's/\\/\
 echo ""
 echo "🤖 AI 분석 결과:"
 echo "─────────────────────────────────────────────"
-claude --message-file "$TEMP_PROMPT"
+claude -p "$(cat "$TEMP_PROMPT")"
 
 # 5. 임시 파일 정리
 rm "$TEMP_PROMPT"

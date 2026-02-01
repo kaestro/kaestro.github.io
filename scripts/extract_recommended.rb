@@ -8,7 +8,7 @@ Dir.glob('docs/_posts/**/*.md').each do |file|
 
   # YAML front matter 추출
   if content =~ /\A---\s*\n(.*?)\n---\s*\n/m
-    front_matter = YAML.load($1)
+    front_matter = YAML.safe_load($1, permitted_classes: [Date, Time])
 
     if front_matter['recommended'] == true
       # 첫 300단어 추출
