@@ -23,7 +23,10 @@
       "Bash(perl:*)",
       "Bash(chmod:*)",
       "Bash(git rm:*)",
-      "Bash(git pull:*)"
+      "Bash(git pull:*)",
+      "Bash(head:*)",
+      "Bash(findstr:*)",
+      "Bash(powershell -Command \"Get-ChildItem *.html | ForEach-Object { \\(Get-Content $_FullName -Raw\\) -replace ''id=\"\"go-home\"\" class=\"\"home-button\"\" aria-label=\"\"home\"\">홈으로<'', ''id=\"\"go-home\"\" class=\"\"home-button\"\" aria-label=\"\"home\"\"><'' | Set-Content $_FullName -NoNewline }\")"
     ]
   }
 }
