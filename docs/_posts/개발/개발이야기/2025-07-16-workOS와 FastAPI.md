@@ -1,8 +1,9 @@
 ---
 layout: 산문
 classes: wide
-title: "sqlAlchemy, alembic, workOS와 FastAPI를 활용한 인증 구축 후기(1)"
-subtitle: "1단계 - db 구축"
+title: "FastAPI 인증 구축기 (1)"
+subtitle: "sqlAlchemy, alembic을 활용한 DB 구축"
+description: "Cloud Run 서버리스 환경에서 FastAPI와 sqlAlchemy, alembic으로 인증용 DB 구축하기"
 date: 2025-07-15
 categories: 개발이야기
 ---
