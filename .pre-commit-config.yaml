@@ -9,5 +9,13 @@ repos:
       - id: detect-private-key
       - id: fix-byte-order-marker
 
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.1.0
+    hooks:
+      - id: prettier
+        types: [markdown]
+        files: ^docs/_posts/리더십여정/.*\.md$
+        args: ['--prose-wrap', 'always', '--print-width', '80']
+
 ci:
   autoupdate_schedule: monthly
