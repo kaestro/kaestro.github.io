@@ -33,7 +33,9 @@
       "Read(//c/Users/didme/Documents/repositories/kaestro.github.io/**)",
       "Bash(dir:*)",
       "Bash(ping:*)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "mcp__claude_ai_Notion__notion-fetch",
+      "mcp__claude_ai_Linear__get_issue"
     ]
   }
 }
